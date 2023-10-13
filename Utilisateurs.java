@@ -1,4 +1,5 @@
-public class Utilisateurs {
+// Cette classe nous permet de créer des comptes d'utilisateurs et de leurs affecter des rôles (employer ou client)
+public class Utilisateurs { 
     private String username;
     private String password;
     private String role;
@@ -17,7 +18,7 @@ public class Utilisateurs {
         return role;
     }
 
-    public boolean authenticate(String password) {
+    public boolean seConnecter(String password) {
         return this.password.equals(password);
     }
 }
