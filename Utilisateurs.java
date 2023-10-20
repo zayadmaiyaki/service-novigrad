@@ -18,7 +18,7 @@ public class Utilisateurs {
         return role;
     }
 
-    public boolean seConnecter(String password) {
-        return this.password.equals(password);
+    public boolean seConnecter(String username, String password) {
+        return this.password.equals(password) && this.username.equals(username);
     }
 }
