@@ -1,10 +1,10 @@
-public class Employee extends Utilisateur {
+public class Employee extends Utilisateurs {
     Service service;
-    public Employee (){
-        super();
+    public Employee (String username , String password, String role){
+        super(username, password,role="Employee");
     }
-    public void createAccount(username,password){
-        Employee employee = new Employee(username,password);
+    public void createAccount(String username,String password){
+        Employee employee = new Employee(username,password,"Employee");
     }
     public void selectService(String service){
         this.service.serviceType = service ;
