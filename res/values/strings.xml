@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Service Novigrad</string>
+    <string name="Login">Login</string>
+    <string name="title_activity_accueil">activity_accueil</string>
+</resources>
