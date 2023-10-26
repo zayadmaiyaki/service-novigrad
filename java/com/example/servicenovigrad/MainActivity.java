@@ -34,9 +34,7 @@ public class MainActivity extends AppCompatActivity {
         buttonSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EditText username = (EditText) findViewById(R.id.editUsername);
-                EditText password = (EditText) findViewById(R.id.editPassword);
-                Client client = new Client(username.getText().toString(),password.getText().toString());
+               
                 openactivity_login();
             }
         });
