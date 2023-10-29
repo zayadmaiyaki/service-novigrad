@@ -1,3 +1,6 @@
 [![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-24ddc0f5d75046c5622901739e7c5dd533143b0c8e959d652212380cedb1ea36.svg)](https://classroom.github.com/a/_keOyI8T)
 :)
 information d'identification pour se connecter au compte administrateur:
+Email : admin@gmail.com
+Username : admin
+Password : 123admin456
