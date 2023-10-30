@@ -13,7 +13,7 @@
         android:theme="@style/Theme.ServiceNovigrad"
         tools:targetApi="34">
         <activity
-            android:name=".activity_accueil"
+            android:name=".AccueilActivity"
             android:exported="true"
             android:label="@string/title_activity_accueil"
             android:theme="@style/Theme.ServiceNovigrad">

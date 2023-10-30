@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background">
@@ -21,7 +22,7 @@
         app:layout_constraintVertical_bias="0.139" />
 
     <EditText
-        android:id="@+id/editUsername"
+        android:id="@+id/editUsernameL"
         android:layout_width="wrap_content"
         android:layout_height="48dp"
         android:layout_marginTop="84dp"
@@ -42,7 +43,7 @@
         app:layout_constraintTop_toBottomOf="@+id/editSalut" />
 
     <EditText
-        android:id="@+id/editPassword"
+        android:id="@+id/editPasswordL"
         android:layout_width="wrap_content"
         android:layout_height="48dp"
         android:layout_marginTop="48dp"
@@ -57,10 +58,10 @@
         android:paddingTop="10dp"
         android:paddingRight="10dp"
         android:paddingBottom="10dp"
-        app:layout_constraintEnd_toEndOf="@+id/editUsername"
+        app:layout_constraintEnd_toEndOf="@+id/editUsernameL"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/editUsername"
-        app:layout_constraintTop_toBottomOf="@+id/editUsername" />
+        app:layout_constraintStart_toStartOf="@+id/editUsernameL"
+        app:layout_constraintTop_toBottomOf="@+id/editUsernameL" />
 
     <TextView
         android:id="@+id/forgotPassword"
@@ -71,8 +72,8 @@
         android:textColor="@color/black"
         android:textSize="12sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/editPassword"
-        app:layout_constraintTop_toBottomOf="@+id/editPassword" />
+        app:layout_constraintEnd_toEndOf="@+id/editPasswordL"
+        app:layout_constraintTop_toBottomOf="@+id/editPasswordL" />
 
     <Button
         android:id="@+id/buttonSignIn"
@@ -81,33 +82,10 @@
         android:layout_marginTop="36dp"
         android:background="@drawable/btn_bg"
         android:text="Sign In"
-        app:layout_constraintEnd_toEndOf="@+id/editPassword"
+        app:layout_constraintEnd_toEndOf="@+id/editPasswordL"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/editPassword"
+        app:layout_constraintStart_toStartOf="@+id/editPasswordL"
         app:layout_constraintTop_toBottomOf="@+id/forgotPassword" />
-
-    <Button
-        android:id="@+id/buttonGoogle"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="38dp"
-        android:layout_marginEnd="8dp"
-        android:background="@drawable/btn_bg"
-        android:drawableStart="@drawable/google"
-        android:drawableLeft="@drawable/google"
-        android:drawablePadding="10dp"
-        android:paddingLeft="20dp"
-        android:text="Google"
-        android:textAlignment="center"
-        android:textColorHighlight="#FFFFFF"
-        android:textColorLink="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/buttonFacebook"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        app:layout_constraintVertical_bias="0.221" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -134,25 +112,6 @@
             android:text=" Sign up"
             android:textColor="#FF0000" />
     </LinearLayout>
-
-    <Button
-        android:id="@+id/buttonFacebook"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="32dp"
-        android:background="@drawable/btn_bg"
-        android:drawableStart="@drawable/facebook"
-        android:drawableLeft="@drawable/facebook"
-        android:drawablePadding="10dp"
-        android:paddingLeft="20dp"
-        android:text="Facebook"
-        android:textAlignment="center"
-        app:layout_constraintBottom_toBottomOf="@+id/buttonGoogle"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/buttonGoogle"
-        app:layout_constraintTop_toTopOf="@+id/buttonGoogle" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
