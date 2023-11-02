@@ -8,5 +8,7 @@
         <item>Client</item>
         <item>Employee</item>
     </string-array>
+    <string name="title_activity_mainpageclient">activity_mainpageclient</string>
+    <string name="title_activity_main_pageclient">activity_mainPageclient</string>
 </resources>
 

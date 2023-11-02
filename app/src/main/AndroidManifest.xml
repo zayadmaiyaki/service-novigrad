@@ -13,6 +13,19 @@
         android:theme="@style/Theme.ServiceNovigrad"
         tools:targetApi="34">
         <activity
+            android:name=".MainPageClient"
+            android:exported="false" />
+        <activity
+            android:name=".activity_mainPageclient"
+            android:exported="false"
+            android:label="@string/title_activity_main_pageclient"
+            android:theme="@style/Theme.ServiceNovigrad" />
+        <activity
+            android:name=".activity_mainpageclient"
+            android:exported="false"
+            android:label="@string/title_activity_mainpageclient"
+            android:theme="@style/Theme.ServiceNovigrad" />
+        <activity
             android:name=".AccueilActivity"
             android:exported="true"
             android:label="@string/title_activity_accueil"
