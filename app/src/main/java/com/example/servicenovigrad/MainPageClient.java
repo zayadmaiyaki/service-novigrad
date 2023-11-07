@@ -1,7 +1,6 @@
 package com.example.servicenovigrad;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 
 public class MainPageClient extends AppCompatActivity {
