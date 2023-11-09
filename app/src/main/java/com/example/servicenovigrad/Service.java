@@ -5,75 +5,101 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
-public class Service {
-    private static Map<String, String> fieldFeatureMap ;
-    // Create a Map that represent the created service with the name
-    // and the informations the Clients have to fill
-    public Service() {
-        this.fieldFeatureMap = new HashMap<>();
+public class Service<T> {
+    String serviceName;
+    Map<String,String> formulaire ; 
+    Map<String,T>documents;
+    
+
+     // Le hashmap sera construit en utilisant les donnees de l'utilisateur demandées dans android studio
+     // To create a new service we just use new services(parameters)
+    public createService(String serviceName , Map <String,String>formulaire,Map<String,T>documents) {
+        this.serviceName=serviceName;
+        this.formulaire = formulaire;
+        this.documents = documents;
 
     }
-    private static Scanner scanner = new Scanner(System.in);
 
+    public void editService() {
+    
 
-
-
-    public static void main(String[] args) {
-        //Handle the lines below w the front end
-        System.out.println("Are you an 'administrator' or a 'client'? Type 'exit' to stop.");
-        String userType = scanner.nextLine().trim().toLowerCase();
-
-        switch (userType) {
-            case "administrator":
-                createService();
-                break;
-            case "client":
-                //Not necessary for the livrable 2
-                //fillFieldFeatureMap();
-                break;
-            case "exit":
-                System.out.println("Exiting program.");
-                break;
-            default:
-                System.out.println("Invalid user type. Exiting program.");
-                break;
+        public void editServiceName(String serviceName) {
+            this.serviceName = serviceName;
         }
 
-        scanner.close();
 
-        // Print the hashmap
-        System.out.println("Final Field-Feature Map: ");
-        fieldFeatureMap.forEach((key, value) -> System.out.println(key + ": " + value));
-    }
+        public void addFieldNameFormulaire(String fieldName) {
+            if (!formulaire.containsKey(fieldName)) {
+                formulaire.put(fieldName, "");
+            }     
+        }
 
-    private static void createService() {
-        // Handle prints and scanners with front end
-        System.out.println("Administrator mode: Please enter field names. Type 'done' when finished.");
+        public void editFieldNameFormulaire(String oldFieldName,String newFieldName) {
 
-        while (true) {
-            System.out.print("Enter field name: ");
-            String field = scanner.nextLine();
-
-            if ("done".equalsIgnoreCase(field)) {
-                break;
+            if (formulaire.containsKey(oldFieldName)) {
+                // Check if the new field name already exists
+                if (!formulaire.containsKey(newFieldName)) {
+                    String value = formulaire.remove(oldFieldName);
+                    formulaire.put(newFieldName,);
+                
+                } 
+                else {
+                //System.out.println("The new field name already exists. Choose a different name.");
+                }
+            } 
+            else {
+                //System.out.println("Field name not Found ")
             }
+    
 
-            //if (!field.isBlank()) {
-            //    fieldFeatureMap.put(field, ""); // Add the field with an empty value
-            //}
         }
+        private static void deleteFieldFormulaire(String fieldName) {
+        //System.out.print("Enter the field name you want to delete: ");
+        //String fieldName = scanner.nextLine();
+        if (formulaire.containsKey(fieldName)) {
+            formulaire.remove(fieldName);
+            //System.out.println("Field name deleted successfully.");
+        } else {
+            //System.out.println("Field name not found.");
+        }
+
+        public void addFieldNameDocuments(String fieldName) {
+            if (!documents.containsKey(fieldName)) {
+                documents.put(fieldName, "");
+            }     
+        }
+
+        public void editFieldNameDocuments(String oldFieldName,String newFieldName) {
+
+            if (documents.containsKey(oldFieldName)) {
+                // Check if the new field name already exists
+                if (!documents.containsKey(newFieldName)) {
+                    String value = documents.remove(oldFieldName);
+                    documents.put(newFieldName,);
+                
+                } 
+                else {
+                //System.out.println("The new field name already exists. Choose a different name.");
+                }
+            } 
+            else {
+                //System.out.println("Field name not Found ")
+            }
+    
+
+        }
+
+        private static void deleteFieldDocuments(String fieldName) {
+        //System.out.print("Enter the field name you want to delete: ");
+        //String fieldName = scanner.nextLine();
+            if (documents.containsKey(fieldName)) {
+                documents.remove(fieldName);
+                //System.out.println("Field name deleted successfully.");
+            } 
+            else {
+            //System.out.println("Field name not found.");
+            }
+        }
+
     }
-
-    /**
-     * This method is not necessary for the livrable 2
-     *
-     * private static void fillFieldFeatureMap() {
-     System.out.println("Client mode: Please enter field values for the following fields.");
-
-     for (String key : fieldFeatureMap.keySet()) {
-     System.out.print("Enter value for '" + key + "': ");
-     String fieldValue = scanner.nextLine();
-     fieldFeatureMap.put(key, fieldValue);
-     }
-     }*/
 }
