@@ -16,10 +16,26 @@ import java.util.List;
 public class AccueilActivity extends AppCompatActivity {
 
     private TextView welcomeTextView;
-    //Button btnAccueil = findViewById(R.id.buttonAccueil);
+    Button buttonAccueil;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_accueil);
+
+        buttonAccueil = (Button)findViewById(R.id.buttonAccueil);
+
+        buttonAccueil.setOnClickListener((new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(AccueilActivity.this, MainPageAdmin.class);
+                startActivity(intent);
+                finish();
+            }
+        }));
+    }
+
+    protected void onCreate2(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_accueil);
 
