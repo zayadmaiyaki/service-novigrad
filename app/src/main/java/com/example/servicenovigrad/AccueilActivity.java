@@ -1,6 +1,9 @@
 package com.example.servicenovigrad;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,6 +16,7 @@ import java.util.List;
 public class AccueilActivity extends AppCompatActivity {
 
     private TextView welcomeTextView;
+    //Button btnAccueil = findViewById(R.id.buttonAccueil);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,5 +46,15 @@ public class AccueilActivity extends AppCompatActivity {
         } else {
             welcomeTextView.setText("Content de vous revoir!");
         }
+        //btnAccueil.setOnClickListener(new View.OnClickListener() {
+          //  @Override
+           // public void onClick(View v) {
+            //    Intent intent = new Intent(AccueilActivity.this, MainPageAdmin.class);
+            //    startActivity(intent);
+           // }
+       // });
+
+
+
     }
 }
