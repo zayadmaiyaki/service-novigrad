@@ -19,22 +19,16 @@ public class Service<T> {
         this.documents = documents;
 
     }
-
-    public void editService() {
-    
-
-        public void editServiceName(String serviceName) {
+    public void editServiceName(String serviceName) {
             this.serviceName = serviceName;
-        }
-
-
-        public void addFieldNameFormulaire(String fieldName) {
+    }
+     public void addFieldNameFormulaire(String fieldName) {
             if (!formulaire.containsKey(fieldName)) {
                 formulaire.put(fieldName, "");
             }     
-        }
+    }
 
-        public void editFieldNameFormulaire(String oldFieldName,String newFieldName) {
+    public void editFieldNameFormulaire(String oldFieldName,String newFieldName) {
 
             if (formulaire.containsKey(oldFieldName)) {
                 // Check if the new field name already exists
@@ -52,8 +46,8 @@ public class Service<T> {
             }
     
 
-        }
-        private static void deleteFieldFormulaire(String fieldName) {
+    }
+    private static void deleteFieldFormulaire(String fieldName) {
         //System.out.print("Enter the field name you want to delete: ");
         //String fieldName = scanner.nextLine();
         if (formulaire.containsKey(fieldName)) {
@@ -67,9 +61,9 @@ public class Service<T> {
             if (!documents.containsKey(fieldName)) {
                 documents.put(fieldName, "");
             }     
-        }
+    }
 
-        public void editFieldNameDocuments(String oldFieldName,String newFieldName) {
+    public void editFieldNameDocuments(String oldFieldName,String newFieldName) {
 
             if (documents.containsKey(oldFieldName)) {
                 // Check if the new field name already exists
@@ -87,9 +81,9 @@ public class Service<T> {
             }
     
 
-        }
+    }
 
-        private static void deleteFieldDocuments(String fieldName) {
+    private static void deleteFieldDocuments(String fieldName) {
         //System.out.print("Enter the field name you want to delete: ");
         //String fieldName = scanner.nextLine();
             if (documents.containsKey(fieldName)) {
@@ -99,7 +93,7 @@ public class Service<T> {
             else {
             //System.out.println("Field name not found.");
             }
-        }
-
     }
+
+    
 }
