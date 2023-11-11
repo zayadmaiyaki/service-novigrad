@@ -3,7 +3,6 @@ package com.example.servicenovigrad;
 import java.sql.Time;
 
 public class Employee extends Utilisateurs {
-    Service service;
     public Employee (String username , String password, String role){
         super(username, password,role="Employee");
     }

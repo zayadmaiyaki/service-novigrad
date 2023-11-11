@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/background"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!-- Dynamically added fields will go here -->
+
+        <!-- Fields are added programmatically -->
+
+
+        <!-- Dynamically added document fields will go here -->
+
+        <!-- Fields are added programmatically -->
+
+
+        <ListView
+            android:id="@+id/documentsFieldsList"
+            android:layout_width="227dp"
+            android:layout_height="82dp"
+            android:layout_marginBottom="24dp"
+            app:layout_constraintBottom_toTopOf="@+id/addDocumentFieldButton"
+            app:layout_constraintEnd_toEndOf="@+id/textView6"
+            app:layout_constraintStart_toStartOf="@+id/textView6" />
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="324dp"
+            android:text="Documents"
+            android:textColor="#000000"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/addFormFieldButton"
+            app:layout_constraintHorizontal_bias="0.529"
+            app:layout_constraintStart_toStartOf="@+id/addFormFieldButton" />
+
+        <Button
+            android:id="@+id/addFormFieldButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="364dp"
+            android:text="Add Field"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/formulaireFieldsList"
+            app:layout_constraintHorizontal_bias="0.495"
+            app:layout_constraintStart_toStartOf="@+id/formulaireFieldsList" />
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="176dp"
+            android:text="Formulaire"
+            android:textColor="#000000"
+            android:textColorHint="#000000"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/serviceNameEditText"
+            app:layout_constraintStart_toStartOf="@+id/serviceNameEditText"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ListView
+            android:id="@+id/formulaireFieldsList"
+            android:layout_width="227dp"
+            android:layout_height="82dp"
+            android:layout_marginBottom="24dp"
+            app:layout_constraintBottom_toTopOf="@+id/addFormFieldButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/addDocumentFieldButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="148dp"
+            android:text="Add Field"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/documentsFieldsList"
+            app:layout_constraintHorizontal_bias="0.495"
+            app:layout_constraintStart_toStartOf="@+id/documentsFieldsList" />
+
+        <TextView
+            android:id="@+id/textCreateServicePage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:text="Create Service Page"
+            android:textColor="#000000"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/serviceNameEditText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:height="48dp"
+            android:background="@drawable/input_bg"
+            android:hint="Enter Service Name"
+            android:paddingLeft="20dp"
+            android:paddingTop="10dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="10dp"
+            app:layout_constraintEnd_toEndOf="@+id/textCreateServicePage"
+            app:layout_constraintStart_toStartOf="@+id/textCreateServicePage"
+            app:layout_constraintTop_toBottomOf="@+id/textCreateServicePage" />
+
+        <Button
+            android:id="@+id/CreateButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="68dp"
+            android:text="Create"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

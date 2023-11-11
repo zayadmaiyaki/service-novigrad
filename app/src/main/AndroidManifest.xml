@@ -13,6 +13,9 @@
         android:theme="@style/Theme.ServiceNovigrad"
         tools:targetApi="34">
         <activity
+            android:name=".CreateServiceActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainPageAdmin"
             android:exported="false" />
         <activity

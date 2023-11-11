@@ -23,54 +23,34 @@ public class AccueilActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_accueil);
 
-        buttonAccueil = (Button)findViewById(R.id.buttonAccueil);
-
-        buttonAccueil.setOnClickListener((new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(AccueilActivity.this, MainPageAdmin.class);
-                startActivity(intent);
-                finish();
-            }
-        }));
-    }
-
-    protected void onCreate2(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_accueil);
-
+        buttonAccueil = findViewById(R.id.buttonAccueil);
         welcomeTextView = findViewById(R.id.welcomeTextView);
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         String username = getIntent().getStringExtra("USERNAME");
 
         if (username != null) {
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
             db.collection("users").whereEqualTo("username", username).limit(1).get().addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
                     List<DocumentSnapshot> documents = task.getResult().getDocuments();
                     if (!documents.isEmpty()) {
                         String role = documents.get(0).getString("role");
-
-                        welcomeTextView.setText("Bienvenue! " + username + ". Vous êtes connectés en tant que " + role + ".");
+                        welcomeTextView.setText("Bienvenue! " + username + ". Vous êtes connecté en tant que " + role + ".");
                     } else {
                         welcomeTextView.setText("Bienvenue! " + username);
                     }
                 } else {
-                    welcomeTextView.setText("Content de vous revoir!");
+                    welcomeTextView.setText("Erreur lors de la récupération des données de l'utilisateur.");
                 }
             });
         } else {
-            welcomeTextView.setText("Content de vous revoir!");
+            welcomeTextView.setText("Bienvenue!");
         }
-        //btnAccueil.setOnClickListener(new View.OnClickListener() {
-          //  @Override
-           // public void onClick(View v) {
-            //    Intent intent = new Intent(AccueilActivity.this, MainPageAdmin.class);
-            //    startActivity(intent);
-           // }
-       // });
 
-
-
+        buttonAccueil.setOnClickListener(view -> {
+            Intent intent = new Intent(AccueilActivity.this, MainPageAdmin.class);
+            startActivity(intent);
+            finish();
+        });
     }
 }
