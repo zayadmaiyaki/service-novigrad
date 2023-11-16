@@ -118,6 +118,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:height="48dp"
+            android:background="@drawable/input_bg"
             android:hint="Enter Service Name"
             android:paddingLeft="20dp"
             android:paddingTop="10dp"
