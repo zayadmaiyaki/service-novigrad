@@ -1,7 +1,6 @@
 package com.example.servicenovigrad;
 
 import androidx.appcompat.app.AppCompatActivity;
-import com.example.servicenovigrad.Service;
 
 
 import android.content.Intent;
@@ -35,7 +34,7 @@ public class MainPageAdmin extends AppCompatActivity {
         createServiceButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainPageAdmin.this, CreateServiceActivity.class);
+                Intent intent = new Intent(MainPageAdmin.this, CreateEditServiceActivity.class);
                 startActivity(intent);
             }
         });

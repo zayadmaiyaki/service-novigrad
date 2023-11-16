@@ -1,55 +1,61 @@
 package com.example.servicenovigrad;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
-public class Service<T> {
-    String serviceName;
-    Map<String, String> formulaire;
-    Map<String, T> documents;
+public class Service {
+    private String id;
+    private String name;
+    private List<String> formFields;
+    private List<String> docsFields;
 
-    // Constructor for Service
-    public Service(String serviceName, Map<String, String> formulaire, Map<String, T> documents) {
-        this.serviceName = serviceName;
-        this.formulaire = formulaire;
-        this.documents = documents;
+    public Service() {
+        // Default constructor required for calls to DataSnapshot.getValue(Service.class)
     }
 
-    public void editServiceName(String serviceName) {
-        this.serviceName = serviceName;
+    public Service(String id, String name, List<String> formFields, List<String> docsFields) {
+        this.id = id;
+        this.name = name;
+        this.formFields = formFields;
+        this.docsFields = docsFields;
     }
 
-    public void addFieldNameFormulaire(String fieldName) {
-        if (!formulaire.containsKey(fieldName)) {
-            formulaire.put(fieldName, "");
-        }
+    public Service(String id, String name) {
+        this.id = id;
+        this.name = name;
+        this.formFields = new ArrayList<>(); // Create an empty list for formFields
+        this.docsFields = new ArrayList<>(); // Create an empty list for docsFields
     }
 
-    public void editFieldNameFormulaire(String oldFieldName, String newFieldName) {
-        if (formulaire.containsKey(oldFieldName) && !formulaire.containsKey(newFieldName)) {
-            String value = formulaire.remove(oldFieldName);
-            formulaire.put(newFieldName, value);
-        }
+    public String getId() {
+        return id;
     }
 
-    public void deleteFieldFormulaire(String fieldName) {
-        formulaire.remove(fieldName);
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public void addFieldNameDocuments(String fieldName, T document) {
-        if (!documents.containsKey(fieldName)) {
-            documents.put(fieldName, document);
-        }
+    public String getName() {
+        return name;
     }
 
-    public void editFieldNameDocuments(String oldFieldName, String newFieldName) {
-        if (documents.containsKey(oldFieldName) && !documents.containsKey(newFieldName)) {
-            T value = documents.remove(oldFieldName);
-            documents.put(newFieldName, value);
-        }
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public void deleteFieldDocuments(String fieldName) {
-        documents.remove(fieldName);
+    public List<String> getFormFields() {
+        return formFields;
+    }
+
+    public void setFormFields(List<String> formFields) {
+        this.formFields = formFields;
+    }
+
+    public List<String> getDocsFields() {
+        return docsFields;
+    }
+
+    public void setDocsFields(List<String> docsFields) {
+        this.docsFields = docsFields;
     }
 }
