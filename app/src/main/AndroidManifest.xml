@@ -13,10 +13,15 @@
         android:theme="@style/Theme.ServiceNovigrad"
         tools:targetApi="34">
         <activity
-            android:name=".UpdateDeleteFieldActivity"
+            android:name=".MainPageEmployee"
             android:exported="false" />
+
         <activity
-            android:name=".CreateEditServiceActivity"
+            android:name=".CreateServiceActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".EditServiceActivity"
             android:exported="false" />
         <activity
             android:name=".MainPageAdmin"

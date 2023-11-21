@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/background"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/textViewUpdateService"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Update Service"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/UpdateServiceName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:height="48dp"
+        android:hint="Enter Service Name"
+        android:paddingLeft="20dp"
+        android:paddingTop="10dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="10dp"
+        app:layout_constraintEnd_toEndOf="@+id/textViewUpdateService"
+        app:layout_constraintHorizontal_bias="0.478"
+        app:layout_constraintStart_toStartOf="@+id/textViewUpdateService"
+        app:layout_constraintTop_toBottomOf="@+id/textViewUpdateService" />
+
+    <TextView
+        android:id="@+id/textViewFormulaireUpdateService"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="Formulaire"
+        android:textColor="#000000"
+        android:textColorHint="#000000"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/UpdateServiceName"
+        app:layout_constraintStart_toStartOf="@+id/UpdateServiceName"
+        app:layout_constraintTop_toBottomOf="@+id/UpdateServiceName" />
+
+    <ListView
+        android:id="@+id/formFieldListUpdate"
+        android:layout_width="228dp"
+        android:layout_height="87dp"
+        android:layout_marginTop="13dp"
+        android:layout_marginBottom="24dp"
+        app:layout_constraintEnd_toEndOf="@+id/textViewFormulaireUpdateService"
+        app:layout_constraintStart_toStartOf="@+id/textViewFormulaireUpdateService"
+        app:layout_constraintTop_toBottomOf="@+id/textViewFormulaireUpdateService" />
+
+    <TextView
+        android:id="@+id/textViewDocumentsUpdateService"
+        android:layout_width="91dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="12dp"
+        android:text="Documents"
+        android:textColor="#000000"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/buttonAddFormFieldUpdate"
+        app:layout_constraintHorizontal_bias="0.47"
+        app:layout_constraintStart_toStartOf="@+id/buttonAddFormFieldUpdate"
+        app:layout_constraintTop_toBottomOf="@+id/buttonAddFormFieldUpdate" />
+
+    <ListView
+        android:id="@+id/docsFieldListUpdate"
+        android:layout_width="228dp"
+        android:layout_height="87dp"
+        android:layout_marginTop="13dp"
+        android:layout_marginBottom="24dp"
+        app:layout_constraintEnd_toEndOf="@+id/textViewDocumentsUpdateService"
+        app:layout_constraintStart_toStartOf="@+id/textViewDocumentsUpdateService"
+        app:layout_constraintTop_toBottomOf="@+id/textViewDocumentsUpdateService" />
+
+    <Button
+        android:id="@+id/buttonAddFormFieldUpdate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:backgroundTint="@color/blue"
+        android:text="Add Field"
+        app:layout_constraintEnd_toEndOf="@+id/formFieldListUpdate"
+        app:layout_constraintStart_toStartOf="@+id/formFieldListUpdate"
+        app:layout_constraintTop_toBottomOf="@+id/formFieldListUpdate" />
+
+    <Button
+        android:id="@+id/buttonAddDocsFieldUpdate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:backgroundTint="@color/blue"
+        android:text="Add Field"
+        app:layout_constraintEnd_toEndOf="@+id/docsFieldListUpdate"
+        app:layout_constraintHorizontal_bias="0.562"
+        app:layout_constraintStart_toStartOf="@+id/docsFieldListUpdate"
+        app:layout_constraintTop_toBottomOf="@+id/docsFieldListUpdate" />
+
+    <Button
+        android:id="@+id/buttonDeleteService"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="88dp"
+        android:layout_marginBottom="40dp"
+        android:backgroundTint="@color/red"
+        android:text="Delete"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonAddDocsFieldUpdate"
+        app:layout_constraintVertical_bias="0.549" />
+
+    <Button
+        android:id="@+id/buttonUpdateService"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="92dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="40dp"
+        android:backgroundTint="@color/green"
+        android:text="Update"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/buttonDeleteService"
+        app:layout_constraintHorizontal_bias="0.02"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonAddDocsFieldUpdate"
+        app:layout_constraintVertical_bias="0.496" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -23,12 +23,12 @@
 
 
         <ListView
-            android:id="@+id/documentsFieldsList"
+            android:id="@+id/documentsFieldsListCreate"
             android:layout_width="227dp"
             android:layout_height="82dp"
             android:layout_marginTop="22dp"
             android:layout_marginBottom="24dp"
-            app:layout_constraintBottom_toTopOf="@+id/addDocumentFieldButton"
+            app:layout_constraintBottom_toTopOf="@+id/addDocumentFieldButtonCreatePage"
             app:layout_constraintEnd_toEndOf="@+id/textView6"
             app:layout_constraintStart_toStartOf="@+id/textView6"
             app:layout_constraintTop_toBottomOf="@+id/textView6" />
@@ -42,21 +42,21 @@
             android:textColor="#000000"
             android:textSize="18sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@+id/addFormFieldButton"
+            app:layout_constraintEnd_toEndOf="@+id/addFormFieldButtonCreatePage"
             app:layout_constraintHorizontal_bias="0.529"
-            app:layout_constraintStart_toStartOf="@+id/addFormFieldButton"
-            app:layout_constraintTop_toBottomOf="@+id/addFormFieldButton" />
+            app:layout_constraintStart_toStartOf="@+id/addFormFieldButtonCreatePage"
+            app:layout_constraintTop_toBottomOf="@+id/addFormFieldButtonCreatePage" />
 
         <Button
-            android:id="@+id/addFormFieldButton"
+            android:id="@+id/addFormFieldButtonCreatePage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="Add Field"
-            app:layout_constraintEnd_toEndOf="@+id/formulaireFieldsList"
+            app:layout_constraintEnd_toEndOf="@+id/formulaireFieldsListCreate"
             app:layout_constraintHorizontal_bias="0.495"
-            app:layout_constraintStart_toStartOf="@+id/formulaireFieldsList"
-            app:layout_constraintTop_toBottomOf="@+id/formulaireFieldsList"
+            app:layout_constraintStart_toStartOf="@+id/formulaireFieldsListCreate"
+            app:layout_constraintTop_toBottomOf="@+id/formulaireFieldsListCreate"
             android:backgroundTint="@color/blue"/>
 
         <TextView
@@ -69,42 +69,42 @@
             android:textColorHint="#000000"
             android:textSize="18sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@+id/serviceNameEditText"
-            app:layout_constraintStart_toStartOf="@+id/serviceNameEditText"
-            app:layout_constraintTop_toBottomOf="@+id/serviceNameEditText"
+            app:layout_constraintEnd_toEndOf="@+id/createServiceNameEditText"
+            app:layout_constraintStart_toStartOf="@+id/createServiceNameEditText"
+            app:layout_constraintTop_toBottomOf="@+id/createServiceNameEditText"
             />
 
         <ListView
-            android:id="@+id/formulaireFieldsList"
+            android:id="@+id/formulaireFieldsListCreate"
             android:layout_width="228dp"
             android:layout_height="87dp"
             android:layout_marginTop="13dp"
             android:layout_marginBottom="24dp"
-            app:layout_constraintBottom_toTopOf="@+id/addFormFieldButton"
+            app:layout_constraintBottom_toTopOf="@+id/addFormFieldButtonCreatePage"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
         <Button
-            android:id="@+id/addDocumentFieldButton"
+            android:id="@+id/addDocumentFieldButtonCreatePage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="32dp"
+            android:backgroundTint="@color/blue"
             android:text="Add Field"
-            app:layout_constraintBottom_toTopOf="@+id/createButton"
-            app:layout_constraintEnd_toEndOf="@+id/documentsFieldsList"
+            app:layout_constraintBottom_toTopOf="@+id/createServiceButtonCreatePage"
+            app:layout_constraintEnd_toEndOf="@+id/documentsFieldsListCreate"
             app:layout_constraintHorizontal_bias="0.495"
-            app:layout_constraintStart_toStartOf="@+id/documentsFieldsList"
-            app:layout_constraintTop_toBottomOf="@+id/documentsFieldsList"
-            android:backgroundTint="@color/red"/>
+            app:layout_constraintStart_toStartOf="@+id/documentsFieldsListCreate"
+            app:layout_constraintTop_toBottomOf="@+id/documentsFieldsListCreate" />
 
         <TextView
             android:id="@+id/textCreateServicePage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
-            android:text="Create/Update Service"
+            android:text="CreateService"
             android:textColor="#000000"
             android:textSize="24sp"
             android:textStyle="bold"
@@ -113,12 +113,11 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
-            android:id="@+id/serviceNameEditText"
+            android:id="@+id/createServiceNameEditText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:height="48dp"
-            android:background="@drawable/input_bg"
             android:hint="Enter Service Name"
             android:paddingLeft="20dp"
             android:paddingTop="10dp"
@@ -129,32 +128,32 @@
             app:layout_constraintTop_toBottomOf="@+id/textCreateServicePage" />
 
         <Button
-            android:id="@+id/createButton"
+            android:id="@+id/createServiceButtonCreatePage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
             android:layout_marginBottom="68dp"
-            android:text="Create/Update"
+            android:backgroundTint="@color/green"
+            android:text="Create"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.311"
+            app:layout_constraintHorizontal_bias="0.348"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/addDocumentFieldButton"
-            android:backgroundTint="@color/green"/>
+            app:layout_constraintTop_toBottomOf="@+id/addDocumentFieldButtonCreatePage" />
 
         <Button
-            android:id="@+id/DeleteServiceButton"
+            android:id="@+id/DeleteServiceButtonCreatePage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="36dp"
+            android:backgroundTint="@color/red"
             android:text="Delete"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@+id/createButton"
-            app:layout_constraintTop_toBottomOf="@+id/addDocumentFieldButton"
-            app:layout_constraintVertical_bias="0.028"
-            android:backgroundTint="@color/red"/>
+            app:layout_constraintHorizontal_bias="0.133"
+            app:layout_constraintStart_toEndOf="@+id/createServiceButtonCreatePage"
+            app:layout_constraintTop_toBottomOf="@+id/addDocumentFieldButtonCreatePage"
+            app:layout_constraintVertical_bias="0.028" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
