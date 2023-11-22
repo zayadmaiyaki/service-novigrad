@@ -48,9 +48,33 @@ public class AccueilActivity extends AppCompatActivity {
         }
 
         buttonAccueil.setOnClickListener(view -> {
-            Intent intent = new Intent(AccueilActivity.this, MainPageAdmin.class);
-            startActivity(intent);
-            finish();
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
+            db.collection("users").whereEqualTo("username", username).limit(1).get().addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    List<DocumentSnapshot> documents = task.getResult().getDocuments();
+                    if (!documents.isEmpty()) {
+                        String role = documents.get(0).getString("role");
+
+                        // Check the user's role and redirect accordingly
+                        if ("Admin".equals(role)) {
+                            Intent intent = new Intent(AccueilActivity.this, MainPageAdmin.class);
+                            startActivity(intent);
+                        } else if ("Employee".equals(role)) {
+                            Intent intent = new Intent(AccueilActivity.this, MainPageEmployee.class);
+                            startActivity(intent);
+                        } else if ("Client".equals(role)) {
+                            Intent intent = new Intent(AccueilActivity.this, MainPageClient.class);
+                            startActivity(intent);
+                        }
+
+                        finish(); // Finish the current activity
+                    } else {
+                        welcomeTextView.setText("Bienvenue! " + username);
+                    }
+                } else {
+                    welcomeTextView.setText("Erreur lors de la récupération des données de l'utilisateur.");
+                }
+            });
         });
     }
 }
