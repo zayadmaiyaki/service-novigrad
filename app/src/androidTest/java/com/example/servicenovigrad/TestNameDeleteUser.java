@@ -12,22 +12,24 @@ import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
 
 @RunWith(AndroidJUnit4.class)
-public class TestEmail {
-    private ActivityScenario<RegisterActivity> scenario;
+
+public class TestNameDeleteUser {
+
+    private ActivityScenario<MainPageAdmin> scenario;
 
     @Before
     public void setUp() {
-        scenario = ActivityScenario.launch(RegisterActivity.class);
+        scenario = ActivityScenario.launch(MainPageAdmin.class);
     }
 
     @Test
-    public void checkEmail() {
+    public void checkNameDeleteUser() {
         scenario.onActivity(activity -> {
-            assertNotNull(activity.findViewById(R.id.textRegister));
-            EditText text = activity.findViewById(R.id.editEmail);
-            text.setText("mail1");
-            String mail = text.getText().toString();
-            assertNotEquals("mail", mail);
+            assertNotNull(activity.findViewById(R.id.textAdminPageDeleteUser));
+            EditText text = activity.findViewById(R.id.usernameEditText);
+            text.setText("name1");
+            String name = text.getText().toString();
+            assertNotEquals("name", name);
         });
     }
 

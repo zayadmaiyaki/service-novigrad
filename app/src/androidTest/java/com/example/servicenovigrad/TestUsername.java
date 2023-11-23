@@ -12,6 +12,7 @@ import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
 
 @RunWith(AndroidJUnit4.class)
+
 public class TestUsername {
 
     private ActivityScenario<LoginActivity> scenario;
@@ -22,7 +23,7 @@ public class TestUsername {
     }
 
     @Test
-    public void checkUsername() {
+    public void checkValidPassword() {
         scenario.onActivity(activity -> {
             assertNotNull(activity.findViewById(R.id.editSalut));
             EditText text = activity.findViewById(R.id.editUsernameL);
