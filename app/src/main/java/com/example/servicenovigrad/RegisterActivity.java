@@ -2,6 +2,8 @@ package com.example.servicenovigrad;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -43,6 +45,7 @@ public class RegisterActivity extends AppCompatActivity {
         EditText usernameField = findViewById(R.id.editUsernameL);
         EditText passwordField = findViewById(R.id.editPasswordL);
         EditText emailField = findViewById(R.id.editEmail);
+        EditText confirmPasswordField = findViewById(R.id.editConfirmPassword);
         Button signUpButton = findViewById(R.id.buttonSignUp);
         TextView alreadyHaveAccountText = findViewById(R.id.textAlreadyHaveAccount);
 
@@ -56,9 +59,12 @@ public class RegisterActivity extends AppCompatActivity {
                 String enteredPassword = passwordField.getText().toString().trim();
                 String enteredEmail = emailField.getText().toString().trim();
                 String selectedRole = role.getSelectedItem().toString();
+                String confirmPassword= confirmPasswordField.getText().toString().trim();
                 Administrateur admin= new Administrateur("admin","123admin456","Administrator");
 
-
+                if (!validateForm(enteredUsername,enteredEmail,enteredPassword,confirmPassword)){
+                    return;
+                }
 
                 if (enteredUsername.isEmpty() || enteredPassword.isEmpty()) {
                     Toast.makeText(RegisterActivity.this, "Please fill all fields.", Toast.LENGTH_SHORT).show();
@@ -121,6 +127,36 @@ public class RegisterActivity extends AppCompatActivity {
                 finish();
             }
         });
+    }
+    private boolean validateForm(String username, String email, String password, String confirmPassword) {
+        EditText usernameField = findViewById(R.id.editUsernameL);
+        EditText passwordField = findViewById(R.id.editPasswordL);
+        EditText emailField = findViewById(R.id.editEmail);
+        EditText confirmPasswordField = findViewById(R.id.editConfirmPassword);
+        // Validate the username
+        if (TextUtils.isDigitsOnly(username)) {
+            usernameField.setError("Username cannot be only numbers.");
+            return false;
+        }
+
+        // Validate the email
+        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches() || !email.endsWith(".com")) {
+            emailField.setError("Enter a valid email address.");
+            return false;
+        }
+
+        // Validate the password
+        if (!password.equals(confirmPassword)) {
+            confirmPasswordField.setError("Password and confirm password must match.");
+            return false;
+        }
+
+        if (password.length() > 16) {
+            passwordField.setError("Password must be at most 16 characters.");
+            return false;
+        }
+
+        return true;
     }
 
     @Override

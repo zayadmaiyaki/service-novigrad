@@ -35,7 +35,7 @@ public class AccueilActivity extends AppCompatActivity {
                     List<DocumentSnapshot> documents = task.getResult().getDocuments();
                     if (!documents.isEmpty()) {
                         String role = documents.get(0).getString("role");
-                        welcomeTextView.setText("Bienvenue! " + username + ". Vous êtes connecté en tant que " + role + ".");
+                        welcomeTextView.setText("Bienvenue! " + username + ". Vous êtes connectés en tant que " + role + ".");
                     } else {
                         welcomeTextView.setText("Bienvenue! " + username);
                     }
@@ -56,7 +56,7 @@ public class AccueilActivity extends AppCompatActivity {
                         String role = documents.get(0).getString("role");
 
                         // Check the user's role and redirect accordingly
-                        if ("Admin".equals(role)) {
+                        if ("Administrator".equals(role)) {
                             Intent intent = new Intent(AccueilActivity.this, MainPageAdmin.class);
                             startActivity(intent);
                         } else if ("Employee".equals(role)) {

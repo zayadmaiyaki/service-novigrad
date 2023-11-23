@@ -12,55 +12,23 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ServiceNovigrad"
         tools:targetApi="34">
-        <activity
-            android:name=".MainPageEmployee"
-            android:exported="false" />
 
-        <activity
-            android:name=".CreateServiceActivity"
-            android:exported="false" />
-
-        <activity
-            android:name=".EditServiceActivity"
-            android:exported="false" />
-        <activity
-            android:name=".MainPageAdmin"
-            android:exported="false" />
-        <activity
-            android:name=".MainPageClient"
-            android:exported="false" />
-        <activity
-            android:name=".activity_mainPageclient"
-            android:exported="false"
-            android:label="@string/title_activity_main_pageclient"
-            android:theme="@style/Theme.ServiceNovigrad" />
-        <activity
-            android:name=".activity_mainpageclient"
-            android:exported="false"
-            android:label="@string/title_activity_mainpageclient"
-            android:theme="@style/Theme.ServiceNovigrad" />
-        <activity
-            android:name=".AccueilActivity"
-            android:exported="true"
-            android:label="@string/title_activity_accueil"
-            android:theme="@style/Theme.ServiceNovigrad">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
         <activity
             android:name=".LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".RegisterActivity" />
-        <activity android:name=".MainActivity" />
-    </application>
 
+        <activity android:name=".RegisterActivity" />
+        <activity android:name=".MainPageEmployee" android:exported="false" />
+        <activity android:name=".CreateServiceActivity" android:exported="false" />
+        <activity android:name=".EditServiceActivity" android:exported="false" />
+        <activity android:name=".MainPageAdmin" android:exported="false" />
+        <activity android:name=".MainPageClient" android:exported="false" />
+        <activity android:name=".AccueilActivity" android:exported="false" />
+
+    </application>
 </manifest>
