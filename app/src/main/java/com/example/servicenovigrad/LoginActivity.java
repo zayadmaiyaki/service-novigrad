@@ -41,6 +41,16 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String password = passwordField.getText().toString().trim();
                 String username = usernameField.getText().toString().trim();
+                if (username.isEmpty()) {
+                    Toast.makeText(LoginActivity.this, "Please enter your username.", Toast.LENGTH_SHORT).show();
+                    return; // Stop the function from proceeding further
+                }
+
+                // Check if the password field is empty
+                if (password.isEmpty()) {
+                    Toast.makeText(LoginActivity.this, "Password cannot be empty.", Toast.LENGTH_SHORT).show();
+                    return; // Stop the function from proceeding further
+                }
                 FirebaseFirestore db = FirebaseFirestore.getInstance();
 
                 db.collection("users").whereEqualTo("username", username).limit(1).get().addOnCompleteListener(task -> {

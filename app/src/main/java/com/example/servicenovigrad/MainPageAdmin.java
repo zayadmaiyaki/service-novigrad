@@ -4,26 +4,24 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.database.*;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -31,14 +29,12 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 
 public class MainPageAdmin extends AppCompatActivity {
+    private ListView adminPageServiceList;
+    private ArrayAdapter<Service> adapter;
+    private ArrayList<Service> servicesList = new ArrayList<>();
+    private DatabaseReference servicesRef;
+    private Button createServiceButton;
 
-    private ArrayList<String> services;
-    private ArrayAdapter<String> adapter;
-    ListView listViewServices;
-    Button createServiceButton;
-    DatabaseReference databaseServices;
-
-    private FirebaseFirestore db;
 
 
     @Override
@@ -46,170 +42,125 @@ public class MainPageAdmin extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_page_admin);
 
+        adminPageServiceList = findViewById(R.id.adminPageServiceList);
         createServiceButton = findViewById(R.id.createServiceButton);
-        listViewServices = findViewById(R.id.adminPageServiceList);
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-        // Initialize your array list and adapter
-        services = new ArrayList<>();
-        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, services);
-        listViewServices.setAdapter(adapter);
-
-        // Initialize Firebase Database reference
-        databaseServices = FirebaseDatabase.getInstance().getReference("services");
-        db = FirebaseFirestore.getInstance();
-
-        createServiceButton.setOnClickListener(new View.OnClickListener() {
+        // Initialize adapter
+        adapter = new ArrayAdapter<Service>(this, android.R.layout.simple_list_item_1, servicesList){
             @Override
-            public void onClick(View view) {
-                // Generate a unique id for the new service
-                String id = databaseServices.push().getKey();
-
-                // Add the new service to the database
-                Service service = new Service(id, "New Service");
-                databaseServices.child(id).setValue(service);
-
-                // Update the local list and notify the adapter
-                services.add(service.getName());
-                adapter.notifyDataSetChanged();
-
-                // Redirect to the CreateServiceActivity page
-                Intent intent = new Intent(MainPageAdmin.this, CreateServiceActivity.class);
-                intent.putExtra("serviceId", id); // Pass the service id to the CreateServiceActivity
-                startActivity(intent);
+            public View getView(int position, View convertView, ViewGroup parent){
+                // Inflate custom layout if you have one
+                View view = super.getView(position, convertView, parent);
+                TextView textView = (TextView) view.findViewById(android.R.id.text1);
+                textView.setText(servicesList.get(position).getName());
+                return view;
             }
-        });
+        };
+        adminPageServiceList.setAdapter(adapter);
 
-        listViewServices.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                // Get the service name
-                String serviceName = services.get(position);
+        // Set up Firebase
+        servicesRef = FirebaseDatabase.getInstance().getReference("services");
 
-                // Create an intent to start CreateEditServiceActivity
-                Intent intent = new Intent(MainPageAdmin.this, CreateServiceActivity.class);
-
-                // Pass the service name to CreateEditServiceActivity
-                intent.putExtra("serviceName", serviceName);
-
-                // Start the activity
-                startActivity(intent);
-
-                return true; // return true to indicate that the long click was handled
-            }
-        });
-
-        EditText usernameEditText = findViewById(R.id.usernameEditText);
-        Button deleteButton = findViewById(R.id.deleteButton);
-
-        deleteButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String username = usernameEditText.getText().toString();
-
-                if (!username.isEmpty()) {
-                    // Query the users collection for the document with the matching username
-                    db.collection("users").whereEqualTo("username", username)
-                            .get()
-                            .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                                @Override
-                                public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                    if (task.isSuccessful()) {
-                                        for (QueryDocumentSnapshot document : task.getResult()) {
-                                            // Once we find the document, we delete it
-                                            db.collection("users").document(document.getId()).delete()
-                                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                                        @Override
-                                                        public void onSuccess(Void aVoid) {
-                                                            Toast.makeText(MainPageAdmin.this, "User deleted successfully", Toast.LENGTH_SHORT).show();
-                                                        }
-                                                    })
-                                                    .addOnFailureListener(new OnFailureListener() {
-                                                        @Override
-                                                        public void onFailure(@NonNull Exception e) {
-                                                            Toast.makeText(MainPageAdmin.this, "Failed to delete user", Toast.LENGTH_SHORT).show();
-                                                        }
-                                                    });
-                                        }
-                                    } else {
-                                        Toast.makeText(MainPageAdmin.this, "Failed to find user", Toast.LENGTH_SHORT).show();
-                                    }
-                                }
-                            });
-                } else {
-                    Toast.makeText(MainPageAdmin.this, "Please enter a username", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-        deleteButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String username = usernameEditText.getText().toString();
-
-                if (!username.isEmpty()) {
-                    // Query the users collection for the document with the matching username
-                    db.collection("users").whereEqualTo("username", username)
-                            .get()
-                            .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                                @Override
-                                public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                    if (task.isSuccessful()) {
-                                        for (QueryDocumentSnapshot document : task.getResult()) {
-                                            // Once we find the document, we delete it
-                                            db.collection("users").document(document.getId()).delete()
-                                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                                        @Override
-                                                        public void onSuccess(Void aVoid) {
-                                                            Toast.makeText(MainPageAdmin.this, "User deleted successfully", Toast.LENGTH_SHORT).show();
-                                                        }
-                                                    })
-                                                    .addOnFailureListener(new OnFailureListener() {
-                                                        @Override
-                                                        public void onFailure(@NonNull Exception e) {
-                                                            Toast.makeText(MainPageAdmin.this, "Failed to delete user", Toast.LENGTH_SHORT).show();
-                                                        }
-                                                    });
-                                        }
-                                    } else {
-                                        Toast.makeText(MainPageAdmin.this, "Failed to find user", Toast.LENGTH_SHORT).show();
-                                    }
-                                }
-                            });
-                } else {
-                    Toast.makeText(MainPageAdmin.this, "Please enter a username", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-
-
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        //attaching value event listener
-        databaseServices.addValueEventListener(new ValueEventListener() {
-
+        servicesRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                // Clear the previous service list
-                services.clear();
-
-                // Iterate through all the nodes
-                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                    // Get service
-                    Service service = postSnapshot.getValue(Service.class);
-                    // Add service to the list
-                    services.add(service.getName());
+                servicesList.clear(); // Clear the old list
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    Service service = snapshot.getValue(Service.class);
+                    if (service != null) {
+                        servicesList.add(service);
+                    }
                 }
-
-                // Notify the adapter that the data has changed
-                adapter.notifyDataSetChanged();
+                adapter.notifyDataSetChanged(); // Notify the adapter of the dataset change
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
+                // Handle possible errors.
             }
         });
+
+        createServiceButton.setOnClickListener(view -> {
+            // Redirect to Create Service page
+            Intent intent = new Intent(MainPageAdmin.this, CreateServiceActivity.class);
+            startActivity(intent);
+        });
+
+        adminPageServiceList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Service service = servicesList.get(position);
+                // Redirect to Edit Service page with service ID
+                Intent intent = new Intent(MainPageAdmin.this, EditServiceActivity.class);
+                intent.putExtra("serviceId", service.getId());
+                startActivity(intent);
+            }
+        });
+
+
+        adminPageServiceList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                Service service = servicesList.get(position);
+                Intent intent = new Intent(MainPageAdmin.this, EditServiceActivity.class);
+                intent.putExtra("serviceId", service.getId()); // pass the service ID to the edit page
+                startActivity(intent);
+                return true; // return true to indicate the click was handled
+            }
+        });
+        EditText usernameEditText=findViewById(R.id.usernameEditText);
+        Button deleteButton = findViewById(R.id.deleteButton);
+        deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String username = usernameEditText.getText().toString().trim();
+
+                if (!username.isEmpty()) {
+                    db.collection("users").whereEqualTo("username", username)
+                            .get()
+                            .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                    if (task.isSuccessful()) {
+                                        QuerySnapshot querySnapshot = task.getResult();
+                                        if (querySnapshot != null && !querySnapshot.isEmpty()) {
+                                            // User exists, proceed to delete
+                                            for (QueryDocumentSnapshot document : querySnapshot) {
+                                                db.collection("users").document(document.getId()).delete()
+                                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                            @Override
+                                                            public void onSuccess(Void aVoid) {
+                                                                Toast.makeText(MainPageAdmin.this, "User deleted successfully", Toast.LENGTH_SHORT).show();
+                                                            }
+                                                        })
+                                                        .addOnFailureListener(new OnFailureListener() {
+                                                            @Override
+                                                            public void onFailure(@NonNull Exception e) {
+                                                                Toast.makeText(MainPageAdmin.this, "Failed to delete user", Toast.LENGTH_SHORT).show();
+                                                            }
+                                                        });
+                                            }
+                                        } else {
+                                            // User does not exist, show error message
+                                            Toast.makeText(MainPageAdmin.this, "No user found with that username.", Toast.LENGTH_SHORT).show();
+                                        }
+                                    } else {
+                                        Toast.makeText(MainPageAdmin.this, "Error searching for user", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            });
+                } else {
+                    Toast.makeText(MainPageAdmin.this, "Please enter a username", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+
+
+
+
     }
+
+
 }
