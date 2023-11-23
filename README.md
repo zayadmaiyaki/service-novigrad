@@ -4,7 +4,7 @@
 IMPORTANT!!! : Le projet se trouve sur la branche test
 
 
-Ce projet consiste à développer une application mobile pour la gestion d’un salon de coiffure. L’application permet aux clients de réserver des services, aux employés de consulter leur horaire et aux administrateurs de gérer les comptes et les services offerts.
+Ce projet consiste à développer une application mobile quiimplemente les fonctionnalités de base pour les services offerts par une province imaginaire appelée Novigrad à ses résidents.. L’application permet aux clients de réserver des services, aux employés de consulter leur horaire et aux administrateurs de gérer les comptes et les services offerts.
 
 Livrable 1 
 
