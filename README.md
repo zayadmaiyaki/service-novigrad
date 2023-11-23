@@ -6,7 +6,7 @@ Ce projet consiste à développer une application mobile quiimplemente les fonct
 
 ## Livrable 1 
 
-**Fonctionnalités**
+### Fonctionnalités
 
 Les fonctionnalités implémentées dans le livrable 1 sont les suivantes:
 
@@ -25,7 +25,7 @@ Pour se connecter à un compte employé ou client, il faut utiliser les informat
 
 ## Livrable 2
 
-**Fonctionnalités**
+### Fonctionnalités
 
 Les fonctionnalités implémentées dans le livrable 2 sont les suivantes:
 
