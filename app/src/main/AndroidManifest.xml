@@ -12,23 +12,49 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ServiceNovigrad"
         tools:targetApi="34">
-
+        <activity
+            android:name=".RedirectRequestsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".RequestsPageActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ServiceOfferedActivity"
+            android:exported="false" />
+        <activity
+            android:name=".BranchPageActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CreateBranchActivity"
+            android:exported="false" />
         <activity
             android:name=".LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity android:name=".RegisterActivity" />
-        <activity android:name=".MainPageEmployee" android:exported="false" />
-        <activity android:name=".CreateServiceActivity" android:exported="false" />
-        <activity android:name=".EditServiceActivity" android:exported="false" />
-        <activity android:name=".MainPageAdmin" android:exported="false" />
-        <activity android:name=".MainPageClient" android:exported="false" />
-        <activity android:name=".AccueilActivity" android:exported="false" />
-
+        <activity
+            android:name=".MainPageEmployee"
+            android:exported="false" />
+        <activity
+            android:name=".CreateServiceActivity"
+            android:exported="false" />
+        <activity
+            android:name=".EditServiceActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MainPageAdmin"
+            android:exported="false" />
+        <activity
+            android:name=".MainPageClient"
+            android:exported="false" />
+        <activity
+            android:name=".AccueilActivity"
+            android:exported="false" />
     </application>
+
 </manifest>

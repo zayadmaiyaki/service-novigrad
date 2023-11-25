@@ -22,5 +22,26 @@
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.11" />
+        app:layout_constraintVertical_bias="0.057" />
+
+    <ListView
+        android:id="@+id/listViewBranch"
+        android:layout_width="348dp"
+        android:layout_height="405dp"
+        android:layout_marginTop="36dp"
+        app:layout_constraintEnd_toEndOf="@+id/textEmployeePage"
+        app:layout_constraintStart_toStartOf="@+id/textEmployeePage"
+        app:layout_constraintTop_toBottomOf="@+id/textEmployeePage" />
+
+    <Button
+        android:id="@+id/buttonCreateBranch"
+        android:layout_width="156dp"
+        android:layout_height="61dp"
+        android:layout_marginTop="40dp"
+        android:text="Create Branch"
+        app:layout_constraintEnd_toEndOf="@+id/listViewBranch"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="@+id/listViewBranch"
+        app:layout_constraintTop_toBottomOf="@+id/listViewBranch" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
