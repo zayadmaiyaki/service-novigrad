@@ -71,6 +71,9 @@ dependencies {
     testImplementation("junit:junit:4.13.2")
     implementation ("com.google.android.material:material:1.8.0")
 
+    classpath("com.google.gms:google-services:4.5.0")
+    classpath("com.android.tools.build:gradle:4.2.1")
+
 
 
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
