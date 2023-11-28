@@ -1,9 +1,9 @@
 version: 2
 jobs:
   build:
-    working_directory: ~/code
+    working_directory: ~/service-novigrad-groupe08
     docker:
-      - image: circleci/android:api-25-alpha
+      - image: circleci/android:api-34
     environment:
       JVM_OPTS: -Xmx3200m
     steps:
