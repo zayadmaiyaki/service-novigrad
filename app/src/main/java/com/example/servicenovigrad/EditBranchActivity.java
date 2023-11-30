@@ -1,5 +1,4 @@
-package com.example.servicenovigrad;
-
+package com.example.createservice;
 
 import android.app.Dialog;
 import android.content.Intent;
@@ -26,49 +25,121 @@ import java.util.List;
 import java.util.Map;
 
 public class EditBranchActivity extends AppCompatActivity {
+
     private EditText branchNameEditText, branchPhoneNumberEditText, branchAddressEditText;
     private Map<String, String> workingTimes = new HashMap<>();
-    private List<Service> servicesOffered = new ArrayList<>();
     private String branchId;
-    private Map<Integer, Button> dayButtons = new HashMap<>();
-
+    private DatabaseReference branchesRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_branch);
 
-        branchId = getIntent().getStringExtra("BRANCH_ID");
-
         branchNameEditText = findViewById(R.id.editTextBranchName);
         branchPhoneNumberEditText = findViewById(R.id.branchPhoneNumberText2);
         branchAddressEditText = findViewById(R.id.branchAddressText2);
-        Button buttonSaveChanges = findViewById(R.id.buttonSaveChanges);
-        Button editOfferedServices=findViewById(R.id.editOfferedServices);
+        Button saveChangesButton = findViewById(R.id.buttonSaveChanges);
+        Button editOfferedServicesButton = findViewById(R.id.editOfferedServices);
 
-        setupDayButtons();
-        updateDayButtonColors();
+        // Assume branchId is passed via Intent
+        branchId = getIntent().getStringExtra("BRANCH_ID");
+        branchesRef = FirebaseDatabase.getInstance().getReference("branches");
 
-        buttonSaveChanges.setOnClickListener(new View.OnClickListener() {
+        loadBranchData();
+
+        saveChangesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                saveBranchChanges();
+
+                updateBranch();
+
             }
         });
 
-        editOfferedServices.setOnClickListener(new View.OnClickListener() {
+        editOfferedServicesButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View v) {
                 Intent intent = new Intent(EditBranchActivity.this, EditOfferedServicesActivity.class);
                 intent.putExtra("BRANCH_ID", branchId);
                 startActivity(intent);
             }
         });
 
-        loadBranchDetails();
+        setupDayButtons(); // A method to set up click listeners for day buttons
     }
 
+    private void loadBranchData() {
+        branchesRef.child(branchId).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Branch branch = dataSnapshot.getValue(Branch.class);
+                if (branch != null) {
+                    branchNameEditText.setText(branch.getName());
+                    branchPhoneNumberEditText.setText(branch.getPhoneNumber());
+                    branchAddressEditText.setText(branch.getAddress());
+                    workingTimes.putAll(branch.getWorkingHours());
+                    updateDayButtonColors();
+                }
+            }
 
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Toast.makeText(EditBranchActivity.this, "Failed to load branch details.", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void updateBranch() {
+        String name = branchNameEditText.getText().toString().trim();
+        String phone = branchPhoneNumberEditText.getText().toString().trim();
+        String address = branchAddressEditText.getText().toString().trim();
+
+        if (name.isEmpty()) {
+            branchNameEditText.setError("Name is required");
+            branchNameEditText.requestFocus();
+            return;
+        }
+
+        // Fetch the latest state of servicesOffered before applying changes
+        branchesRef.child(branchId).child("servicesOffered").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                // This list will hold the current services offered
+                List<Service> currentServicesOffered = new ArrayList<>();
+                for (DataSnapshot serviceSnapshot : dataSnapshot.getChildren()) {
+                    Service service = serviceSnapshot.getValue(Service.class);
+                    currentServicesOffered.add(service);
+                }
+
+                // Create a new Branch object with the updated information but preserving the services offered
+                Branch updatedBranch = new Branch(branchId, name, phone, address, workingTimes, currentServicesOffered);
+                Map<String, Object> branchUpdates = new HashMap<>();
+                branchUpdates.put("name", updatedBranch.getName());
+                branchUpdates.put("phone", updatedBranch.getPhoneNumber());
+                branchUpdates.put("address", updatedBranch.getAddress());
+                branchUpdates.put("workingTimes", updatedBranch.getWorkingHours());
+
+                // Here we are not overwriting the entire branch to avoid affecting the servicesOffered
+                branchesRef.child(branchId).updateChildren(branchUpdates).addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        Toast.makeText(EditBranchActivity.this, "Branch updated", Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent(EditBranchActivity.this, BranchPageActivity.class);
+                        intent.putExtra("BRANCH_ID", branchId); // if you need to pass the ID
+                        startActivity(intent);
+                        finish();
+                    } else {
+                        Toast.makeText(EditBranchActivity.this, "Failed to update branch", Toast.LENGTH_LONG).show();
+                    }
+                });
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Toast.makeText(EditBranchActivity.this, "Failed to fetch current services", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 
     private void setupDayButtons() {
         int[] dayButtonIds = {
@@ -79,112 +150,51 @@ public class EditBranchActivity extends AppCompatActivity {
 
         for (int i = 0; i < dayButtonIds.length; i++) {
             Button dayButton = findViewById(dayButtonIds[i]);
-            dayButtons.put(dayButtonIds[i], dayButton);
             final String day = days[i];
-            dayButton.setOnClickListener(v -> showWorkingHoursDialog(day)
-            );
+            dayButton.setOnClickListener(v -> showWorkingHoursDialog(day));
         }
     }
+
     private void showWorkingHoursDialog(final String dayKey) {
         final Dialog dialog = new Dialog(this);
-        dialog.setContentView(R.layout.dialog_working_hours); // make sure you have this layout
+        dialog.setContentView(R.layout.dialog_working_hours); // Assuming you have this layout
 
         final EditText editTextWorkingHours = dialog.findViewById(R.id.editTextWorkingHours);
         Button buttonCancel = dialog.findViewById(R.id.buttonCancel);
         Button buttonOk = dialog.findViewById(R.id.buttonOk);
 
-        // Pre-populate the dialog if hours were already set
         String existingHours = workingTimes.get(dayKey);
         if (existingHours != null) {
             editTextWorkingHours.setText(existingHours);
         }
 
         buttonCancel.setOnClickListener(v -> dialog.dismiss());
-
         buttonOk.setOnClickListener(v -> {
             String hours = editTextWorkingHours.getText().toString();
-
             workingTimes.put(dayKey, hours);
-
             updateDayButtonColors();
             dialog.dismiss();
         });
 
         dialog.show();
     }
+
     private void updateDayButtonColors() {
-        for (Map.Entry<Integer, Button> entry : dayButtons.entrySet()) {
-            Button dayButton = entry.getValue();
-            // Extract day key from button ID
-            String dayKey = getResources().getResourceEntryName(entry.getKey())
-                    .replace("button", "");
+        int[] dayButtonIds = {
+                R.id.buttonMonday2, R.id.buttonTuesday2, R.id.buttonWednesday2,
+                R.id.buttonThursday2, R.id.buttonFriday2, R.id.buttonSaturday2, R.id.buttonSunday2
+        };
 
-            // Remove any numbers at the end of the dayKey (if your IDs are like buttonMonday2, buttonTuesday2, etc.)
-            dayKey = dayKey.replaceAll("\\d", "");
-
+        for (int buttonId : dayButtonIds) {
+            Button dayButton = findViewById(buttonId);
+            String dayKey = getResources().getResourceEntryName(buttonId).replace("button", "").replace("2", "");
             String hours = workingTimes.getOrDefault(dayKey, "Closed");
+
             if (!hours.equals("Closed") && !hours.isEmpty()) {
                 dayButton.setBackgroundColor(getResources().getColor(R.color.green));
             } else {
                 dayButton.setBackgroundColor(getResources().getColor(R.color.red));
             }
         }
-    }
-
-
-
-
-    private void saveBranchChanges() {
-        String name = branchNameEditText.getText().toString().trim();
-        String phone = branchPhoneNumberEditText.getText().toString().trim();
-        String address = branchAddressEditText.getText().toString().trim();
-
-        // Validation
-        // ...
-
-        Branch updatedBranch = new Branch(branchId, name, phone, address, workingTimes, servicesOffered);
-
-        DatabaseReference branchesRef = FirebaseDatabase.getInstance().getReference("branches");
-        branchesRef.child(branchId).setValue(updatedBranch).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if (task.isSuccessful()) {
-                    Toast.makeText(EditBranchActivity.this, "Branch updated", Toast.LENGTH_LONG).show();
-                    finish(); // Go back to the previous activity
-                } else {
-                    Toast.makeText(EditBranchActivity.this, "Failed to update branch", Toast.LENGTH_LONG).show();
-                }
-            }
-        });
-    }
-    private void loadBranchDetails() {
-        DatabaseReference databaseRef = FirebaseDatabase.getInstance().getReference("branches").child(branchId);
-        databaseRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Branch branch = dataSnapshot.getValue(Branch.class);
-                if (branch != null) {
-                    branchNameEditText.setText(branch.getName());
-                    branchPhoneNumberEditText.setText(branch.getPhoneNumber());
-                    branchAddressEditText.setText(branch.getAddress());
-                    workingTimes = branch.getWorkingHours();
-                    servicesOffered = branch.getServiceOfferred();
-                    updateDayButtonColors();
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                Toast.makeText(EditBranchActivity.this, "Error loading data", Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-
-
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        loadBranchDetails(); // Refresh data when returning to this activity
     }
 }
