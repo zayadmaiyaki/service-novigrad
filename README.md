@@ -2,7 +2,7 @@
 # Projet Android : Service Novigrad
 
 Ce projet consiste à développer une application mobile quiimplemente les fonctionnalités de base pour les services offerts par une province imaginaire appelée Novigrad à ses résidents.. L’application permet aux clients de réserver des services, aux employés de consulter leur horaire et aux administrateurs de gérer les comptes et les services offerts.
-**IMPORTANT!!! : Le projet se trouve sur la branche test**
+**IMPORTANT!!! : Le projet se trouve sur la branche circleci et l'apk dans le tag v0.3**
 
 ## Livrable 1 
 
@@ -42,6 +42,6 @@ Les fonctionnalités implémentées dans le livrable 3 sont les suivantes:
 - Completion des profils des succursales par les employés
 - L'association des des services creer par l'administrateur au profil de la succursale
 
-### Fonctionnalités
+
 
 
