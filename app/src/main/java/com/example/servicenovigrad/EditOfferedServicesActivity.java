@@ -1,6 +1,4 @@
-package com.example.servicenovigrad;
-
-import androidx.appcompat.app.AppCompatActivity;
+package com.example.createservice;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,6 +6,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -24,26 +24,25 @@ public class EditOfferedServicesActivity extends AppCompatActivity {
 
     private ListView servicesListView;
     private ArrayAdapter<String> adapter;
-    private final List<String> serviceNames = new ArrayList<>();
-    private final Map<String, Service> allServices = new HashMap<>();
-    private List<String> currentlyOfferedServices = new ArrayList<>();
-    private String branchId;
+    private List<String> serviceNames = new ArrayList<>();
+    private Map<String, Service> allServices = new HashMap<>();
     private DatabaseReference servicesRef;
+    private String branchId;
+    private List<String> currentServiceIds = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_offered_services);
 
+        branchId = getIntent().getStringExtra("BRANCH_ID");
         servicesListView = findViewById(R.id.service_list_view2);
         servicesListView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_multiple_choice, serviceNames);
         servicesListView.setAdapter(adapter);
 
-        branchId = getIntent().getStringExtra("BRANCH_ID");
         servicesRef = FirebaseDatabase.getInstance().getReference("services");
         loadServicesFromFirebase();
-        loadCurrentlyOfferedServices();
 
         Button confirmButton = findViewById(R.id.confirmButton2);
         confirmButton.setOnClickListener(v -> confirmSelection());
@@ -63,6 +62,7 @@ public class EditOfferedServicesActivity extends AppCompatActivity {
                     }
                 }
                 adapter.notifyDataSetChanged();
+                loadCurrentServices();
             }
 
             @Override
@@ -72,19 +72,16 @@ public class EditOfferedServicesActivity extends AppCompatActivity {
         });
     }
 
-    private void loadCurrentlyOfferedServices() {
-        DatabaseReference branchRef = FirebaseDatabase.getInstance().getReference("branches").child(branchId).child("serviceOffered");
+    private void loadCurrentServices() {
+        DatabaseReference branchRef = FirebaseDatabase.getInstance().getReference("branches").child(branchId).child("servicesOffered");
         branchRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                currentlyOfferedServices.clear();
                 for (DataSnapshot serviceSnapshot : dataSnapshot.getChildren()) {
-                    String serviceName = serviceSnapshot.child("name").getValue(String.class);
-                    if (serviceName != null) {
-                        currentlyOfferedServices.add(serviceName);
-                    }
+                    String serviceId = serviceSnapshot.getKey();
+                    currentServiceIds.add(serviceId);
                 }
-                markCurrentlyOfferedServices();
+                markCurrentServices();
             }
 
             @Override
@@ -94,37 +91,35 @@ public class EditOfferedServicesActivity extends AppCompatActivity {
         });
     }
 
-    private void markCurrentlyOfferedServices() {
-        for (int i = 0; i < serviceNames.size(); i++) {
-            if (currentlyOfferedServices.contains(serviceNames.get(i))) {
+    private void markCurrentServices() {
+        for (int i = 0; i < servicesListView.getCount(); i++) {
+            String serviceName = adapter.getItem(i);
+            Service service = allServices.get(serviceName);
+            if (service != null && currentServiceIds.contains(service.getId())) {
                 servicesListView.setItemChecked(i, true);
             }
         }
     }
 
     private void confirmSelection() {
-        // Get the count of ListView items
-        int itemCount = servicesListView.getCount();
-
-        // Prepare a list to store the updated offered services' names
-        List<String> updatedOfferedServicesNames = new ArrayList<>();
-
-        // Iterate over all services
-        for (int i = 0; i < itemCount; i++) {
+        // Get the selected services from the list view
+        List<Service> selectedServices = new ArrayList<>();
+        for (int i = 0; i < servicesListView.getCount(); i++) {
             if (servicesListView.isItemChecked(i)) {
                 String serviceName = adapter.getItem(i);
-                // Add the service name to the list if it's checked
-                updatedOfferedServicesNames.add(serviceName);
+                Service service = allServices.get(serviceName);
+                if (service != null) {
+                    selectedServices.add(service); // Assuming you have a Service class with id and name
+                }
             }
         }
 
-        // Update the branch's serviceOffered node with the new list of service names
-        DatabaseReference branchRef = FirebaseDatabase.getInstance().getReference("branches").child(branchId);
-        branchRef.child("serviceOffered").setValue(updatedOfferedServicesNames).addOnCompleteListener(task -> {
+        // Prepare to update the Firebase database
+        DatabaseReference branchServicesRef = FirebaseDatabase.getInstance().getReference("branches").child(branchId).child("servicesOffered");
+        branchServicesRef.setValue(selectedServices).addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 Toast.makeText(EditOfferedServicesActivity.this, "Services updated successfully", Toast.LENGTH_SHORT).show();
-                // If you want to refresh the OfferedServicesActivity upon return, consider using startActivityForResult when starting EditOfferedServicesActivity
-                finish(); // Close the activity
+                finish();
             } else {
                 Toast.makeText(EditOfferedServicesActivity.this, "Failed to update services", Toast.LENGTH_SHORT).show();
             }
