@@ -1,4 +1,4 @@
-package com.example.createservice;
+package com.example.servicenovigrad;
 
 import android.content.Intent;
 import android.os.Bundle;

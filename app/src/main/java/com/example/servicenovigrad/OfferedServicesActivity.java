@@ -1,4 +1,4 @@
-package com.example.createservice;
+package com.example.servicenovigrad;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
