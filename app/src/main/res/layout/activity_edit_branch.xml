@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    tools:context=".EditBranchActivity">
+
+    <Button
+        android:id="@+id/editOfferedServices"
+        android:layout_width="204dp"
+        android:layout_height="58dp"
+        android:layout_marginTop="30dp"
+        android:text="Offered Services"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonThursday2" />
+
+    <Button
+        android:id="@+id/buttonThursday2"
+        android:layout_width="57dp"
+        android:layout_height="51dp"
+        android:layout_marginTop="20dp"
+        android:text="T"
+        app:layout_constraintStart_toEndOf="@+id/buttonWednesday2"
+        app:layout_constraintTop_toBottomOf="@+id/textWorkingDaysAndHours2" />
+
+    <Button
+        android:id="@+id/buttonFriday2"
+        android:layout_width="57dp"
+        android:layout_height="51dp"
+        android:layout_marginTop="20dp"
+        android:text="F"
+        app:layout_constraintStart_toEndOf="@+id/buttonThursday2"
+        app:layout_constraintTop_toBottomOf="@+id/textWorkingDaysAndHours2" />
+
+    <Button
+        android:id="@+id/buttonTuesday2"
+        android:layout_width="57dp"
+        android:layout_height="51dp"
+        android:layout_marginTop="20dp"
+        android:text="T"
+        app:layout_constraintStart_toEndOf="@+id/buttonMonday2"
+        app:layout_constraintTop_toBottomOf="@+id/textWorkingDaysAndHours2" />
+
+    <Button
+        android:id="@+id/buttonWednesday2"
+        android:layout_width="57dp"
+        android:layout_height="51dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="20dp"
+        android:text="W"
+        app:layout_constraintStart_toEndOf="@+id/buttonTuesday2"
+        app:layout_constraintTop_toBottomOf="@+id/textWorkingDaysAndHours2" />
+
+    <Button
+        android:id="@+id/buttonSunday2"
+        android:layout_width="57dp"
+        android:layout_height="51dp"
+        android:layout_marginTop="20dp"
+        android:text="S"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/buttonSaturday2"
+        app:layout_constraintTop_toBottomOf="@+id/textWorkingDaysAndHours2" />
+
+    <Button
+        android:id="@+id/buttonMonday2"
+        android:layout_width="57dp"
+        android:layout_height="51dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="20dp"
+        android:text="M"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textWorkingDaysAndHours2" />
+
+    <Button
+        android:id="@+id/buttonSaturday2"
+        android:layout_width="57dp"
+        android:layout_height="51dp"
+        android:layout_marginTop="20dp"
+        android:text="S"
+        app:layout_constraintStart_toEndOf="@+id/buttonFriday2"
+        app:layout_constraintTop_toBottomOf="@+id/textWorkingDaysAndHours2" />
+
+
+    <TextView
+        android:id="@+id/textWorkingDaysAndHours2"
+        android:layout_width="404dp"
+        android:layout_height="65dp"
+        android:layout_marginTop="36dp"
+        android:gravity="center_horizontal|center_vertical"
+        android:text="Working days and hours"
+        android:textColor="#000000"
+        android:textColorHint="#000000"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.428"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/branchAddressText2" />
+
+    <TextView
+        android:id="@+id/textBranchPage2"
+        android:layout_width="329dp"
+        android:layout_height="48dp"
+        android:gravity="center_horizontal|center_vertical"
+        android:text="Edit Branch Page"
+        android:textColor="#000000"
+        android:textColorHint="#000000"
+        android:textSize="36sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.057" />
+
+    <Button
+        android:id="@+id/buttonSaveChanges"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
+        android:text="Apply Changes"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/editOfferedServices"
+        app:layout_constraintHorizontal_bias="0.483"
+        app:layout_constraintStart_toStartOf="@+id/editOfferedServices" />
+
+    <EditText
+        android:id="@+id/editTextBranchName"
+        android:layout_width="270dp"
+        android:layout_height="53dp"
+        android:layout_marginTop="40dp"
+        android:height="48dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:text="Name"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/textBranchPage2"
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="@+id/textBranchPage2"
+        app:layout_constraintTop_toBottomOf="@+id/textBranchPage2"  />
+
+    <EditText
+        android:id="@+id/branchPhoneNumberText2"
+        android:layout_width="267dp"
+        android:layout_height="54dp"
+        android:layout_marginTop="20dp"
+        android:height="48dp"
+        android:autofillHints=""
+        android:drawablePadding="10dp"
+        android:ems="10"
+        android:inputType="text"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:text="Phone Number"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/editTextBranchName"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/editTextBranchName"
+        app:layout_constraintTop_toBottomOf="@+id/editTextBranchName" />
+
+    <EditText
+        android:id="@+id/branchAddressText2"
+        android:layout_width="272dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="16dp"
+        android:height="48dp"
+        android:autofillHints=""
+        android:drawablePadding="10dp"
+        android:ems="10"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:text="Address"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/branchPhoneNumberText2"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/branchPhoneNumberText2"
+        app:layout_constraintTop_toBottomOf="@+id/branchPhoneNumberText2" />
+</androidx.constraintlayout.widget.ConstraintLayout>

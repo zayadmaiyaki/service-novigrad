@@ -2,10 +2,25 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@drawable/background"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background"
     tools:context=".BranchPageActivity">
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="173dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="220dp"
+        android:height="48dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:text="Address:"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textBranchPage"
@@ -24,64 +39,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.057" />
 
-    <EditText
-        android:id="@+id/branchNameEditText"
-        android:layout_width="173dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="16dp"
-        android:height="48dp"
-        android:background="@drawable/input_bg"
-        android:hint="Name"
-        android:paddingLeft="20dp"
-        android:paddingTop="10dp"
-        android:paddingRight="10dp"
-        android:paddingBottom="10dp"
-        app:layout_constraintEnd_toEndOf="@+id/textBranchPage"
-        app:layout_constraintHorizontal_bias="0.51"
-        app:layout_constraintStart_toStartOf="@+id/textBranchPage"
-        app:layout_constraintTop_toBottomOf="@+id/textBranchPage" />
-
-    <EditText
-        android:id="@+id/branchPhoneNumberEditText"
-        android:layout_width="173dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="16dp"
-        android:height="48dp"
-        android:autofillHints=""
-        android:background="@drawable/input_bg"
-        android:drawablePadding="10dp"
-        android:ems="10"
-        android:hint="Phone Number"
-        android:inputType="text"
-        android:paddingLeft="20dp"
-        android:paddingTop="10dp"
-        android:paddingRight="10dp"
-        android:paddingBottom="10dp"
-        app:layout_constraintEnd_toEndOf="@+id/branchNameEditText"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/branchNameEditText"
-        app:layout_constraintTop_toBottomOf="@+id/branchNameEditText" />
-
-    <EditText
-        android:id="@+id/branchAddressEditText"
-        android:layout_width="173dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="12dp"
-        android:height="48dp"
-        android:autofillHints=""
-        android:background="@drawable/input_bg"
-        android:drawablePadding="10dp"
-        android:ems="10"
-        android:hint="Address"
-        android:inputType="text"
-        android:paddingLeft="20dp"
-        android:paddingTop="10dp"
-        android:paddingRight="10dp"
-        android:paddingBottom="10dp"
-        app:layout_constraintEnd_toEndOf="@+id/branchPhoneNumberEditText"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/branchPhoneNumberEditText"
-        app:layout_constraintTop_toBottomOf="@+id/branchPhoneNumberEditText" />
 
     <TextView
         android:id="@+id/textWorkingDaysAndHours"
@@ -101,25 +58,180 @@
         app:layout_constraintVertical_bias="0.415" />
 
     <Button
+        android:id="@+id/buttonMonday"
+        android:layout_width="57dp"
+        android:layout_height="51dp"
+        android:layout_marginTop="13dp"
+        android:text="M"
+        app:layout_constraintEnd_toStartOf="@+id/buttonTuesday"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textWorkingDaysAndHours" />
+
+    <Button
+        android:id="@+id/buttonTuesday"
+        android:layout_width="57dp"
+        android:layout_height="51dp"
+        android:layout_marginTop="13dp"
+        android:text="T"
+        app:layout_constraintEnd_toStartOf="@+id/buttonWednesday"
+        app:layout_constraintTop_toBottomOf="@+id/textWorkingDaysAndHours" />
+
+    <Button
+        android:id="@+id/buttonWednesday"
+        android:layout_width="57dp"
+        android:layout_height="51dp"
+        android:layout_marginTop="13dp"
+        android:text="W"
+        app:layout_constraintEnd_toStartOf="@+id/buttonThursday"
+        app:layout_constraintTop_toBottomOf="@+id/textWorkingDaysAndHours" />
+
+    <Button
+        android:id="@+id/buttonThursday"
+        android:layout_width="57dp"
+        android:layout_height="51dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="4dp"
+        android:text="T"
+        app:layout_constraintEnd_toStartOf="@+id/buttonFriday"
+        app:layout_constraintTop_toBottomOf="@+id/textWorkingDaysAndHours" />
+
+    <Button
+        android:id="@+id/buttonFriday"
+        android:layout_width="57dp"
+        android:layout_height="51dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="4dp"
+        android:text="F"
+        app:layout_constraintEnd_toStartOf="@+id/buttonSaturday"
+        app:layout_constraintTop_toBottomOf="@+id/textWorkingDaysAndHours" />
+
+    <Button
+        android:id="@+id/buttonSaturday"
+        android:layout_width="57dp"
+        android:layout_height="51dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="1dp"
+        android:text="S"
+        app:layout_constraintEnd_toStartOf="@+id/buttonSunday"
+        app:layout_constraintTop_toBottomOf="@+id/textWorkingDaysAndHours" />
+
+    <Button
+        android:id="@+id/buttonSunday"
+        android:layout_width="57dp"
+        android:layout_height="51dp"
+        android:layout_marginTop="13dp"
+        android:text="S"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textWorkingDaysAndHours" />
+
+    <Button
         android:id="@+id/buttonServicesRequests"
         android:layout_width="169dp"
         android:layout_height="59dp"
-        android:layout_marginTop="140dp"
+        android:layout_marginTop="200dp"
         android:text="Services Requests"
         app:layout_constraintEnd_toEndOf="@+id/textWorkingDaysAndHours"
+        app:layout_constraintHorizontal_bias="0.51"
         app:layout_constraintStart_toStartOf="@+id/textWorkingDaysAndHours"
+        app:layout_constraintTop_toBottomOf="@+id/textWorkingDaysAndHours" />
+
+    <Button
+        android:id="@+id/buttonOfferedServices"
+        android:layout_width="169dp"
+        android:layout_height="59dp"
+        android:layout_marginTop="128dp"
+        android:text="Offered Services"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textWorkingDaysAndHours" />
 
     <Button
         android:id="@+id/buttonBranchPageEdit"
         android:layout_width="110dp"
         android:layout_height="52dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="20dp"
         android:text="Edit"
         app:layout_constraintEnd_toEndOf="@+id/buttonServicesRequests"
         app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="@+id/buttonServicesRequests"
         app:layout_constraintTop_toBottomOf="@+id/buttonServicesRequests" />
+
+    <TextView
+        android:id="@+id/branchAddressText"
+        android:layout_width="173dp"
+        android:layout_height="48dp"
+        android:layout_marginEnd="120dp"
+        android:height="48dp"
+        android:autofillHints=""
+        android:drawablePadding="10dp"
+        android:ems="10"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:text="Address"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/branchPhoneNumberText" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="173dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="172dp"
+        android:height="48dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:text="Phone Number:"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="173dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="112dp"
+        android:height="48dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:text="Name:"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/branchPhoneNumberText"
+        android:layout_width="173dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="11dp"
+        android:layout_marginEnd="64dp"
+        android:height="48dp"
+        android:autofillHints=""
+        android:drawablePadding="10dp"
+        android:ems="10"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:text="Phone Number"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/branchNameText" />
+
+    <TextView
+        android:id="@+id/branchNameText"
+        android:layout_width="173dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="27dp"
+        android:layout_marginEnd="72dp"
+        android:height="48dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:text="Name"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/textBranchPage"
+        app:layout_constraintTop_toBottomOf="@+id/textBranchPage" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

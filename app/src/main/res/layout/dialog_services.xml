@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+             android:layout_height="match_parent">
+
+    <ListView
+        android:id="@+id/DocsFieldDialogListView"
+        android:layout_width="398dp"
+        android:layout_height="102dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintEnd_toEndOf="@+id/textView11"
+        app:layout_constraintStart_toStartOf="@+id/textView11"
+        app:layout_constraintTop_toBottomOf="@+id/textView11" />
+
+    <TextView
+        android:id="@+id/ServiceNameDialogText"
+        android:layout_width="256dp"
+        android:layout_height="33dp"
+        android:gravity="center"
+        android:text="Service Name"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ListView
+        android:id="@+id/FormFieldDialogListView"
+        android:layout_width="398dp"
+        android:layout_height="102dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="@+id/textView10"
+        app:layout_constraintStart_toStartOf="@+id/textView10"
+        app:layout_constraintTop_toBottomOf="@+id/textView10" />
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Formulaire"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/ServiceNameDialogText"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="@+id/ServiceNameDialogText"
+        app:layout_constraintTop_toBottomOf="@+id/ServiceNameDialogText" />
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Documents"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/FormFieldDialogListView"
+        app:layout_constraintStart_toStartOf="@+id/FormFieldDialogListView"
+        app:layout_constraintTop_toBottomOf="@+id/FormFieldDialogListView" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -19,8 +19,18 @@
             android:name=".RequestsPageActivity"
             android:exported="false" />
         <activity
-            android:name=".ServiceOfferedActivity"
+            android:name=".SelectOfferedServicesActivity"
             android:exported="false" />
+        <activity
+            android:name=".EditOfferedServicesActivity"
+            android:exported="false" />
+        <activity
+            android:name=".OfferedServicesActivity"
+            android:exported="false" />
+        <activity
+            android:name=".EditBranchActivity"
+            android:exported="false" />
+
         <activity
             android:name=".BranchPageActivity"
             android:exported="false" />

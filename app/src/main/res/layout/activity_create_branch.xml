@@ -30,7 +30,6 @@
         android:layout_height="48dp"
         android:layout_marginTop="16dp"
         android:height="48dp"
-        android:background="@drawable/input_bg"
         android:hint="Name"
         android:paddingLeft="20dp"
         android:paddingTop="10dp"
@@ -48,7 +47,6 @@
         android:layout_marginTop="16dp"
         android:height="48dp"
         android:autofillHints=""
-        android:background="@drawable/input_bg"
         android:drawablePadding="10dp"
         android:ems="10"
         android:hint="Phone Number"
@@ -69,7 +67,6 @@
         android:layout_marginTop="12dp"
         android:height="48dp"
         android:autofillHints=""
-        android:background="@drawable/input_bg"
         android:drawablePadding="10dp"
         android:ems="10"
         android:hint="Address"
@@ -105,7 +102,6 @@
         android:layout_width="57dp"
         android:layout_height="51dp"
         android:layout_marginTop="13dp"
-        android:background="@drawable/circular_button"
         android:text="M"
         app:layout_constraintEnd_toStartOf="@+id/buttonTuesday"
         app:layout_constraintStart_toStartOf="parent"
@@ -116,7 +112,6 @@
         android:layout_width="57dp"
         android:layout_height="51dp"
         android:layout_marginTop="13dp"
-        android:background="@drawable/circular_button"
         android:text="T"
         app:layout_constraintEnd_toStartOf="@+id/buttonWednesday"
         app:layout_constraintTop_toBottomOf="@+id/textWorkingDaysAndHours" />
@@ -126,7 +121,6 @@
         android:layout_width="57dp"
         android:layout_height="51dp"
         android:layout_marginTop="13dp"
-        android:background="@drawable/circular_button"
         android:text="W"
         app:layout_constraintEnd_toStartOf="@+id/buttonThursday"
         app:layout_constraintTop_toBottomOf="@+id/textWorkingDaysAndHours" />
@@ -137,7 +131,6 @@
         android:layout_height="51dp"
         android:layout_marginTop="12dp"
         android:layout_marginEnd="4dp"
-        android:background="@drawable/circular_button"
         android:text="T"
         app:layout_constraintEnd_toStartOf="@+id/buttonFriday"
         app:layout_constraintTop_toBottomOf="@+id/textWorkingDaysAndHours" />
@@ -148,7 +141,6 @@
         android:layout_height="51dp"
         android:layout_marginTop="12dp"
         android:layout_marginEnd="4dp"
-        android:background="@drawable/circular_button"
         android:text="F"
         app:layout_constraintEnd_toStartOf="@+id/buttonSaturday"
         app:layout_constraintTop_toBottomOf="@+id/textWorkingDaysAndHours" />
@@ -159,7 +151,6 @@
         android:layout_height="51dp"
         android:layout_marginTop="12dp"
         android:layout_marginEnd="1dp"
-        android:background="@drawable/circular_button"
         android:text="S"
         app:layout_constraintEnd_toStartOf="@+id/buttonSunday"
         app:layout_constraintTop_toBottomOf="@+id/textWorkingDaysAndHours" />
@@ -169,7 +160,6 @@
         android:layout_width="57dp"
         android:layout_height="51dp"
         android:layout_marginTop="13dp"
-        android:background="@drawable/circular_button"
         android:text="S"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textWorkingDaysAndHours" />
@@ -179,7 +169,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="216dp"
-        android:text="Services Offered"
+        android:text="Select Offered Services"
         app:layout_constraintEnd_toEndOf="@+id/buttonSunday"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="@+id/buttonMonday"
