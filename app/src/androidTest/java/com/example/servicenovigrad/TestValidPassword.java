@@ -19,7 +19,7 @@ public class TestValidPassword {
     }
 
     @Test
-    public void checkUsername() {
+    public void checkPassword() {
         scenario.onActivity(activity -> {
             assertNotNull(activity.findViewById(R.id.textRegister));
             EditText text = activity.findViewById(R.id.editPasswordL);
