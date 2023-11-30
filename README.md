@@ -32,5 +32,16 @@ Les fonctionnalités implémentées dans le livrable 2 sont les suivantes:
 - La suppression, l’ajout et la modification des services offerts par le salon de coiffure.
 - La suppression des comptes employé et client par l’administrateur.
 - L’intégration avec CircleCI pour les builds et les tests automatiques.
+  
+## Livrable 3
+
+### Fonctionnalités
+Les fonctionnalités implémentées dans le livrable 3 sont les suivantes:
+
+- La definition des heures de travail par les employé de la succursale
+- Completion des profils des succursales par les employés
+- L'association des des services creer par l'administrateur au profil de la succursale
+
+### Fonctionnalités
 
 
