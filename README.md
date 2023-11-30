@@ -42,6 +42,10 @@ Les fonctionnalités implémentées dans le livrable 3 sont les suivantes:
 - Completion des profils des succursales par les employés
 - L'association des des services creer par l'administrateur au profil de la succursale
 
+Voici les identifiants d'un de nos comptes employé pour vous connecter au besoin :
+-Username : employee
+-Password : employee123
+
 
 
 
