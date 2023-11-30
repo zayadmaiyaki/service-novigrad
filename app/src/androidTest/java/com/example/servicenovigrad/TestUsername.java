@@ -23,7 +23,7 @@ public class TestUsername {
     }
 
     @Test
-    public void checkValidPassword() {
+    public void checkUsername() {
         scenario.onActivity(activity -> {
             assertNotNull(activity.findViewById(R.id.editSalut));
             EditText text = activity.findViewById(R.id.editUsernameL);
