@@ -26,11 +26,11 @@
 
     <TextView
         android:id="@+id/textViewForm"
-        android:layout_width="105dp"
-        android:layout_height="44dp"
+        android:layout_width="124dp"
+        android:layout_height="45dp"
         android:layout_marginTop="8dp"
         android:gravity="center_horizontal"
-        android:text="Form"
+        android:text="Formulaire"
         android:textColor="#000000"
         android:textColorHint="#000000"
         android:textSize="24sp"
@@ -41,7 +41,7 @@
         app:layout_constraintTop_toBottomOf="@+id/newRequestForServiceTextView" />
 
     <ListView
-        android:id="@+id/listViewDialog"
+        android:id="@+id/formFieldListViewRequest"
         android:layout_width="252dp"
         android:layout_height="217dp"
         android:layout_marginTop="8dp"
@@ -52,22 +52,22 @@
 
     <TextView
         android:id="@+id/textViewDocs"
-        android:layout_width="105dp"
-        android:layout_height="44dp"
+        android:layout_width="137dp"
+        android:layout_height="41dp"
         android:layout_marginTop="20dp"
         android:gravity="center_horizontal"
-        android:text="Docs"
+        android:text="Documents"
         android:textColor="#000000"
         android:textColorHint="#000000"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/listViewDialog"
+        app:layout_constraintEnd_toEndOf="@+id/formFieldListViewRequest"
         app:layout_constraintHorizontal_bias="0.503"
-        app:layout_constraintStart_toStartOf="@+id/listViewDialog"
-        app:layout_constraintTop_toBottomOf="@+id/listViewDialog" />
+        app:layout_constraintStart_toStartOf="@+id/formFieldListViewRequest"
+        app:layout_constraintTop_toBottomOf="@+id/formFieldListViewRequest" />
 
     <ListView
-        android:id="@+id/listViewDialog2"
+        android:id="@+id/docsFieldListViewRequest"
         android:layout_width="252dp"
         android:layout_height="217dp"
         android:layout_marginTop="16dp"
@@ -77,14 +77,14 @@
         app:layout_constraintTop_toBottomOf="@+id/textViewDocs" />
 
     <Button
-        android:id="@+id/buttonSumbitRequest"
+        android:id="@+id/buttonSubmitRequest"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="Sumbit Request"
-        app:layout_constraintEnd_toEndOf="@+id/listViewDialog2"
+        app:layout_constraintEnd_toEndOf="@+id/docsFieldListViewRequest"
         app:layout_constraintHorizontal_bias="0.503"
-        app:layout_constraintStart_toStartOf="@+id/listViewDialog2"
-        app:layout_constraintTop_toBottomOf="@+id/listViewDialog2" />
+        app:layout_constraintStart_toStartOf="@+id/docsFieldListViewRequest"
+        app:layout_constraintTop_toBottomOf="@+id/docsFieldListViewRequest" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
