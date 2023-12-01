@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linearLayout4"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Search Branch by Name -->
+
+    <!-- Location Input -->
+
+    <EditText
+        android:id="@+id/search_branch_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="10dp"
+        android:hint="Search branch by name"
+        android:inputType="text"
+        app:layout_constraintBottom_toTopOf="@+id/location_input"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Filter Buttons -->
+
+
+    <EditText
+        android:id="@+id/location_input"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:hint="Enter location"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="@+id/search_branch_name"
+        app:layout_constraintTop_toBottomOf="@+id/search_branch_name" />
+
+
+    <!-- RecyclerView for Displaying Branches -->
+
+    <Button
+        android:id="@+id/button_working_times"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:text="Select Working Times"
+        app:layout_constraintBaseline_toBaselineOf="@+id/button_offered_services"
+        app:layout_constraintEnd_toStartOf="@+id/button_offered_services"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/button_offered_services"
+        android:layout_width="165dp"
+        android:layout_height="100dp"
+        android:layout_marginBottom="5dp"
+        android:text="Select Offered Services"
+        app:layout_constraintBottom_toTopOf="@+id/branches_recycler_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/button_working_times"
+        app:layout_constraintTop_toBottomOf="@+id/location_input" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/branches_recycler_view"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/button_offered_services"
+        app:layout_constraintStart_toStartOf="@+id/button_offered_services"
+        app:layout_constraintTop_toBottomOf="@+id/button_offered_services" />
+
+    <!-- Message for No Results -->
+    <TextView
+        android:id="@+id/text_no_results"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:text="No branches found with your selected filters"
+        android:textAlignment="center"
+        android:textColor="#FF0000"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

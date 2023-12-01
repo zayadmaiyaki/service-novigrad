@@ -133,13 +133,12 @@ public class CreateBranchActivity extends AppCompatActivity {
 
     private void showWorkingHoursDialog(final String dayKey) {
         final Dialog dialog = new Dialog(this);
-        dialog.setContentView(R.layout.dialog_working_hours); // make sure you have this layout
+        dialog.setContentView(R.layout.dialog_working_hours);
 
         final EditText editTextWorkingHours = dialog.findViewById(R.id.editTextWorkingHours);
         Button buttonCancel = dialog.findViewById(R.id.buttonCancel);
         Button buttonOk = dialog.findViewById(R.id.buttonOk);
 
-        // Pre-populate the dialog if hours were already set
         String existingHours = workingTimes.get(dayKey);
         if (existingHours != null) {
             editTextWorkingHours.setText(existingHours);

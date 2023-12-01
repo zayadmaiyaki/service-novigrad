@@ -49,7 +49,7 @@ public class LoginActivity extends AppCompatActivity {
                 // Check if the password field is empty
                 if (password.isEmpty()) {
                     Toast.makeText(LoginActivity.this, "Password cannot be empty.", Toast.LENGTH_SHORT).show();
-                    return; // Stop the function from proceeding further
+                    return;
                 }
                 FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -63,17 +63,17 @@ public class LoginActivity extends AppCompatActivity {
                                 @Override
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     if (task.isSuccessful()) {
-                                        // Fetch the role from the document
+                                        // Fetch le role du the document
                                         String userRole = documents.get(0).getString("role");
 
                                         Toast.makeText(LoginActivity.this, "Login successful.", Toast.LENGTH_SHORT).show();
                                         Intent intent = new Intent(LoginActivity.this, AccueilActivity.class);
                                         intent.putExtra("USERNAME", username);
-                                        intent.putExtra("ROLE", userRole); // Passing the role to AccueilActivity
+                                        intent.putExtra("ROLE", userRole);
                                         startActivity(intent);
                                         finish();
                                     } else {
-                                        // If sign in fails, display a message to the user.
+                                        // Quand le sign in fail, montrer le message.
                                         Toast.makeText(LoginActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
                                     }
                                 }

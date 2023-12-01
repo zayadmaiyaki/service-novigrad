@@ -103,13 +103,13 @@ public class OfferedServicesActivity extends AppCompatActivity {
     }
 
     private void showServiceDetailsDialog(Service service) {
-        // Create the dialog
+        // Créer un dialogue
         AlertDialog.Builder builder = new AlertDialog.Builder(OfferedServicesActivity.this);
         LayoutInflater inflater = getLayoutInflater();
         View dialogView = inflater.inflate(R.layout.dialog_services, null);
         builder.setView(dialogView);
 
-        // Set the service details in the dialog
+        // Details du service
         TextView serviceNameTextView = dialogView.findViewById(R.id.ServiceNameDialogText);
         ListView formFieldsListView = dialogView.findViewById(R.id.FormFieldDialogListView);
         ListView docsFieldsListView = dialogView.findViewById(R.id.DocsFieldDialogListView);
@@ -123,7 +123,7 @@ public class OfferedServicesActivity extends AppCompatActivity {
                 android.R.layout.simple_list_item_1, service.getDocsFields());
         docsFieldsListView.setAdapter(docsFieldsAdapter);
 
-        // Show the dialog
+        // Afficher le dialogue
         AlertDialog dialog = builder.create();
         dialog.show();
     }

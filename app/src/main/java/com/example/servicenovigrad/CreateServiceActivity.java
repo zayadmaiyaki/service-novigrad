@@ -46,10 +46,10 @@ public class CreateServiceActivity extends AppCompatActivity {
         formFieldsListView = findViewById(R.id.formulaireFieldsListCreate);
         documentFieldsListView = findViewById(R.id.documentsFieldsListCreate);
 
-        // Initialize Firebase Database reference
+
         servicesRef = FirebaseDatabase.getInstance().getReference("services");
 
-        // Initialize adapters for the ListViews
+
         formFieldsAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, formFieldsList);
         documentFieldsAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, documentFieldsList);
         formFieldsListView.setAdapter(formFieldsAdapter);
@@ -92,7 +92,7 @@ public class CreateServiceActivity extends AppCompatActivity {
         deleteServiceButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Implement deletion logic, if this is for deleting an existing service
+
             }
         });
 
@@ -101,7 +101,7 @@ public class CreateServiceActivity extends AppCompatActivity {
     private void createService() {
         String serviceName = serviceNameEditText.getText().toString().trim();
 
-        // Simple validation
+        // Validation simple
         if (serviceName.isEmpty()) {
             serviceNameEditText.setError("Service name required");
             serviceNameEditText.requestFocus();
@@ -117,22 +117,21 @@ public class CreateServiceActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {
                     Toast.makeText(CreateServiceActivity.this, "Service created", Toast.LENGTH_LONG).show();
-                    // Redirect back to the MainPageAdmin
-                    finish(); // Assuming you want to go back to the previous activity.
-                } else {
+                    // Redirection vers MainPageAdmin
+                    finish();
+                } else { // Pour retourner à l'activité précédente
                     Toast.makeText(CreateServiceActivity.this, "Failed to create service", Toast.LENGTH_LONG).show();
                 }
             }
         });
     }
     private void addField(ArrayList<String> fieldsList, ArrayAdapter<String> adapter) {
-        // Show a dialog or use another EditText to get the field name
-        // This is just a placeholder for actual field name
-        String fieldName = "New Field"; // Replace this with the actual field name from user input
+
+        String fieldName = "New Field";
 
         if (!fieldName.trim().isEmpty() && !fieldsList.contains(fieldName.trim())) {
             fieldsList.add(fieldName.trim());
-            adapter.notifyDataSetChanged(); // Update the ListView
+            adapter.notifyDataSetChanged();
         }
     }
     private void showAddFieldDialog(final ArrayList<String> fieldsList, final ArrayAdapter<String> adapter) {
@@ -190,7 +189,7 @@ public class CreateServiceActivity extends AppCompatActivity {
         builder.show();
     }
     private void updateItemInFirebase(String item, int position, String fieldType) {
-        // Decide which field type we are updating, form or document
+
         DatabaseReference fieldsRef;
         if ("form".equals(fieldType)) {
             fieldsRef = servicesRef.child("formFields");
@@ -198,9 +197,6 @@ public class CreateServiceActivity extends AppCompatActivity {
             fieldsRef = servicesRef.child("docsFields");
         }
 
-
-
-        // Update the local list and notify the adapter
         if ("form".equals(fieldType)) {
             formFieldsList.set(position, item);
             formFieldsAdapter.notifyDataSetChanged();
@@ -218,9 +214,6 @@ public class CreateServiceActivity extends AppCompatActivity {
             fieldsRef = servicesRef.child("docsFields");
         }
 
-
-
-        // Remove the item from the local list and notify the adapter
         if ("form".equals(fieldType)) {
             formFieldsList.remove(position);
             formFieldsAdapter.notifyDataSetChanged();

@@ -28,8 +28,6 @@ import java.util.Map;
 
 public class BranchPageActivity extends AppCompatActivity {
     private TextView branchNameTextView, branchPhoneNumberTextView, branchAddressTextView;
-    // Other necessary views and variables
-
     private String branchId;
     private Map<String, String> workingTimes = new HashMap<>();
     private Map<Integer, Button> dayButtons = new HashMap<>();
@@ -39,7 +37,7 @@ public class BranchPageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_branch_page);
 
-        // Initialize your TextViews and other views
+        // Initialize TextViews and other views
         branchNameTextView = findViewById(R.id.branchNameText);
         branchPhoneNumberTextView = findViewById(R.id.branchPhoneNumberText);
         branchAddressTextView = findViewById(R.id.branchAddressText);
@@ -56,9 +54,6 @@ public class BranchPageActivity extends AppCompatActivity {
             public void onClick(View view) {
                 FirebaseDatabase database = FirebaseDatabase.getInstance();
                 DatabaseReference branchesRef = database.getReference("branches");
-
-                //String branchId = branchesRef.push().getKey();
-
                 Intent intent = new Intent(BranchPageActivity.this, OfferedServicesActivity.class);
                 intent.putExtra("BRANCH_ID", branchId);
                 intent.putExtra("BRANCH_NAME",branchNameTextView.getText().toString().trim());
@@ -92,10 +87,8 @@ public class BranchPageActivity extends AppCompatActivity {
     private void updateDayButtonColors() {
         for (Map.Entry<Integer, Button> entry : dayButtons.entrySet()) {
             Button dayButton = entry.getValue();
-            // Retrieve the single-letter day abbreviation based on button ID
             String dayKey = getResources().getResourceEntryName(entry.getKey())
                     .replace("button", "");
-
             String hours = workingTimes.getOrDefault(dayKey, "Closed");
             if (!hours.equals("Closed")&&!hours.equals("") ) {
                 dayButton.setBackgroundColor(getResources().getColor(R.color.green));
@@ -108,7 +101,7 @@ public class BranchPageActivity extends AppCompatActivity {
 
     private void showViewWorkingTimesDialog(final String dayKey) {
         final Dialog dialog = new Dialog(this);
-        dialog.setContentView(R.layout.view_working_times_dialog); // Assuming this layout has a TextView for displaying hours
+        dialog.setContentView(R.layout.view_working_times_dialog);
 
         TextView textViewWorkingHours = dialog.findViewById(R.id.textViewWorkingHours);
         TextView dayText = dialog.findViewById(R.id.textView7);
@@ -147,6 +140,6 @@ public class BranchPageActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        loadBranchDetails(); // Refresh data when returning to this activity
+        loadBranchDetails();
     }
 }
