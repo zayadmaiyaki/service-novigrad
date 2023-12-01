@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    tools:context=".RequestForServiceActivity">
+
+    <TextView
+        android:id="@+id/newRequestForServiceTextView"
+        android:layout_width="356dp"
+        android:layout_height="42dp"
+        android:gravity="center_horizontal"
+        android:text="New Request For Service"
+        android:textColor="#000000"
+        android:textColorHint="#000000"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.49"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.034" />
+
+    <TextView
+        android:id="@+id/textViewForm"
+        android:layout_width="105dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="8dp"
+        android:gravity="center_horizontal"
+        android:text="Form"
+        android:textColor="#000000"
+        android:textColorHint="#000000"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/newRequestForServiceTextView"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="@+id/newRequestForServiceTextView"
+        app:layout_constraintTop_toBottomOf="@+id/newRequestForServiceTextView" />
+
+    <ListView
+        android:id="@+id/listViewDialog"
+        android:layout_width="252dp"
+        android:layout_height="217dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="@+id/textViewForm"
+        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintStart_toStartOf="@+id/textViewForm"
+        app:layout_constraintTop_toBottomOf="@+id/textViewForm" />
+
+    <TextView
+        android:id="@+id/textViewDocs"
+        android:layout_width="105dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="20dp"
+        android:gravity="center_horizontal"
+        android:text="Docs"
+        android:textColor="#000000"
+        android:textColorHint="#000000"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/listViewDialog"
+        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintStart_toStartOf="@+id/listViewDialog"
+        app:layout_constraintTop_toBottomOf="@+id/listViewDialog" />
+
+    <ListView
+        android:id="@+id/listViewDialog2"
+        android:layout_width="252dp"
+        android:layout_height="217dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="@+id/textViewDocs"
+        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintStart_toStartOf="@+id/textViewDocs"
+        app:layout_constraintTop_toBottomOf="@+id/textViewDocs" />
+
+    <Button
+        android:id="@+id/buttonSumbitRequest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Sumbit Request"
+        app:layout_constraintEnd_toEndOf="@+id/listViewDialog2"
+        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintStart_toStartOf="@+id/listViewDialog2"
+        app:layout_constraintTop_toBottomOf="@+id/listViewDialog2" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
