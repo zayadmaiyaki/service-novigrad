@@ -13,10 +13,10 @@
         android:theme="@style/Theme.ServiceNovigrad"
         tools:targetApi="34">
         <activity
-            android:name=".RedirectRequestsActivity"
+            android:name=".NewRequestPageActivity"
             android:exported="false" />
         <activity
-            android:name=".RequestsPageActivity"
+            android:name=".RequestForServiceActivity"
             android:exported="false" />
         <activity
             android:name=".SelectOfferedServicesActivity"
