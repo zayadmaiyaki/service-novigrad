@@ -20,7 +20,7 @@ public class MainPageEmployee extends AppCompatActivity {
 
     private ListView listViewBranch;
     private List<String> branchNames;
-    private List<String> branchIds; // Store branch IDs
+    private List<String> branchIds;
     private ArrayAdapter<String> adapter;
 
     @Override
@@ -31,7 +31,7 @@ public class MainPageEmployee extends AppCompatActivity {
         Button buttonCreateBranch = findViewById(R.id.buttonCreateBranch);
         listViewBranch = findViewById(R.id.listViewBranch);
         branchNames = new ArrayList<>();
-        branchIds = new ArrayList<>(); // Initialize the list for branch IDs
+        branchIds = new ArrayList<>();
 
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, branchNames);
         listViewBranch.setAdapter(adapter);
@@ -59,12 +59,12 @@ public class MainPageEmployee extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 branchNames.clear();
-                branchIds.clear(); // Also clear the branch IDs list
+                branchIds.clear();
                 for (DataSnapshot branchSnapshot : dataSnapshot.getChildren()) {
                     Branch branch = branchSnapshot.getValue(Branch.class);
                     if (branch != null) {
                         branchNames.add(branch.getName());
-                        branchIds.add(branchSnapshot.getKey()); // Store the branch ID
+                        branchIds.add(branchSnapshot.getKey());
                     }
                 }
                 adapter.notifyDataSetChanged();
@@ -72,7 +72,7 @@ public class MainPageEmployee extends AppCompatActivity {
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                // Failed to read value
+
             }
         });
     }

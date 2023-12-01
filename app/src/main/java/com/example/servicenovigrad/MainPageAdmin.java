@@ -65,14 +65,14 @@ public class MainPageAdmin extends AppCompatActivity {
         servicesRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                servicesList.clear(); // Clear the old list
+                servicesList.clear();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     Service service = snapshot.getValue(Service.class);
                     if (service != null) {
                         servicesList.add(service);
                     }
                 }
-                adapter.notifyDataSetChanged(); // Notify the adapter of the dataset change
+                adapter.notifyDataSetChanged();
             }
 
             @Override
@@ -104,9 +104,9 @@ public class MainPageAdmin extends AppCompatActivity {
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
                 Service service = servicesList.get(position);
                 Intent intent = new Intent(MainPageAdmin.this, EditServiceActivity.class);
-                intent.putExtra("serviceId", service.getId()); // pass the service ID to the edit page
+                intent.putExtra("serviceId", service.getId());
                 startActivity(intent);
-                return true; // return true to indicate the click was handled
+                return true; // return true quand le test reussi
             }
         });
         EditText usernameEditText=findViewById(R.id.usernameEditText);
@@ -142,7 +142,7 @@ public class MainPageAdmin extends AppCompatActivity {
                                                         });
                                             }
                                         } else {
-                                            // User does not exist, show error message
+                                            // Montre l'erreur quand le user n'existe pas
                                             Toast.makeText(MainPageAdmin.this, "No user found with that username.", Toast.LENGTH_SHORT).show();
                                         }
                                     } else {

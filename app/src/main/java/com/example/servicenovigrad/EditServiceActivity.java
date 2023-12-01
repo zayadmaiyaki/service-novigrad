@@ -57,19 +57,19 @@ public class EditServiceActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_update_service); // Use your actual layout file name
+        setContentView(R.layout.activity_update_service);
 
-        serviceNameEditText = findViewById(R.id.UpdateServiceName); // Use your actual ID
-        formFieldsListView = findViewById(R.id.formFieldListUpdate); // Use your actual ID
-        docsFieldsListView = findViewById(R.id.docsFieldListUpdate); // Use your actual ID
-        updateServiceButton = findViewById(R.id.buttonUpdateService); // Use your actual ID
-        deleteServiceButton = findViewById(R.id.buttonDeleteService); // Use your actual ID
+        serviceNameEditText = findViewById(R.id.UpdateServiceName);
+        formFieldsListView = findViewById(R.id.formFieldListUpdate);
+        docsFieldsListView = findViewById(R.id.docsFieldListUpdate);
+        updateServiceButton = findViewById(R.id.buttonUpdateService);
+        deleteServiceButton = findViewById(R.id.buttonDeleteService);
         addFormFieldButton = findViewById(R.id.buttonAddFormFieldUpdate);
         addDocumentFieldButton = findViewById(R.id.buttonAddDocsFieldUpdate);
 
         serviceId = getIntent().getStringExtra("serviceId");
         if(serviceId == null) {
-            // Handle the case where serviceId is not passed correctly
+            // Gérer l'erreur
             Toast.makeText(this, "Error: Service ID is missing.", Toast.LENGTH_LONG).show();
             finish(); // Close the activity as there's no valid service ID
             return;
@@ -118,7 +118,7 @@ public class EditServiceActivity extends AppCompatActivity {
     }
 
     private void fetchServiceData() {
-        // Fetch the service name
+        // Fetch le nom du service
         serviceRef.child("name").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -128,11 +128,11 @@ public class EditServiceActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                // Handle possible errors.
+                // Gerer les erreurs possibles.
             }
         });
 
-        // Fetch form fields
+        // Fetch à partir des champs
         serviceRef.child("formFields").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -146,11 +146,11 @@ public class EditServiceActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                // Handle possible errors.
+                // Gerer les erreurs possibles .
             }
         });
 
-        // Fetch document fields
+        // Fetch les documents à partir des fields
         serviceRef.child("docsFields").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -164,7 +164,7 @@ public class EditServiceActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                // Handle possible errors.
+                // Gerer les erreurs possibles.
             }
         });
     }
@@ -179,9 +179,9 @@ public class EditServiceActivity extends AppCompatActivity {
         // Update service name
         serviceRef.child("name").setValue(serviceName).addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
-                // Optionally, handle updating the lists of fields
+
             } else {
-                // Handle failure
+                // Gerer les erreurs
             }
         });
         Intent intent = new Intent(EditServiceActivity.this, MainPageAdmin.class);
@@ -199,7 +199,7 @@ public class EditServiceActivity extends AppCompatActivity {
             }
         });
     }
-    private static final int UPDATE_DELETE_FIELD_REQUEST = 1; // Define this constant
+    private static final int UPDATE_DELETE_FIELD_REQUEST = 1; // Definir la constante
 
 
     @Override
@@ -207,7 +207,7 @@ public class EditServiceActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == UPDATE_DELETE_FIELD_REQUEST && resultCode == RESULT_OK) {
-            // Refresh your fields list here. This might involve fetching data from Firebase again.
+            // Raffraichir la liste des champs
             fetchServiceData();
         }
     }
@@ -266,7 +266,6 @@ public class EditServiceActivity extends AppCompatActivity {
         builder.show();
     }
     private void updateItemInFirebase(String item, int position, String fieldType) {
-        // Decide which field type we are updating, form or document
         DatabaseReference fieldsRef;
         if ("form".equals(fieldType)) {
             fieldsRef = serviceRef.child("formFields");
@@ -274,8 +273,6 @@ public class EditServiceActivity extends AppCompatActivity {
             fieldsRef = serviceRef.child("docsFields");
         }
 
-        // The child key is the String value of the position, which works if you haven't deleted any items.
-        // If you have deleted items, this will not work and you need to use the actual keys of the items.
         fieldsRef.child(String.valueOf(position)).setValue(item)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
@@ -285,7 +282,6 @@ public class EditServiceActivity extends AppCompatActivity {
                     }
                 });
 
-        // Update the local list and notify the adapter
         if ("form".equals(fieldType)) {
             formFieldsList.set(position, item);
             formFieldsAdapter.notifyDataSetChanged();
@@ -303,7 +299,6 @@ public class EditServiceActivity extends AppCompatActivity {
             fieldsRef = serviceRef.child("docsFields");
         }
 
-        // Remove the value at the specified position
         fieldsRef.child(String.valueOf(position)).removeValue()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
@@ -313,7 +308,6 @@ public class EditServiceActivity extends AppCompatActivity {
                     }
                 });
 
-        // Remove the item from the local list and notify the adapter
         if ("form".equals(fieldType)) {
             formFieldsList.remove(position);
             formFieldsAdapter.notifyDataSetChanged();

@@ -42,7 +42,7 @@ public class EditBranchActivity extends AppCompatActivity {
         Button saveChangesButton = findViewById(R.id.buttonSaveChanges);
         Button editOfferedServicesButton = findViewById(R.id.editOfferedServices);
 
-        // Assume branchId is passed via Intent
+
         branchId = getIntent().getStringExtra("BRANCH_ID");
         branchesRef = FirebaseDatabase.getInstance().getReference("branches");
 
@@ -66,7 +66,7 @@ public class EditBranchActivity extends AppCompatActivity {
             }
         });
 
-        setupDayButtons(); // A method to set up click listeners for day buttons
+        setupDayButtons();
     }
 
     private void loadBranchData() {
@@ -101,18 +101,17 @@ public class EditBranchActivity extends AppCompatActivity {
             return;
         }
 
-        // Fetch the latest state of servicesOffered before applying changes
         branchesRef.child(branchId).child("servicesOffered").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                // This list will hold the current services offered
+
                 List<Service> currentServicesOffered = new ArrayList<>();
                 for (DataSnapshot serviceSnapshot : dataSnapshot.getChildren()) {
                     Service service = serviceSnapshot.getValue(Service.class);
                     currentServicesOffered.add(service);
                 }
 
-                // Create a new Branch object with the updated information but preserving the services offered
+
                 Branch updatedBranch = new Branch(branchId, name, phone, address, workingTimes, currentServicesOffered);
                 Map<String, Object> branchUpdates = new HashMap<>();
                 branchUpdates.put("name", updatedBranch.getName());
@@ -120,7 +119,7 @@ public class EditBranchActivity extends AppCompatActivity {
                 branchUpdates.put("address", updatedBranch.getAddress());
                 branchUpdates.put("workingTimes", updatedBranch.getWorkingHours());
 
-                // Here we are not overwriting the entire branch to avoid affecting the servicesOffered
+
                 branchesRef.child(branchId).updateChildren(branchUpdates).addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         Toast.makeText(EditBranchActivity.this, "Branch updated", Toast.LENGTH_LONG).show();
@@ -157,7 +156,7 @@ public class EditBranchActivity extends AppCompatActivity {
 
     private void showWorkingHoursDialog(final String dayKey) {
         final Dialog dialog = new Dialog(this);
-        dialog.setContentView(R.layout.dialog_working_hours); // Assuming you have this layout
+        dialog.setContentView(R.layout.dialog_working_hours);
 
         final EditText editTextWorkingHours = dialog.findViewById(R.id.editTextWorkingHours);
         Button buttonCancel = dialog.findViewById(R.id.buttonCancel);

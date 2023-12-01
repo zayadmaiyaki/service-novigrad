@@ -109,12 +109,11 @@ public class EditOfferedServicesActivity extends AppCompatActivity {
                 String serviceName = adapter.getItem(i);
                 Service service = allServices.get(serviceName);
                 if (service != null) {
-                    selectedServices.add(service); // Assuming you have a Service class with id and name
+                    selectedServices.add(service);
                 }
             }
         }
 
-        // Prepare to update the Firebase database
         DatabaseReference branchServicesRef = FirebaseDatabase.getInstance().getReference("branches").child(branchId).child("servicesOffered");
         branchServicesRef.setValue(selectedServices).addOnCompleteListener(task -> {
             if (task.isSuccessful()) {

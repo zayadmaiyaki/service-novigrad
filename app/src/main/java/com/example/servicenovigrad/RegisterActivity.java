@@ -40,7 +40,7 @@ public class RegisterActivity extends AppCompatActivity {
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.role_array, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         role.setAdapter(adapter);
-        role.setSelection(-1); // This line ensure role is displayed initially
+        role.setSelection(-1);
 
         EditText usernameField = findViewById(R.id.editUsernameL);
         EditText passwordField = findViewById(R.id.editPasswordL);
@@ -75,16 +75,16 @@ public class RegisterActivity extends AppCompatActivity {
                         .addOnCompleteListener(task -> {
                             if (task.isSuccessful()) {
                                 if (task.getResult().isEmpty()) {
-                                    // Username doesn't exist, so you can proceed with registration
+                                    // Le username n'existe pas encore donc on continue avec le sign in
 
                                     Map<String, Object> data = new HashMap<>();
                                     data.put("username", enteredUsername);
-                                    data.put("email", enteredEmail); // This is the actual email of the user.
+                                    data.put("email", enteredEmail);
                                     data.put("role", selectedRole);
 
                                     db.collection("users").document().set(data)
                                             .addOnSuccessListener(aVoid -> {
-                                                // Create Firebase Authentication account with the email and password
+
                                                 mAuth.createUserWithEmailAndPassword(enteredEmail, enteredPassword)
                                                         .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                                                             @Override
@@ -102,7 +102,7 @@ public class RegisterActivity extends AppCompatActivity {
                                                         });
                                             })
                                             .addOnFailureListener(e -> {
-                                                // Handle any errors
+
                                             });
                                 } else {
                                     Toast.makeText(RegisterActivity.this, "Username already exists.", Toast.LENGTH_SHORT).show();
