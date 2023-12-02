@@ -7,8 +7,9 @@ for the working times and the services offered services filters if none of the e
 respect the filter it display a message to say that no branches are found with your selectionned
  filters
  */
-package com.example.servicenovigrad;
+/*package com.example.servicenovigrad;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.View;
@@ -88,9 +89,112 @@ public class NewRequestPageActivity extends AppCompatActivity {
         textView.setLayoutParams(new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT));
+        textView.setOnClickListener(new View.OnClickListener() {
+             listViewBranch.setOnItemClickListener((parent, view, position, id) -> {
+                // Get the branch ID corresponding to the clicked item
+                String selectedBranchId = branchIds.get(position);
+                // Create an intent and start the BranchPageActivity
+                Intent intent = new Intent(NewRequestPageActivity.this, BranchPageActivity.class);
+                intent.putExtra("BRANCH_ID", selectedBranchId);
+                startActivity(intent);
+            });
+
+
+
         branchesLinearLayout.addView(textView);
     }
 
     // Implement your filterBranches method as before
+}*/
+package com.example.servicenovigrad;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class NewRequestPageActivity extends AppCompatActivity {
+
+    private EditText searchBranchNameEditText, locationInputEditText, offeredServicesEditText;
+    private ListView listViewBranches;
+    private List<String> branchNames;
+    private List<String> branchIds;
+    private ArrayAdapter<String> adapter;
+    private Button applyFilterButton;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_new_request_page);
+
+        initializeUI();
+        loadBranches();
+    }
+
+    private void initializeUI() {
+        searchBranchNameEditText = findViewById(R.id.search_branch_name);
+        locationInputEditText = findViewById(R.id.location_input);
+        offeredServicesEditText = findViewById(R.id.offered_services);
+        listViewBranches = findViewById(R.id.branches_list_view); // Make sure the ID matches in your XML
+        applyFilterButton = findViewById(R.id.button_filter);
+
+        branchNames = new ArrayList<>();
+        branchIds = new ArrayList<>();
+        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, branchNames);
+        listViewBranches.setAdapter(adapter);
+
+        applyFilterButton.setOnClickListener(view -> applyFilter());
+
+        listViewBranches.setOnItemClickListener((parent, view, position, id) -> {
+            String selectedBranchId = branchIds.get(position);
+            Intent intent = new Intent(NewRequestPageActivity.this, BranchPageActivity.class);
+            intent.putExtra("BRANCH_ID", selectedBranchId);
+            startActivity(intent);
+        });
+    }
+
+    private void loadBranches() {
+        DatabaseReference branchesRef = FirebaseDatabase.getInstance().getReference("branches");
+        branchesRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                branchNames.clear();
+                branchIds.clear();
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    Branch branch = snapshot.getValue(Branch.class);
+                    if (branch != null) {
+                        branchNames.add(branch.getName());
+                        branchIds.add(snapshot.getKey());
+                    }
+                }
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Toast.makeText(NewRequestPageActivity.this, "Failed to load branches.", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void applyFilter() {
+        // Implement your filtering logic here
+        // After filtering, update the adapter's data
+    }
 }
+
 
