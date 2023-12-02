@@ -102,7 +102,6 @@
         android:text="No branches found with your selected filters"
         android:textAlignment="center"
         android:textColor="#FF0000"
-        android:textSize="18sp"
         android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/branches_linear_layout"

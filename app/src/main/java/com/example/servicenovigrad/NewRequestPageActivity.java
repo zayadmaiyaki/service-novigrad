@@ -10,6 +10,7 @@ respect the filter it display a message to say that no branches are found with y
 package com.example.servicenovigrad;
 
 import android.os.Bundle;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -83,6 +84,7 @@ public class NewRequestPageActivity extends AppCompatActivity {
     private void addBranchNameToView(String branchName) {
         TextView textView = new TextView(this);
         textView.setText(branchName);
+        textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 24);
         textView.setLayoutParams(new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT));
