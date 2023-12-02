@@ -93,8 +93,8 @@ public class NewRequestPageActivity extends AppCompatActivity {
              listViewBranch.setOnItemClickListener((parent, view, position, id) -> {
                 // Get the branch ID corresponding to the clicked item
                 String selectedBranchId = branchIds.get(position);
-                // Create an intent and start the BranchPageActivity
-                Intent intent = new Intent(NewRequestPageActivity.this, BranchPageActivity.class);
+                // Create an intent and start the ClientBranchPageActivity
+                Intent intent = new Intent(NewRequestPageActivity.this, ClientBranchPageActivity.class);
                 intent.putExtra("BRANCH_ID", selectedBranchId);
                 startActivity(intent);
             });
@@ -161,7 +161,7 @@ public class NewRequestPageActivity extends AppCompatActivity {
 
         listViewBranches.setOnItemClickListener((parent, view, position, id) -> {
             String selectedBranchId = branchIds.get(position);
-            Intent intent = new Intent(NewRequestPageActivity.this, BranchPageActivity.class);
+            Intent intent = new Intent(NewRequestPageActivity.this, ClientBranchPageActivity.class);
             intent.putExtra("BRANCH_ID", selectedBranchId);
             startActivity(intent);
         });

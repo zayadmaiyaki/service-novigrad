@@ -13,6 +13,9 @@
         android:theme="@style/Theme.ServiceNovigrad"
         tools:targetApi="34">
         <activity
+            android:name=".ClientBranchPageActivity"
+            android:exported="false" />
+        <activity
             android:name=".NewRequestPageActivity"
             android:exported="false" />
         <activity
@@ -30,7 +33,6 @@
         <activity
             android:name=".EditBranchActivity"
             android:exported="false" />
-
         <activity
             android:name=".BranchPageActivity"
             android:exported="false" />
@@ -66,6 +68,5 @@
             android:name=".AccueilActivity"
             android:exported="false" />
     </application>
-
 
 </manifest>
