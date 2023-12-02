@@ -1,6 +1,7 @@
 package com.example.servicenovigrad;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -27,7 +28,12 @@ public class AccueilActivity extends AppCompatActivity {
         welcomeTextView = findViewById(R.id.welcomeTextView);
 
         String username = getIntent().getStringExtra("USERNAME");
-
+        //
+        SharedPreferences sharedPreferences = getSharedPreferences("MySharedPref",MODE_PRIVATE);
+        SharedPreferences.Editor myEdit = sharedPreferences.edit();
+        myEdit.putString("username", username);
+        myEdit.commit();
+        //
         if (username != null) {
             FirebaseFirestore db = FirebaseFirestore.getInstance();
             db.collection("users").whereEqualTo("username", username).limit(1).get().addOnCompleteListener(task -> {

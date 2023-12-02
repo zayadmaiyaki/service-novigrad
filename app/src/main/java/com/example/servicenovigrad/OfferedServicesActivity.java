@@ -3,6 +3,8 @@ package com.example.servicenovigrad;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,6 +20,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,6 +53,7 @@ public class OfferedServicesActivity extends AppCompatActivity {
         selectedServicesListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+
                 // Get the selected service name
                 String selectedServiceName = offeredServiceNames.get(position);
 
@@ -61,7 +66,30 @@ public class OfferedServicesActivity extends AppCompatActivity {
                             DataSnapshot serviceSnapshot = dataSnapshot.getChildren().iterator().next();
                             Service service = serviceSnapshot.getValue(Service.class);
                             if (service != null) {
-                                showServiceDetailsDialog(service);
+                                SharedPreferences sharedPreferences = getSharedPreferences("MySharedPref",MODE_PRIVATE);
+                                String username = sharedPreferences.getString("username", "");
+                                // Fetch the user role from Firebase
+                                FirebaseFirestore db = FirebaseFirestore.getInstance();
+                                db.collection("users").whereEqualTo("username", username).limit(1).get().addOnCompleteListener(task -> {
+                                    if (task.isSuccessful()) {
+                                        List<DocumentSnapshot> documents = task.getResult().getDocuments();
+                                        if (!documents.isEmpty()) {
+                                            String role = documents.get(0).getString("role");
+
+                                            // Check the user's role and redirect accordingly
+                                            if ("Client".equals(role)) {
+                                                Intent intent = new Intent(OfferedServicesActivity.this, RequestForServiceActivity.class);
+                                                startActivity(intent);
+                                            } else {
+                                                showServiceDetailsDialog(service);
+                                            }
+                                        } else {
+                                            Toast.makeText(OfferedServicesActivity.this, "User details not found.", Toast.LENGTH_LONG).show();
+                                        }
+                                    } else {
+                                        Toast.makeText(OfferedServicesActivity.this, "Failed to load user details.", Toast.LENGTH_LONG).show();
+                                    }
+                                });
                             } else {
                                 Toast.makeText(OfferedServicesActivity.this, "Service details not found.", Toast.LENGTH_LONG).show();
                             }
@@ -78,6 +106,7 @@ public class OfferedServicesActivity extends AppCompatActivity {
                 return true;
             }
         });
+
     }
 
     private void loadOfferedServices(String branchId) {
