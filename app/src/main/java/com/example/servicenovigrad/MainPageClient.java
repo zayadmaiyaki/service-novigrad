@@ -45,6 +45,7 @@ public class MainPageClient extends AppCompatActivity {
         textClientPage.setText("Client Page");
         textView.setText("Ongoing Requests");
 
+
         ongoingRequests = new ArrayList<>();
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, ongoingRequests);
         ongoingRequestsListView.setAdapter(adapter);
