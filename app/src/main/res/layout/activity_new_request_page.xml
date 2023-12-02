@@ -7,84 +7,105 @@
     android:layout_height="match_parent"
     android:background="@drawable/background">
 
-
     <!-- Search Branch by Name -->
-
-    <!-- Location Input -->
-
-    <!-- Filter Buttons -->
-
-
     <EditText
         android:id="@+id/search_branch_name"
-        android:layout_width="398dp"
-        android:layout_height="77dp"
-        android:layout_marginTop="32dp"
-        android:hint="Search branch by name"
-        android:inputType="text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_width="0dp"
+    android:layout_height="58dp"
+    android:layout_marginTop="16dp"
+    android:layout_marginStart="16dp"
+    android:layout_marginEnd="16dp"
+    android:hint="Enter branch name"
+    android:inputType="text"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
 
-
-    <!-- RecyclerView for Displaying Branches -->
-
+    <!-- Location Input -->
     <EditText
         android:id="@+id/location_input"
-        android:layout_width="253dp"
-        android:layout_height="71dp"
-        android:layout_marginTop="16dp"
-        android:hint="Enter location"
-        android:inputType="text"
-        app:layout_constraintEnd_toEndOf="@+id/search_branch_name"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="@+id/search_branch_name"
-        app:layout_constraintTop_toBottomOf="@+id/search_branch_name" />
+        android:layout_width="0dp"
+    android:layout_height="53dp"
+    android:layout_marginTop="16dp"
+    android:layout_marginStart="16dp"
+    android:layout_marginEnd="16dp"
+    android:hint="Enter your location"
+    android:inputType="text"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/search_branch_name" />
 
+    <!-- Service Input -->
+    <EditText
+        android:id="@+id/offered_services"
+        android:layout_width="0dp"
+    android:layout_height="53dp"
+    android:layout_marginTop="16dp"
+    android:layout_marginStart="16dp"
+    android:layout_marginEnd="16dp"
+    android:hint="Enter the service you need"
+    android:inputType="text"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/location_input" />
+
+    <!-- Buttons -->
     <Button
         android:id="@+id/button_working_times"
-        android:layout_width="167dp"
+        android:layout_width="0dp"
         android:layout_height="57dp"
-        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:text="Filter by  working times"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         android:backgroundTint="@color/grey"
+        android:text="Search by branch working times"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/location_input" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/offered_services" />
 
     <Button
-        android:id="@+id/button_offered_services"
-        android:layout_width="185dp"
+        android:id="@+id/button_filter"
+        android:layout_width="0dp"
         android:layout_height="59dp"
         android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:text="Filter by offered services"
         android:backgroundTint="@color/grey"
+        android:text="Apply filter"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/location_input" />
-
-    <!-- Message for No Results -->
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/branches_recycler_view"
-        android:layout_width="355dp"
-        android:layout_height="403dp"
-        android:layout_marginBottom="36dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/button_offered_services"
-        app:layout_constraintStart_toStartOf="@+id/button_working_times"
         app:layout_constraintTop_toBottomOf="@+id/button_working_times" />
 
+    <!-- RecyclerView for Displaying Branches -->
+    <LinearLayout
+        android:id="@+id/branches_linear_layout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:orientation="vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_filter"
+        app:layout_constraintBottom_toBottomOf="parent">
+        <!-- Branch names will be added here programmatically -->
+    </LinearLayout>
+
+    <!-- Message for No Results -->
     <TextView
         android:id="@+id/text_no_results"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
         android:text="No branches found with your selected filters"
         android:textAlignment="center"
         android:textColor="#FF0000"
+        android:textSize="18sp"
         android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/branches_linear_layout"
+        app:layout_constraintEnd_toEndOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
