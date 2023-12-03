@@ -11,58 +11,45 @@
     <EditText
         android:id="@+id/search_branch_name"
         android:layout_width="0dp"
-    android:layout_height="58dp"
-    android:layout_marginTop="16dp"
-    android:layout_marginStart="16dp"
-    android:layout_marginEnd="16dp"
-    android:hint="Enter branch name"
-    android:inputType="text"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="58dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:hint="Enter branch name"
+        android:inputType="text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <!-- Location Input -->
     <EditText
         android:id="@+id/location_input"
         android:layout_width="0dp"
-    android:layout_height="53dp"
-    android:layout_marginTop="16dp"
-    android:layout_marginStart="16dp"
-    android:layout_marginEnd="16dp"
-    android:hint="Enter your location"
-    android:inputType="text"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/search_branch_name" />
+        android:layout_height="53dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:hint="Enter your location"
+        android:inputType="text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/search_branch_name" />
 
     <!-- Service Input -->
     <EditText
         android:id="@+id/offered_services"
         android:layout_width="0dp"
-    android:layout_height="53dp"
-    android:layout_marginTop="16dp"
-    android:layout_marginStart="16dp"
-    android:layout_marginEnd="16dp"
-    android:hint="Enter the service you need"
-    android:inputType="text"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/location_input" />
-
-    <!-- Buttons -->
-    <Button
-        android:id="@+id/button_working_times"
-        android:layout_width="0dp"
-        android:layout_height="57dp"
+        android:layout_height="53dp"
         android:layout_marginTop="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:backgroundTint="@color/grey"
-        android:text="Search by branch working times"
+        android:hint="Enter the service you need"
+        android:inputType="text"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/offered_services" />
+        app:layout_constraintTop_toBottomOf="@+id/location_input" />
 
+    <!-- Button for 'Apply filter' -->
     <Button
         android:id="@+id/button_filter"
         android:layout_width="0dp"
@@ -74,23 +61,35 @@
         android:text="Apply filter"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_working_times" />
+        app:layout_constraintTop_toBottomOf="@+id/offered_services" />
 
-    <!-- RecyclerView for Displaying Branches -->
+    <!-- Button for 'Search by branch working times' -->
+    <Button
+        android:id="@+id/button_working_times"
+        android:layout_width="0dp"
+        android:layout_height="57dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:backgroundTint="@color/grey"
+        android:text="Search by branch working times"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_filter" />
+
+    <!-- ListView for Displaying Branches -->
     <ListView
-    android:id="@+id/branches_list_view"
-    android:layout_width="0dp"
-    android:layout_height="0dp"
-    android:layout_marginTop="16dp"
-    android:layout_marginStart="16dp"
-    android:layout_marginEnd="16dp"
-    android:layout_marginBottom="16dp"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/button_filter"
-    app:layout_constraintBottom_toBottomOf="parent" />
-
-    <!-- Branch names will be added here programmatically -->
+        android:id="@+id/branches_list_view"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_working_times"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
     <!-- Message for No Results -->
     <TextView
@@ -103,7 +102,7 @@
         android:textColor="#FF0000"
         android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/branches_linear_layout"
+        app:layout_constraintTop_toBottomOf="@+id/branches_list_view"
         app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

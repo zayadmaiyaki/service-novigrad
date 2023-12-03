@@ -28,6 +28,10 @@ import java.util.Locale;
 import java.util.Map;
 
 public class NewRequestPageActivity extends AppCompatActivity {
+
+    private String serviceNeeded;
+
+    private String branchNameToSearch;
     private EditText searchBranchNameEditText, locationInputEditText, offeredServicesEditText;
     private ListView listViewBranches;
     private Button applyFilterButton;
@@ -113,7 +117,7 @@ public class NewRequestPageActivity extends AppCompatActivity {
 
         buttonOk.setOnClickListener(v -> {
             String timeSearched = clientSearchWorkingHours.getText().toString();
-            filterAndSortBranches(timeSearched);
+            filterAndSortBranchesByTime(timeSearched);
             dialog.dismiss();
         });
 
@@ -121,11 +125,105 @@ public class NewRequestPageActivity extends AppCompatActivity {
     }
 
     private void applyFilter() {
-        String timeSearched = locationInputEditText.getText().toString(); // Assuming time is input here
-        filterAndSortBranches(timeSearched);
+        branchNameToSearch = searchBranchNameEditText.getText().toString();
+        serviceNeeded = offeredServicesEditText.getText().toString();
+
+        /*if (!branchNameToSearch.isEmpty()) {
+            searchAndSortBranchesByName(branchNameToSearch);
+        } else {
+            Toast.makeText(this, "Please enter a branch name to search", Toast.LENGTH_SHORT).show();
+        }*/
+        if (!serviceNeeded.isEmpty()) {
+            filterBranchesByServices(serviceNeeded);
+        } else {
+            Toast.makeText(this, "Please enter the service you need", Toast.LENGTH_SHORT).show();
+        }
     }
 
-    private void filterAndSortBranches(String timeSearched) {
+    private void filterBranchesByServices(String serviceNeeded) {
+        List<Branch> branchesWithService = new ArrayList<>();
+        List<Branch> otherBranches = new ArrayList<>();
+
+        for (Branch branch : originalBranchesList) {
+            boolean serviceMatch = false;
+            for (Service service : branch.getServiceOfferred()) {
+                if (service.getName().toLowerCase().contains(serviceNeeded.toLowerCase())) {
+                    serviceMatch = true;
+                    break;
+                }
+            }
+
+            if (serviceMatch) {
+                branchesWithService.add(branch);
+            } else {
+                otherBranches.add(branch);
+            }
+        }
+        if (branchesWithService.isEmpty()) {
+            Toast.makeText(this, "No branches found offering the specified service.", Toast.LENGTH_SHORT).show();
+        }
+        updateBranchListViewByService(branchesWithService, otherBranches);
+    }
+
+    private void updateBranchListViewByService(List<Branch> branchesWithService, List<Branch> otherBranches) {
+        branchNames.clear();
+        branchIds.clear();
+
+        // Adding branches that offer the specified service
+        for (Branch branch : branchesWithService) {
+            branchNames.add(branch.getName());
+            branchIds.add(branch.getId());
+        }
+
+        // Adding other branches
+        for (Branch branch : otherBranches) {
+            branchNames.add(branch.getName());
+            branchIds.add(branch.getId());
+        }
+
+        adapter.notifyDataSetChanged();
+
+    }
+
+
+    private void searchAndSortBranchesByName(String branchNameToSearch) {
+        Branch foundBranch = null;
+        List<Branch> otherBranches = new ArrayList<>();
+
+        for (Branch branch : originalBranchesList) {
+            if (branch.getName().equalsIgnoreCase(branchNameToSearch)) {
+                foundBranch = branch;
+            } else {
+                otherBranches.add(branch);
+            }
+        }
+
+        updateBranchListViewByTimeByName(foundBranch, otherBranches);
+    }
+
+
+    private void updateBranchListViewByTimeByName(Branch foundBranch, List<Branch> otherBranches) {
+        branchNames.clear();
+        branchIds.clear();
+
+        if (foundBranch != null) {
+            branchNames.add(foundBranch.getName());
+            branchIds.add(foundBranch.getId());
+        }
+
+        for (Branch branch : otherBranches) {
+            branchNames.add(branch.getName());
+            branchIds.add(branch.getId());
+        }
+
+        adapter.notifyDataSetChanged();
+
+        if (foundBranch == null) {
+            Toast.makeText(this, "No branch found with the name " + branchNameToSearch, Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void filterAndSortBranchesByTime(String timeSearched) {
         // Split the input into day and hour
         String[] parts = timeSearched.split(" ");
         if (parts.length != 2) {
@@ -148,7 +246,7 @@ public class NewRequestPageActivity extends AppCompatActivity {
         }
 
         // Update ListView
-        updateBranchListView(matchingBranches, otherBranches);
+        updateBranchListViewByTime(matchingBranches, otherBranches);
     }
 
     private boolean isTimeInRange(String inputHour, String workingTime) {
@@ -174,7 +272,7 @@ public class NewRequestPageActivity extends AppCompatActivity {
         }
     }
 
-    private void updateBranchListView(List<Branch> matchingBranches, List<Branch> otherBranches) {
+    private void updateBranchListViewByTime(List<Branch> matchingBranches, List<Branch> otherBranches) {
         // Update ListView with filtered branches
         branchNames.clear();
         branchIds.clear();
