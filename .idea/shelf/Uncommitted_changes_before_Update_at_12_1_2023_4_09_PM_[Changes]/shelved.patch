@@ -1,0 +1,159 @@
+Index: app/src/main/java/com/example/servicenovigrad/NewRequestPageActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/servicenovigrad/NewRequestPageActivity.java b/app/src/main/java/com/example/servicenovigrad/NewRequestPageActivity.java
+new file mode 100644
+--- /dev/null	(date 1701463148012)
++++ b/app/src/main/java/com/example/servicenovigrad/NewRequestPageActivity.java	(date 1701463148012)
+@@ -0,0 +1,14 @@
++package com.example.servicenovigrad;
++
++import androidx.appcompat.app.AppCompatActivity;
++
++import android.os.Bundle;
++
++public class NewRequestPageActivity extends AppCompatActivity {
++
++    @Override
++    protected void onCreate(Bundle savedInstanceState) {
++        super.onCreate(savedInstanceState);
++        setContentView(R.layout.activity_new_request_page);
++    }
++}
+\ No newline at end of file
+Index: app/src/main/res/layout/activity_new_request_page.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/activity_new_request_page.xml b/app/src/main/res/layout/activity_new_request_page.xml
+new file mode 100644
+--- /dev/null	(date 1701464895980)
++++ b/app/src/main/res/layout/activity_new_request_page.xml	(date 1701464895980)
+@@ -0,0 +1,89 @@
++<?xml version="1.0" encoding="utf-8"?>
++<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
++    xmlns:app="http://schemas.android.com/apk/res-auto"
++    xmlns:tools="http://schemas.android.com/tools"
++    android:id="@+id/linearLayout4"
++    android:layout_width="match_parent"
++    android:layout_height="match_parent">
++
++    <!-- Search Branch by Name -->
++
++    <!-- Location Input -->
++
++    <EditText
++        android:id="@+id/search_branch_name"
++        android:layout_width="0dp"
++        android:layout_height="wrap_content"
++        android:layout_marginTop="32dp"
++        android:layout_marginBottom="10dp"
++        android:hint="Search branch by name"
++        android:inputType="text"
++        app:layout_constraintBottom_toTopOf="@+id/location_input"
++        app:layout_constraintEnd_toEndOf="parent"
++        app:layout_constraintHorizontal_bias="0.0"
++        app:layout_constraintStart_toStartOf="parent"
++        app:layout_constraintTop_toTopOf="parent" />
++
++    <!-- Filter Buttons -->
++
++
++    <EditText
++        android:id="@+id/location_input"
++        android:layout_width="wrap_content"
++        android:layout_height="wrap_content"
++        android:layout_marginTop="20dp"
++        android:hint="Enter location"
++        android:inputType="text"
++        app:layout_constraintEnd_toEndOf="parent"
++        app:layout_constraintHorizontal_bias="0.498"
++        app:layout_constraintStart_toStartOf="@+id/search_branch_name"
++        app:layout_constraintTop_toBottomOf="@+id/search_branch_name" />
++
++
++    <!-- RecyclerView for Displaying Branches -->
++
++    <Button
++        android:id="@+id/button_working_times"
++        android:layout_width="0dp"
++        android:layout_height="wrap_content"
++        android:layout_marginStart="32dp"
++        android:text="Select Working Times"
++        app:layout_constraintBaseline_toBaselineOf="@+id/button_offered_services"
++        app:layout_constraintEnd_toStartOf="@+id/button_offered_services"
++        app:layout_constraintStart_toStartOf="parent" />
++
++    <Button
++        android:id="@+id/button_offered_services"
++        android:layout_width="165dp"
++        android:layout_height="100dp"
++        android:layout_marginBottom="5dp"
++        android:text="Select Offered Services"
++        app:layout_constraintBottom_toTopOf="@+id/branches_recycler_view"
++        app:layout_constraintEnd_toEndOf="parent"
++        app:layout_constraintStart_toEndOf="@+id/button_working_times"
++        app:layout_constraintTop_toBottomOf="@+id/location_input" />
++
++    <androidx.recyclerview.widget.RecyclerView
++        android:id="@+id/branches_recycler_view"
++        android:layout_width="wrap_content"
++        android:layout_height="0dp"
++        app:layout_constraintBottom_toBottomOf="parent"
++        app:layout_constraintEnd_toStartOf="@+id/button_offered_services"
++        app:layout_constraintStart_toStartOf="@+id/button_offered_services"
++        app:layout_constraintTop_toBottomOf="@+id/button_offered_services" />
++
++    <!-- Message for No Results -->
++    <TextView
++        android:id="@+id/text_no_results"
++        android:layout_width="wrap_content"
++        android:layout_height="wrap_content"
++        android:layout_marginStart="16dp"
++        android:layout_marginLeft="16dp"
++        android:layout_marginTop="16dp"
++        android:text="No branches found with your selected filters"
++        android:textAlignment="center"
++        android:textColor="#FF0000"
++        android:visibility="gone"
++        app:layout_constraintStart_toStartOf="parent"
++        app:layout_constraintTop_toTopOf="parent" />
++</androidx.constraintlayout.widget.ConstraintLayout>
+Index: app/src/main/AndroidManifest.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<manifest xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\">\r\n\r\n    <application\r\n        android:allowBackup=\"true\"\r\n        android:dataExtractionRules=\"@xml/data_extraction_rules\"\r\n        android:fullBackupContent=\"@xml/backup_rules\"\r\n        android:icon=\"@mipmap/ic_launcher\"\r\n        android:label=\"@string/app_name\"\r\n        android:roundIcon=\"@mipmap/ic_launcher_round\"\r\n        android:supportsRtl=\"true\"\r\n        android:theme=\"@style/Theme.ServiceNovigrad\"\r\n        tools:targetApi=\"34\">\r\n        <activity\r\n            android:name=\".RedirectRequestsActivity\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".RequestsPageActivity\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".SelectOfferedServicesActivity\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".EditOfferedServicesActivity\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".OfferedServicesActivity\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".EditBranchActivity\"\r\n            android:exported=\"false\" />\r\n\r\n        <activity\r\n            android:name=\".BranchPageActivity\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".CreateBranchActivity\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".LoginActivity\"\r\n            android:exported=\"true\">\r\n            <intent-filter>\r\n                <action android:name=\"android.intent.action.MAIN\" />\r\n\r\n                <category android:name=\"android.intent.category.LAUNCHER\" />\r\n            </intent-filter>\r\n        </activity>\r\n        <activity android:name=\".RegisterActivity\" />\r\n        <activity\r\n            android:name=\".MainPageEmployee\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".CreateServiceActivity\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".EditServiceActivity\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".MainPageAdmin\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".MainPageClient\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".AccueilActivity\"\r\n            android:exported=\"false\" />\r\n    </application>\r\n\r\n\r\n</manifest>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/AndroidManifest.xml b/app/src/main/AndroidManifest.xml
+--- a/app/src/main/AndroidManifest.xml	(revision 5ffda73abd7a327dc2c9438813dbb6cb3b266b70)
++++ b/app/src/main/AndroidManifest.xml	(date 1701463147671)
+@@ -13,6 +13,9 @@
+         android:theme="@style/Theme.ServiceNovigrad"
+         tools:targetApi="34">
+         <activity
++            android:name=".NewRequestPageActivity"
++            android:exported="false" />
++        <activity
+             android:name=".RedirectRequestsActivity"
+             android:exported="false" />
+         <activity
+@@ -30,7 +33,6 @@
+         <activity
+             android:name=".EditBranchActivity"
+             android:exported="false" />
+-
+         <activity
+             android:name=".BranchPageActivity"
+             android:exported="false" />
+@@ -67,5 +69,4 @@
+             android:exported="false" />
+     </application>
+ 
+-
+ </manifest>
+\ No newline at end of file

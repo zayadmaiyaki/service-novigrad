@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    tools:context=".ClientBranchPageActivity">
+
+    <TextView
+        android:id="@+id/ClienttextView3"
+        android:layout_width="173dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="220dp"
+        android:height="48dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:text="Address:"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/ClienttextBranchPage"
+        android:layout_width="265dp"
+        android:layout_height="50dp"
+        android:gravity="center_horizontal|center_vertical"
+        android:text="Branch Page"
+        android:textColor="#000000"
+        android:textColorHint="#000000"
+        android:textSize="36sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.057" />
+
+    <TextView
+        android:id="@+id/ClienttextWorkingDaysAndHours"
+        android:layout_width="404dp"
+        android:layout_height="65dp"
+        android:gravity="center_horizontal|center_vertical"
+        android:text="Working days and hours"
+        android:textColor="#000000"
+        android:textColorHint="#000000"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.428"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.415" />
+
+    <Button
+        android:id="@+id/ClientbuttonMonday"
+        android:layout_width="57dp"
+        android:layout_height="51dp"
+        android:layout_marginTop="13dp"
+        android:text="M"
+        app:layout_constraintEnd_toStartOf="@+id/ClientbuttonTuesday"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ClienttextWorkingDaysAndHours" />
+
+    <Button
+        android:id="@+id/ClientbuttonTuesday"
+        android:layout_width="57dp"
+        android:layout_height="51dp"
+        android:layout_marginTop="13dp"
+        android:text="T"
+        app:layout_constraintEnd_toStartOf="@+id/ClientbuttonWednesday"
+        app:layout_constraintTop_toBottomOf="@+id/ClienttextWorkingDaysAndHours" />
+
+    <Button
+        android:id="@+id/ClientbuttonWednesday"
+        android:layout_width="57dp"
+        android:layout_height="51dp"
+        android:layout_marginTop="13dp"
+        android:text="W"
+        app:layout_constraintEnd_toStartOf="@+id/ClientbuttonThursday"
+        app:layout_constraintTop_toBottomOf="@+id/ClienttextWorkingDaysAndHours" />
+
+    <Button
+        android:id="@+id/ClientbuttonThursday"
+        android:layout_width="57dp"
+        android:layout_height="51dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="4dp"
+        android:text="T"
+        app:layout_constraintEnd_toStartOf="@+id/ClientbuttonFriday"
+        app:layout_constraintTop_toBottomOf="@+id/ClienttextWorkingDaysAndHours" />
+
+    <Button
+        android:id="@+id/ClientbuttonFriday"
+        android:layout_width="57dp"
+        android:layout_height="51dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="4dp"
+        android:text="F"
+        app:layout_constraintEnd_toStartOf="@+id/ClientbuttonSaturday"
+        app:layout_constraintTop_toBottomOf="@+id/ClienttextWorkingDaysAndHours" />
+
+    <Button
+        android:id="@+id/ClientbuttonSaturday"
+        android:layout_width="57dp"
+        android:layout_height="51dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="1dp"
+        android:text="S"
+        app:layout_constraintEnd_toStartOf="@+id/ClientbuttonSunday"
+        app:layout_constraintTop_toBottomOf="@+id/ClienttextWorkingDaysAndHours" />
+
+    <Button
+        android:id="@+id/ClientbuttonSunday"
+        android:layout_width="57dp"
+        android:layout_height="51dp"
+        android:layout_marginTop="13dp"
+        android:text="S"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ClienttextWorkingDaysAndHours" />
+
+    <Button
+        android:id="@+id/ClientbuttonServicesRequests"
+        android:layout_width="169dp"
+        android:layout_height="59dp"
+        android:layout_marginTop="200dp"
+        android:text="Services Requests"
+        app:layout_constraintEnd_toEndOf="@+id/ClienttextWorkingDaysAndHours"
+        app:layout_constraintHorizontal_bias="0.51"
+        app:layout_constraintStart_toStartOf="@+id/ClienttextWorkingDaysAndHours"
+        app:layout_constraintTop_toBottomOf="@+id/ClienttextWorkingDaysAndHours" />
+
+    <Button
+        android:id="@+id/ClientbuttonOfferedServices"
+        android:layout_width="169dp"
+        android:layout_height="59dp"
+        android:layout_marginTop="128dp"
+        android:text="Offered Services"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ClienttextWorkingDaysAndHours" />
+
+
+
+    <TextView
+        android:id="@+id/ClientbranchAddressText"
+        android:layout_width="173dp"
+        android:layout_height="48dp"
+        android:layout_marginEnd="120dp"
+        android:height="48dp"
+        android:autofillHints=""
+        android:drawablePadding="10dp"
+        android:ems="10"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:text="Address"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ClientbranchPhoneNumberText" />
+
+    <TextView
+        android:id="@+id/ClienttextView2"
+        android:layout_width="173dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="172dp"
+        android:height="48dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:text="Phone Number:"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/ClienttextView4"
+        android:layout_width="173dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="112dp"
+        android:height="48dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:text="Name:"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/ClientbranchPhoneNumberText"
+        android:layout_width="173dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="11dp"
+        android:layout_marginEnd="64dp"
+        android:height="48dp"
+        android:autofillHints=""
+        android:drawablePadding="10dp"
+        android:ems="10"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:text="Phone Number"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ClientbranchNameText" />
+
+    <TextView
+        android:id="@+id/ClientbranchNameText"
+        android:layout_width="173dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="27dp"
+        android:layout_marginEnd="72dp"
+        android:height="48dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:text="Name"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/ClienttextBranchPage"
+        app:layout_constraintTop_toBottomOf="@+id/ClienttextBranchPage" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
