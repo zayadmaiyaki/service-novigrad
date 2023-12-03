@@ -29,6 +29,8 @@ import java.util.Map;
 
 public class NewRequestPageActivity extends AppCompatActivity {
 
+    private String locationToSearch;
+
     private String serviceNeeded;
 
     private String branchNameToSearch;
@@ -127,63 +129,112 @@ public class NewRequestPageActivity extends AppCompatActivity {
     private void applyFilter() {
         branchNameToSearch = searchBranchNameEditText.getText().toString();
         serviceNeeded = offeredServicesEditText.getText().toString();
+        locationToSearch = locationInputEditText.getText().toString();
 
-        /*if (!branchNameToSearch.isEmpty()) {
-            searchAndSortBranchesByName(branchNameToSearch);
-        } else {
-            Toast.makeText(this, "Please enter a branch name to search", Toast.LENGTH_SHORT).show();
-        }*/
-        if (!serviceNeeded.isEmpty()) {
-            filterBranchesByServices(serviceNeeded);
-        } else {
-            Toast.makeText(this, "Please enter the service you need", Toast.LENGTH_SHORT).show();
+        boolean isNameFilterActive = !branchNameToSearch.isEmpty();
+        boolean isServiceFilterActive = !serviceNeeded.isEmpty();
+        boolean isLocationFilterActive = !locationToSearch.isEmpty();
+
+        if (!isNameFilterActive && !isServiceFilterActive && !isLocationFilterActive) {
+            Toast.makeText(this, "Please enter at least one filter criterion", Toast.LENGTH_SHORT).show();
+            return;
         }
+
+        List<Branch> filteredBranches = new ArrayList<>(originalBranchesList);
+
+        if (isNameFilterActive) {
+            filteredBranches = filterBranchesByName(filteredBranches, branchNameToSearch);
+        }
+        if (isServiceFilterActive) {
+            filteredBranches = filterBranchesByServices(filteredBranches, serviceNeeded);
+        }
+        if (isLocationFilterActive) {
+            filteredBranches = filterBranchesByLocation(filteredBranches, locationToSearch);
+        }
+
+        updateBranchListView(filteredBranches);
     }
 
-    private void filterBranchesByServices(String serviceNeeded) {
-        List<Branch> branchesWithService = new ArrayList<>();
-        List<Branch> otherBranches = new ArrayList<>();
+    private List<Branch> filterBranchesByName(List<Branch> branches, String name) {
+        // Implement filtering logic based on branch name
+        List<Branch> filteredList = new ArrayList<>();
+        for (Branch branch : branches) {
+            if (branch.getName().equalsIgnoreCase(name)) {
+                filteredList.add(branch);
+            }
+        }
+        if (filteredList.isEmpty()) {
+            Toast.makeText(this, "No branches found with the name " + name, Toast.LENGTH_SHORT).show();
+        }
+        return filteredList;
+    }
 
-        for (Branch branch : originalBranchesList) {
-            boolean serviceMatch = false;
+    /*private List<Branch> filterBranchesByServices(List<Branch> branches, String serviceNeeded) {
+        // Implement filtering logic based on service
+        List<Branch> filteredList = new ArrayList<>();
+        for (Branch branch : branches) {
             for (Service service : branch.getServiceOfferred()) {
                 if (service.getName().toLowerCase().contains(serviceNeeded.toLowerCase())) {
-                    serviceMatch = true;
+                    filteredList.add(branch);
                     break;
                 }
             }
+        }
+        if (filteredList.isEmpty()) {
+            Toast.makeText(this, "No branches found that offer this service.", Toast.LENGTH_SHORT).show();
+        }
+        return filteredList;
+    }*/
 
-            if (serviceMatch) {
-                branchesWithService.add(branch);
-            } else {
-                otherBranches.add(branch);
+    private List<Branch> filterBranchesByServices(List<Branch> branches, String serviceNeeded) {
+        String normalizedServiceNeeded = normalizeString(serviceNeeded);
+        List<Branch> filteredList = new ArrayList<>();
+        for (Branch branch : branches) {
+            List<Service> servicesOffered = branch.getServiceOfferred();
+            if (servicesOffered != null && !servicesOffered.isEmpty()) {
+                for (Service service : servicesOffered) {
+                    String normalizedServiceName = normalizeString(service.getName());
+                    if (normalizedServiceName.contains(normalizedServiceNeeded)) {
+                        filteredList.add(branch);
+                        break;
+                    }
+                }
             }
         }
-        if (branchesWithService.isEmpty()) {
-            Toast.makeText(this, "No branches found offering the specified service.", Toast.LENGTH_SHORT).show();
+        if (filteredList.isEmpty()) {
+            Toast.makeText(this, "No branches found that offer the service " + serviceNeeded, Toast.LENGTH_SHORT).show();
         }
-        updateBranchListViewByService(branchesWithService, otherBranches);
+        return filteredList;
     }
 
-    private void updateBranchListViewByService(List<Branch> branchesWithService, List<Branch> otherBranches) {
+    private String normalizeString(String input) {
+        return input.replaceAll("[^A-Za-z0-9]", "").toLowerCase();
+    }
+
+
+    private List<Branch> filterBranchesByLocation(List<Branch> branches, String location) {
+        // Implement filtering logic based on location
+        List<Branch> filteredList = new ArrayList<>();
+        for (Branch branch : branches) {
+            if (branch.getAddress().equalsIgnoreCase(location)) {
+                filteredList.add(branch);
+            }
+        }
+        return filteredList;
+    }
+
+    private void updateBranchListView(List<Branch> branches) {
         branchNames.clear();
         branchIds.clear();
 
-        // Adding branches that offer the specified service
-        for (Branch branch : branchesWithService) {
-            branchNames.add(branch.getName());
-            branchIds.add(branch.getId());
-        }
-
-        // Adding other branches
-        for (Branch branch : otherBranches) {
+        for (Branch branch : branches) {
             branchNames.add(branch.getName());
             branchIds.add(branch.getId());
         }
 
         adapter.notifyDataSetChanged();
-
     }
+
 
 
     private void searchAndSortBranchesByName(String branchNameToSearch) {
