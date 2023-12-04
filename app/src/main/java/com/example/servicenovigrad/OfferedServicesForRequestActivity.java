@@ -83,7 +83,7 @@ public class OfferedServicesForRequestActivity extends AppCompatActivity {
     }
 
     private void loadOfferedServices(String branchId) {
-        branchesRef = FirebaseDatabase.getInstance().getReference("branches").child(branchId).child("servicesOffered");
+        branchesRef = FirebaseDatabase.getInstance().getReference("branches").child(branchId).child("serviceOfferred");
         branchesRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {

@@ -19,14 +19,13 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.076" />
+        app:layout_constraintVertical_bias="0.023" />
 
     <TextView
         android:id="@+id/statusTextView"
-        android:layout_width="124dp"
-        android:layout_height="64dp"
-        android:layout_marginTop="44dp"
-        android:layout_marginEnd="144dp"
+        android:layout_width="315dp"
+        android:layout_height="99dp"
+        android:layout_marginTop="12dp"
         android:gravity="center"
         android:text="Status :"
         android:textColor="#000000"
@@ -34,29 +33,32 @@
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/textRequestStatusPage"
+        app:layout_constraintHorizontal_bias="0.516"
+        app:layout_constraintStart_toStartOf="@+id/textRequestStatusPage"
         app:layout_constraintTop_toBottomOf="@+id/textRequestStatusPage" />
 
     <TextView
         android:id="@+id/requestStatusTextView"
         android:layout_width="216dp"
         android:layout_height="64dp"
-        android:layout_marginStart="44dp"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="20dp"
         android:gravity="center"
         android:text="In process"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/textRequestStatusPage"
-        app:layout_constraintTop_toBottomOf="@+id/textRequestStatusPage" />
+        app:layout_constraintEnd_toEndOf="@+id/statusTextView"
+        app:layout_constraintHorizontal_bias="0.484"
+        app:layout_constraintStart_toStartOf="@+id/statusTextView"
+        app:layout_constraintTop_toBottomOf="@+id/statusTextView" />
 
     <Button
         android:id="@+id/buttonSeeRequest"
         android:layout_width="170dp"
         android:layout_height="66dp"
-        android:layout_marginTop="148dp"
+        android:layout_marginTop="20dp"
         android:text="See Request"
         app:layout_constraintEnd_toEndOf="@+id/requestStatusTextView"
-        app:layout_constraintHorizontal_bias="0.536"
-        app:layout_constraintStart_toStartOf="@+id/statusTextView"
-        app:layout_constraintTop_toBottomOf="@+id/textRequestStatusPage" />
+        app:layout_constraintHorizontal_bias="0.369"
+        app:layout_constraintStart_toStartOf="@+id/requestStatusTextView"
+        app:layout_constraintTop_toBottomOf="@+id/requestStatusTextView" />
 </androidx.constraintlayout.widget.ConstraintLayout>

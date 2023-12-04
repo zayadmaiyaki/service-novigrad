@@ -50,7 +50,7 @@ public class MainPageClient extends AppCompatActivity {
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, ongoingRequests);
         ongoingRequestsListView.setAdapter(adapter);
 
-        DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("requestedservices");
+        DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("requests");
         dbRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -105,5 +105,6 @@ public class MainPageClient extends AppCompatActivity {
                 });
         builder.create().show();
     }
+
 }
 
