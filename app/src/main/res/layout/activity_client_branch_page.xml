@@ -123,28 +123,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ClienttextWorkingDaysAndHours" />
 
+
     <Button
-        android:id="@+id/ClientbuttonServicesRequests"
+        android:id="@+id/newServiceRequestbutton"
         android:layout_width="169dp"
         android:layout_height="59dp"
-        android:layout_marginTop="200dp"
-        android:text="Services Requests"
+        android:layout_marginTop="256dp"
+        android:text="New Services Requests"
         app:layout_constraintEnd_toEndOf="@+id/ClienttextWorkingDaysAndHours"
-        app:layout_constraintHorizontal_bias="0.51"
+        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="@+id/ClienttextWorkingDaysAndHours"
         app:layout_constraintTop_toBottomOf="@+id/ClienttextWorkingDaysAndHours" />
-
-    <Button
-        android:id="@+id/ClientbuttonOfferedServices"
-        android:layout_width="169dp"
-        android:layout_height="59dp"
-        android:layout_marginTop="128dp"
-        android:text="Offered Services"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ClienttextWorkingDaysAndHours" />
-
-
 
     <TextView
         android:id="@+id/ClientbranchAddressText"

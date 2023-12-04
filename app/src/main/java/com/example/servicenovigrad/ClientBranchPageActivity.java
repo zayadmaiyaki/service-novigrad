@@ -35,18 +35,18 @@ public class ClientBranchPageActivity extends AppCompatActivity {
         branchNameTextView = findViewById(R.id.ClientbranchNameText);
         branchPhoneNumberTextView = findViewById(R.id.ClientbranchPhoneNumberText);
         branchAddressTextView = findViewById(R.id.ClientbranchAddressText);
-        Button selectedServices = findViewById(R.id.ClientbuttonOfferedServices);
+        Button newServiceRequest = findViewById(R.id.newServiceRequestbutton);
 
         branchId = getIntent().getStringExtra("BRANCH_ID");
 
         setupDayButtons();
 
-        selectedServices.setOnClickListener(new View.OnClickListener() {
+        newServiceRequest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 FirebaseDatabase database = FirebaseDatabase.getInstance();
                 DatabaseReference branchesRef = database.getReference("branches");
-                Intent intent = new Intent(ClientBranchPageActivity.this, OfferedServicesActivity.class);
+                Intent intent = new Intent(ClientBranchPageActivity.this,OfferedServicesForRequestActivity.class);
                 intent.putExtra("BRANCH_ID", branchId);
                 intent.putExtra("BRANCH_NAME", branchNameTextView.getText().toString().trim());
                 startActivity(intent);

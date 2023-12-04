@@ -39,7 +39,7 @@ public class RequestForServiceActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_request_for_service);
-
+/**
         database = FirebaseDatabase.getInstance();
 
         String serviceId = getIntent().getStringExtra("serviceId");
@@ -136,6 +136,6 @@ public class RequestForServiceActivity extends AppCompatActivity {
                 myRef.child(requestId).child("form").setValue(formValues);
                 myRef.child(requestId).child("docs").setValue(docsValues);
             }
-        });
+        });         */
     }
 }

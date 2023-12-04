@@ -66,30 +66,7 @@ public class OfferedServicesActivity extends AppCompatActivity {
                             DataSnapshot serviceSnapshot = dataSnapshot.getChildren().iterator().next();
                             Service service = serviceSnapshot.getValue(Service.class);
                             if (service != null) {
-                                SharedPreferences sharedPreferences = getSharedPreferences("MySharedPref",MODE_PRIVATE);
-                                String username = sharedPreferences.getString("username", "");
-                                // Fetch the user role from Firebase
-                                FirebaseFirestore db = FirebaseFirestore.getInstance();
-                                db.collection("users").whereEqualTo("username", username).limit(1).get().addOnCompleteListener(task -> {
-                                    if (task.isSuccessful()) {
-                                        List<DocumentSnapshot> documents = task.getResult().getDocuments();
-                                        if (!documents.isEmpty()) {
-                                            String role = documents.get(0).getString("role");
-
-                                            // Check the user's role and redirect accordingly
-                                            if ("Client".equals(role)) {
-                                                Intent intent = new Intent(OfferedServicesActivity.this, RequestForServiceActivity.class);
-                                                startActivity(intent);
-                                            } else {
-                                                showServiceDetailsDialog(service);
-                                            }
-                                        } else {
-                                            Toast.makeText(OfferedServicesActivity.this, "User details not found.", Toast.LENGTH_LONG).show();
-                                        }
-                                    } else {
-                                        Toast.makeText(OfferedServicesActivity.this, "Failed to load user details.", Toast.LENGTH_LONG).show();
-                                    }
-                                });
+                                showServiceDetailsDialog(service);
                             } else {
                                 Toast.makeText(OfferedServicesActivity.this, "Service details not found.", Toast.LENGTH_LONG).show();
                             }
@@ -110,7 +87,7 @@ public class OfferedServicesActivity extends AppCompatActivity {
     }
 
     private void loadOfferedServices(String branchId) {
-        branchesRef = FirebaseDatabase.getInstance().getReference("branches").child(branchId).child("servicesOffered");
+        branchesRef = FirebaseDatabase.getInstance().getReference("branches").child(branchId).child("serviceOfferred");
         branchesRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
