@@ -4,6 +4,8 @@ import static android.content.ContentValues.TAG;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+
+import android.content.SharedPreferences;
 import android.net.Uri;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -204,6 +206,7 @@ public class RequestForServiceActivity extends AppCompatActivity {
                             requestsRef.child(requestId).child("serviceRequested").setValue(serviceName);
                             requestsRef.child(requestId).child("form").setValue(filledForm);
                             requestsRef.child(requestId).child("username").setValue(username);
+                            requestsRef.child(requestId).child("branch").setValue(getIntent().getStringExtra("BRANCH_ID"));
                             requestsRef.child(requestId).child("docs").setValue(filledDocs)
                                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                                         @Override
@@ -211,10 +214,12 @@ public class RequestForServiceActivity extends AppCompatActivity {
                                             // Write was successful!
                                             // Display a success Toast message
                                             Toast.makeText(RequestForServiceActivity.this, "Request submitted successfully!", Toast.LENGTH_SHORT).show();
-
+                                            SharedPreferences prefs = getSharedPreferences("MyApp", MODE_PRIVATE);
+                                            prefs.edit().putBoolean("showRatingPopup", true).apply();
                                             // Redirect to MainPageClient
                                             Intent intent = new Intent(RequestForServiceActivity.this, MainPageClient.class);
                                             intent.putExtra("username",username);
+                                            intent.putExtra("BRANCH_ID",getIntent().getStringExtra("BRANCH_ID"));
                                             startActivity(intent);
                                         }
                                     })
