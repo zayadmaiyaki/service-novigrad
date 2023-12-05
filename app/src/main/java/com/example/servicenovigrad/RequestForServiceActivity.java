@@ -4,6 +4,7 @@ import static android.content.ContentValues.TAG;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import android.net.Uri;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -47,6 +48,8 @@ public class RequestForServiceActivity extends AppCompatActivity {
     private DatabaseReference serviceRef;
     private DatabaseReference requestsRef;
     private String serviceId;
+    private ActivityResultLauncher<Intent> filePickerLauncher;
+    private String selectedDocField;
 
 
 
@@ -62,6 +65,7 @@ public class RequestForServiceActivity extends AppCompatActivity {
         submitRequest = findViewById(R.id.buttonSubmitRequest);
         Map<String,String>filledForm = new HashMap<>();
         Map<String,String>filledDocs = new HashMap<>();
+        String username=getIntent().getStringExtra("username");
 
         serviceId = getIntent().getStringExtra("SERVICE_ID");
         if(serviceId == null) {
@@ -78,6 +82,8 @@ public class RequestForServiceActivity extends AppCompatActivity {
         docsFieldsAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, docsFieldsList);
         formFieldsListView.setAdapter(formFieldsAdapter);
         docsFieldsListView.setAdapter(docsFieldsAdapter);
+
+
 
         fetchServiceData();
         formFieldsListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
@@ -257,6 +263,7 @@ public class RequestForServiceActivity extends AppCompatActivity {
 
                             requestsRef.child(requestId).child("serviceRequested").setValue(serviceName);
                             requestsRef.child(requestId).child("form").setValue(filledForm);
+                            requestsRef.child(requestId).child("username").setValue(username);
                             requestsRef.child(requestId).child("docs").setValue(filledDocs)
                                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                                         @Override
@@ -267,6 +274,7 @@ public class RequestForServiceActivity extends AppCompatActivity {
 
                                             // Redirect to MainPageClient
                                             Intent intent = new Intent(RequestForServiceActivity.this, MainPageClient.class);
+                                            intent.putExtra("username",username);
                                             startActivity(intent);
                                         }
                                     })

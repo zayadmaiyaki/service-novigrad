@@ -62,6 +62,8 @@ public class OfferedServicesForRequestActivity extends AppCompatActivity {
                                 Intent intent = new Intent(OfferedServicesForRequestActivity.this, RequestForServiceActivity.class);
                                 intent.putExtra("SERVICE_ID", service.getId());
                                 intent.putExtra("BRANCH_ID",branchId);
+                                String username=getIntent().getStringExtra("username");
+                                intent.putExtra("username",username);
                                 startActivity(intent);
                             } else {
                                 Toast.makeText(OfferedServicesForRequestActivity.this, "Service details not found.", Toast.LENGTH_LONG).show();

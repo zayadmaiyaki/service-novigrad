@@ -71,6 +71,8 @@ public class NewRequestPageActivity extends AppCompatActivity {
             String selectedBranchId = branchIds.get(position);
             Intent intent = new Intent(NewRequestPageActivity.this, ClientBranchPageActivity.class);
             intent.putExtra("BRANCH_ID", selectedBranchId);
+            String username=getIntent().getStringExtra("username");
+            intent.putExtra("username",username);
             startActivity(intent);
         });
 

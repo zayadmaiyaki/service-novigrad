@@ -45,7 +45,6 @@ public class MainPageClient extends AppCompatActivity {
         textClientPage.setText("Client Page");
         textView.setText("Ongoing Requests");
 
-
         ongoingRequests = new ArrayList<>();
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, ongoingRequests);
         ongoingRequestsListView.setAdapter(adapter);
@@ -55,9 +54,13 @@ public class MainPageClient extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 ongoingRequests.clear();
+                String username=getIntent().getStringExtra("username");
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     String serviceName = snapshot.getKey();
-                    ongoingRequests.add(serviceName);
+                    String requestUsername = snapshot.child("username").getValue(String.class);
+                    if(username != null && username.equals(requestUsername)){
+                        ongoingRequests.add(serviceName);
+                    }
                 }
                 adapter.notifyDataSetChanged();
             }
@@ -72,6 +75,9 @@ public class MainPageClient extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainPageClient.this, NewRequestPageActivity.class);
+                String username=getIntent().getStringExtra("username");
+                intent.putExtra("username",username);
+
                 startActivity(intent);
             }
         });
@@ -85,6 +91,7 @@ public class MainPageClient extends AppCompatActivity {
             }
         });
     }
+
 
     // Show Dialog
     private void showLongClickDialog(String selectedItem) {

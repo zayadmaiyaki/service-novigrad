@@ -70,6 +70,7 @@ public class AccueilActivity extends AppCompatActivity {
                             startActivity(intent);
                         } else if ("Client".equals(role)) {
                             Intent intent = new Intent(AccueilActivity.this, MainPageClient.class);
+                            intent.putExtra("username",username);
                             startActivity(intent);
                         }
 

@@ -49,6 +49,8 @@ public class ClientBranchPageActivity extends AppCompatActivity {
                 Intent intent = new Intent(ClientBranchPageActivity.this,OfferedServicesForRequestActivity.class);
                 intent.putExtra("BRANCH_ID", branchId);
                 intent.putExtra("BRANCH_NAME", branchNameTextView.getText().toString().trim());
+                String username=getIntent().getStringExtra("username");
+                intent.putExtra("username",username);
                 startActivity(intent);
             }
         });
