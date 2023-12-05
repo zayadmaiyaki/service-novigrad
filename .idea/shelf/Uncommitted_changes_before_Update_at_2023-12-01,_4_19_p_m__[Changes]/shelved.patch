@@ -1,0 +1,130 @@
+Index: app/src/main/res/layout/activity_new_request_page.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\n<androidx.constraintlayout.widget.ConstraintLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\n    xmlns:tools=\"http://schemas.android.com/tools\"\n    android:id=\"@+id/linearLayout4\"\n    android:layout_width=\"match_parent\"\n    android:layout_height=\"match_parent\">\n\n    <!-- Search Branch by Name -->\n\n    <!-- Location Input -->\n\n    <EditText\n        android:id=\"@+id/search_branch_name\"\n        android:layout_width=\"0dp\"\n        android:layout_height=\"wrap_content\"\n        android:layout_marginTop=\"32dp\"\n        android:layout_marginBottom=\"10dp\"\n        android:hint=\"Search branch by name\"\n        android:inputType=\"text\"\n        app:layout_constraintBottom_toTopOf=\"@+id/location_input\"\n        app:layout_constraintEnd_toEndOf=\"parent\"\n        app:layout_constraintHorizontal_bias=\"0.0\"\n        app:layout_constraintStart_toStartOf=\"parent\"\n        app:layout_constraintTop_toTopOf=\"parent\" />\n\n    <!-- Filter Buttons -->\n\n\n    <EditText\n        android:id=\"@+id/location_input\"\n        android:layout_width=\"wrap_content\"\n        android:layout_height=\"wrap_content\"\n        android:layout_marginTop=\"20dp\"\n        android:hint=\"Enter location\"\n        android:inputType=\"text\"\n        app:layout_constraintEnd_toEndOf=\"parent\"\n        app:layout_constraintHorizontal_bias=\"0.498\"\n        app:layout_constraintStart_toStartOf=\"@+id/search_branch_name\"\n        app:layout_constraintTop_toBottomOf=\"@+id/search_branch_name\" />\n\n\n    <!-- RecyclerView for Displaying Branches -->\n\n    <Button\n        android:id=\"@+id/button_working_times\"\n        android:layout_width=\"0dp\"\n        android:layout_height=\"wrap_content\"\n        android:layout_marginStart=\"32dp\"\n        android:text=\"Select Working Times\"\n        app:layout_constraintBaseline_toBaselineOf=\"@+id/button_offered_services\"\n        app:layout_constraintEnd_toStartOf=\"@+id/button_offered_services\"\n        app:layout_constraintStart_toStartOf=\"parent\" />\n\n    <Button\n        android:id=\"@+id/button_offered_services\"\n        android:layout_width=\"165dp\"\n        android:layout_height=\"100dp\"\n        android:layout_marginBottom=\"5dp\"\n        android:text=\"Select Offered Services\"\n        app:layout_constraintBottom_toTopOf=\"@+id/branches_recycler_view\"\n        app:layout_constraintEnd_toEndOf=\"parent\"\n        app:layout_constraintStart_toEndOf=\"@+id/button_working_times\"\n        app:layout_constraintTop_toBottomOf=\"@+id/location_input\" />\n\n    <androidx.recyclerview.widget.RecyclerView\n        android:id=\"@+id/branches_recycler_view\"\n        android:layout_width=\"wrap_content\"\n        android:layout_height=\"0dp\"\n        app:layout_constraintBottom_toBottomOf=\"parent\"\n        app:layout_constraintEnd_toStartOf=\"@+id/button_offered_services\"\n        app:layout_constraintStart_toStartOf=\"@+id/button_offered_services\"\n        app:layout_constraintTop_toBottomOf=\"@+id/button_offered_services\" />\n\n    <!-- Message for No Results -->\n    <TextView\n        android:id=\"@+id/text_no_results\"\n        android:layout_width=\"wrap_content\"\n        android:layout_height=\"wrap_content\"\n        android:layout_marginStart=\"16dp\"\n        android:layout_marginLeft=\"16dp\"\n        android:layout_marginTop=\"16dp\"\n        android:text=\"No branches found with your selected filters\"\n        android:textAlignment=\"center\"\n        android:textColor=\"#FF0000\"\n        android:visibility=\"gone\"\n        app:layout_constraintStart_toStartOf=\"parent\"\n        app:layout_constraintTop_toTopOf=\"parent\" />\n</androidx.constraintlayout.widget.ConstraintLayout>\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/activity_new_request_page.xml b/app/src/main/res/layout/activity_new_request_page.xml
+--- a/app/src/main/res/layout/activity_new_request_page.xml	(revision 968ab363ed066ed97c6c8806a56723e262187459)
++++ b/app/src/main/res/layout/activity_new_request_page.xml	(date 1701465537949)
+@@ -4,73 +4,70 @@
+     xmlns:tools="http://schemas.android.com/tools"
+     android:id="@+id/linearLayout4"
+     android:layout_width="match_parent"
+-    android:layout_height="match_parent">
++    android:layout_height="match_parent"
++    android:background="@drawable/background">
++
+ 
+     <!-- Search Branch by Name -->
+ 
+     <!-- Location Input -->
+ 
++    <!-- Filter Buttons -->
++
++
+     <EditText
+         android:id="@+id/search_branch_name"
+-        android:layout_width="0dp"
++        android:layout_width="411dp"
+         android:layout_height="wrap_content"
+         android:layout_marginTop="32dp"
+-        android:layout_marginBottom="10dp"
+         android:hint="Search branch by name"
+         android:inputType="text"
+-        app:layout_constraintBottom_toTopOf="@+id/location_input"
+         app:layout_constraintEnd_toEndOf="parent"
+-        app:layout_constraintHorizontal_bias="0.0"
+         app:layout_constraintStart_toStartOf="parent"
+         app:layout_constraintTop_toTopOf="parent" />
+ 
+-    <!-- Filter Buttons -->
+ 
++    <!-- RecyclerView for Displaying Branches -->
+ 
+     <EditText
+         android:id="@+id/location_input"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+-        android:layout_marginTop="20dp"
++        android:layout_marginTop="16dp"
+         android:hint="Enter location"
+         android:inputType="text"
+-        app:layout_constraintEnd_toEndOf="parent"
++        app:layout_constraintEnd_toEndOf="@+id/search_branch_name"
+         app:layout_constraintHorizontal_bias="0.498"
+         app:layout_constraintStart_toStartOf="@+id/search_branch_name"
+         app:layout_constraintTop_toBottomOf="@+id/search_branch_name" />
+ 
+-
+-    <!-- RecyclerView for Displaying Branches -->
+-
+     <Button
+         android:id="@+id/button_working_times"
+-        android:layout_width="0dp"
+-        android:layout_height="wrap_content"
+-        android:layout_marginStart="32dp"
++        android:layout_width="167dp"
++        android:layout_height="57dp"
++        android:layout_marginStart="16dp"
++        android:layout_marginTop="16dp"
+         android:text="Select Working Times"
+-        app:layout_constraintBaseline_toBaselineOf="@+id/button_offered_services"
+-        app:layout_constraintEnd_toStartOf="@+id/button_offered_services"
+-        app:layout_constraintStart_toStartOf="parent" />
++        app:layout_constraintStart_toStartOf="parent"
++        app:layout_constraintTop_toBottomOf="@+id/location_input" />
+ 
+     <Button
+         android:id="@+id/button_offered_services"
+-        android:layout_width="165dp"
+-        android:layout_height="100dp"
+-        android:layout_marginBottom="5dp"
++        android:layout_width="185dp"
++        android:layout_height="59dp"
++        android:layout_marginTop="16dp"
++        android:layout_marginEnd="16dp"
+         android:text="Select Offered Services"
+-        app:layout_constraintBottom_toTopOf="@+id/branches_recycler_view"
+         app:layout_constraintEnd_toEndOf="parent"
+-        app:layout_constraintStart_toEndOf="@+id/button_working_times"
+         app:layout_constraintTop_toBottomOf="@+id/location_input" />
+ 
+     <androidx.recyclerview.widget.RecyclerView
+         android:id="@+id/branches_recycler_view"
+-        android:layout_width="wrap_content"
+-        android:layout_height="0dp"
++        android:layout_width="355dp"
++        android:layout_height="403dp"
+         app:layout_constraintBottom_toBottomOf="parent"
+-        app:layout_constraintEnd_toStartOf="@+id/button_offered_services"
+-        app:layout_constraintStart_toStartOf="@+id/button_offered_services"
+-        app:layout_constraintTop_toBottomOf="@+id/button_offered_services" />
++        app:layout_constraintEnd_toEndOf="@+id/button_offered_services"
++        app:layout_constraintStart_toStartOf="@+id/button_working_times" />
+ 
+     <!-- Message for No Results -->
+     <TextView
+Index: app/src/main/res/layout/activity_main_page_client.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\n<androidx.constraintlayout.widget.ConstraintLayout\n    xmlns:android=\"http://schemas.android.com/apk/res/android\"\n    xmlns:tools=\"http://schemas.android.com/tools\"\n    android:background=\"@drawable/background\"\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\n    android:layout_width=\"match_parent\"\n    android:layout_height=\"match_parent\"\n    tools:context=\".MainPageClient\">\n\n  <TextView\n      android:id=\"@+id/textClientPage\"\n      android:layout_width=\"wrap_content\"\n      android:layout_height=\"wrap_content\"\n      android:text=\"Client Page\"\n      android:textColor=\"#000000\"\n      android:textColorHint=\"#000000\"\n      android:textSize=\"36sp\"\n      android:textStyle=\"bold\"\n      app:layout_constraintBottom_toBottomOf=\"parent\"\n      app:layout_constraintEnd_toEndOf=\"parent\"\n      app:layout_constraintStart_toStartOf=\"parent\"\n      app:layout_constraintTop_toTopOf=\"parent\"\n      app:layout_constraintVertical_bias=\"0.096\"/>\n</androidx.constraintlayout.widget.ConstraintLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/activity_main_page_client.xml b/app/src/main/res/layout/activity_main_page_client.xml
+--- a/app/src/main/res/layout/activity_main_page_client.xml	(revision 5ffda73abd7a327dc2c9438813dbb6cb3b266b70)
++++ b/app/src/main/res/layout/activity_main_page_client.xml	(date 1701463040926)
+@@ -19,7 +19,9 @@
+       android:textStyle="bold"
+       app:layout_constraintBottom_toBottomOf="parent"
+       app:layout_constraintEnd_toEndOf="parent"
++      app:layout_constraintHorizontal_bias="0.497"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toTopOf="parent"
+-      app:layout_constraintVertical_bias="0.096"/>
++      app:layout_constraintVertical_bias="0.042" />
++
+ </androidx.constraintlayout.widget.ConstraintLayout>
+\ No newline at end of file

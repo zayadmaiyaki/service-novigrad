@@ -34,6 +34,7 @@ public class OfferedServicesForRequestActivity extends AppCompatActivity {
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, offeredServiceNames);
         selectServicesForRequestListView.setAdapter(adapter);
 
+
         String branchId = getIntent().getStringExtra("BRANCH_ID");
         if (branchId != null) {
             loadOfferedServices(branchId);

@@ -82,7 +82,6 @@ public class NewRequestPageActivity extends AppCompatActivity {
     }
 
     private void loadBranches() {
-        // Load branches from Firebase
         DatabaseReference branchesRef = FirebaseDatabase.getInstance().getReference("branches");
         branchesRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -90,20 +89,39 @@ public class NewRequestPageActivity extends AppCompatActivity {
                 originalBranchesList.clear();
                 branchNames.clear();
                 branchIds.clear();
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    Branch branch = snapshot.getValue(Branch.class);
+
+                for (DataSnapshot branchSnapshot : dataSnapshot.getChildren()) {
+                    Branch branch = branchSnapshot.getValue(Branch.class);
                     if (branch != null) {
                         originalBranchesList.add(branch);
-                        branchNames.add(branch.getName());
-                        branchIds.add(snapshot.getKey());
+                        fetchBranchRating(branchSnapshot.getKey(), branch.getName());
                     }
                 }
-                adapter.notifyDataSetChanged();
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 Toast.makeText(NewRequestPageActivity.this, "Failed to load branches.", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void fetchBranchRating(final String branchId, final String branchName) {
+        DatabaseReference branchRef = FirebaseDatabase.getInstance().getReference("branches").child(branchId).child("averageRating");
+        branchRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Double rating = dataSnapshot.getValue(Double.class);
+                if (rating == null) rating = 0.0;
+                String branchWithRating = branchName + " - Rating: " + String.format("%.1f", rating);
+                branchNames.add(branchWithRating);
+                branchIds.add(branchId);
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // Handle possible errors
             }
         });
     }

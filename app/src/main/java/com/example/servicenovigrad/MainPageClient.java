@@ -2,12 +2,14 @@ package com.example.servicenovigrad;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,6 +23,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MainPageClient extends AppCompatActivity {
 
@@ -30,6 +34,7 @@ public class MainPageClient extends AppCompatActivity {
     private Button newRequestButton;
     private ArrayAdapter<String> adapter;
     private ArrayList<String> ongoingRequests;
+    private double averageRating1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +82,7 @@ public class MainPageClient extends AppCompatActivity {
                 Intent intent = new Intent(MainPageClient.this, NewRequestPageActivity.class);
                 String username=getIntent().getStringExtra("username");
                 intent.putExtra("username",username);
+                intent.putExtra("RATING",averageRating1);
 
                 startActivity(intent);
             }
@@ -111,6 +117,87 @@ public class MainPageClient extends AppCompatActivity {
                     }
                 });
         builder.create().show();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        SharedPreferences prefs = getSharedPreferences("MyApp", MODE_PRIVATE);
+        boolean showPopup = prefs.getBoolean("showRatingPopup", false);
+
+        if (showPopup) {
+            showRatingDialog();
+            prefs.edit().putBoolean("showRatingPopup", false).apply(); // Reset the flag
+        }
+    }
+
+    private void showRatingDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Rate the Branch");
+
+        // Add rating input (e.g., a RatingBar)
+        final RatingBar ratingBar = new RatingBar(this);
+        builder.setView(ratingBar);
+
+        // Add action buttons
+        builder.setPositiveButton("Submit", (dialog, id) -> {
+            // User clicked Submit button
+            float rating = ratingBar.getRating();
+            submitRating(getIntent().getStringExtra("BRANCH_ID"),rating); // Implement this method to handle rating submission
+        });
+        builder.setNegativeButton("Cancel", (dialog, id) -> {
+            // User cancelled the dialog
+            dialog.dismiss();
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+    private void submitRating(String branchId, float newRating) {
+        DatabaseReference branchRef = FirebaseDatabase.getInstance().getReference("branches").child(branchId);
+
+        branchRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                long totalRatings = 0;
+                double sumOfRatings = 0.0;
+
+                if (dataSnapshot.exists()) {
+                    if (dataSnapshot.hasChild("totalRatings") && dataSnapshot.child("totalRatings").getValue() != null) {
+                        totalRatings = (long) dataSnapshot.child("totalRatings").getValue();
+                    }
+                    if (dataSnapshot.hasChild("sumOfRatings") && dataSnapshot.child("sumOfRatings").getValue() != null) {
+                        sumOfRatings = (double) dataSnapshot.child("sumOfRatings").getValue();
+                    }
+                }
+
+                // Update the ratings
+                totalRatings += 1;
+                sumOfRatings += newRating;
+                double newAverage = totalRatings > 0 ? sumOfRatings / totalRatings : 0;
+                averageRating1=newAverage;
+
+                // Update Firebase
+                updateBranchRating(branchId, totalRatings, sumOfRatings, newAverage);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // Handle possible errors
+            }
+        });
+    }
+
+    private void updateBranchRating(String branchId, long totalRatings, double sumOfRatings, double newAverage) {
+        DatabaseReference branchRef = FirebaseDatabase.getInstance().getReference("branches").child(branchId);
+
+        Map<String, Object> updates = new HashMap<>();
+        updates.put("totalRatings", totalRatings);
+        updates.put("sumOfRatings", sumOfRatings);
+        updates.put("averageRating", newAverage);
+
+        branchRef.updateChildren(updates);
     }
 
 }
