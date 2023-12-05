@@ -50,6 +50,7 @@ public class RequestForServiceActivity extends AppCompatActivity {
     private String serviceId;
     private ActivityResultLauncher<Intent> filePickerLauncher;
     private String selectedDocField;
+    private Map<String,String>filledDocs = new HashMap<>();
 
 
 
@@ -64,7 +65,7 @@ public class RequestForServiceActivity extends AppCompatActivity {
         docsFieldsListView = findViewById(R.id.docsFieldListViewRequest);
         submitRequest = findViewById(R.id.buttonSubmitRequest);
         Map<String,String>filledForm = new HashMap<>();
-        Map<String,String>filledDocs = new HashMap<>();
+
         String username=getIntent().getStringExtra("username");
 
         serviceId = getIntent().getStringExtra("SERVICE_ID");
@@ -83,7 +84,16 @@ public class RequestForServiceActivity extends AppCompatActivity {
         formFieldsListView.setAdapter(formFieldsAdapter);
         docsFieldsListView.setAdapter(docsFieldsAdapter);
 
-
+        filePickerLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                result -> {
+                    if (result.getResultCode() == RESULT_OK && result.getData() != null) {
+                        Uri fileUri = result.getData().getData();
+                        filledDocs.put(selectedDocField, fileUri.toString());
+                        updateDocsStatus();
+                    }
+                }
+        );
 
         fetchServiceData();
         formFieldsListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
@@ -167,86 +177,16 @@ public class RequestForServiceActivity extends AppCompatActivity {
             }
         });
 
-        docsFieldsListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                // Get the clicked item
-                String item = (String) parent.getItemAtPosition(position);
+        docsFieldsListView.setOnItemLongClickListener((parent, view, position, id) -> {
+            String item = (String) parent.getItemAtPosition(position);
+            selectedDocField = item;
 
+            // Open file picker
+            Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+            intent.setType("*/*"); // Set appropriate file type if needed
+            filePickerLauncher.launch(intent);
 
-
-                // Create an AlertDialog.Builder
-                AlertDialog.Builder builder = new AlertDialog.Builder(RequestForServiceActivity.this);
-                builder.setTitle("Enter a value");
-
-                // Set up the input
-                final EditText input = new EditText(RequestForServiceActivity.this);
-                // Check if the HashMap already contains a value for the item
-                if (filledDocs.containsKey(item)) {
-                    // If it does, pre-fill the EditText with the value
-                    input.setText(filledDocs.get(item));
-                }
-                builder.setView(input);
-
-
-                // Set up the buttons
-                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        String value = input.getText().toString();
-                        if (value.isEmpty()) {
-                            // Notify that the input is empty
-                            Toast.makeText(getApplicationContext(), "Value cannot be empty", Toast.LENGTH_SHORT).show();
-                            TextView statusText = findViewById(R.id.docsStatus);  // Replace with the actual ID of your TextView
-                            statusText.setText("Incomplete");
-                            statusText.setTextColor(Color.RED);
-                        }
-                        else {
-                            filledDocs.put(item, value);  // Add the item and value to the HashMap
-
-                            // Get the current adapter of docsFieldsListView
-                            ListAdapter adapter = docsFieldsListView.getAdapter();
-
-                            // Check if the adapter is an instance of CustomAdapterDocs
-                            if (adapter instanceof CustomAdapterDocs) {
-                                // Cast the adapter to CustomAdapterDocs and notify that the data has changed
-                                ((CustomAdapterDocs) adapter).notifyDataSetChanged();
-                            } else {
-                                // The adapter is not an instance of CustomAdapterDocs
-                                // Handle this case here
-                            }
-                            // Check if all items have a value
-                            boolean allFilled = true;
-                            for (int i = 0; i < docsFieldsAdapter.getCount(); i++) {
-                                String listItem = (String) docsFieldsListView.getItemAtPosition(i);
-                                if (!filledDocs.containsKey(listItem)) {
-                                    allFilled = false;
-                                    break;
-                                }
-                            }
-
-
-                            // If all items have a value, change the text and color
-                            if (allFilled) {
-                                TextView statusText = findViewById(R.id.docsStatus);  // Replace with the actual ID of your TextView
-                                statusText.setText("Complete");
-                                statusText.setTextColor(Color.GREEN);
-                            }
-                        }
-                    }
-                });
-                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
-                    }
-                });
-
-                // Show the dialog
-                builder.show();
-
-                return true;  // Return true to indicate that the long click was consumed
-            }
+            return true;
         });
 
         submitRequest.setOnClickListener(new View.OnClickListener() {
@@ -304,6 +244,26 @@ public class RequestForServiceActivity extends AppCompatActivity {
         });
 
 
+    }
+    private void updateDocsStatus() {
+        boolean allFilled = areAllDocsFieldsFilled();
+        TextView statusText = findViewById(R.id.docsStatus);
+        if (allFilled) {
+            statusText.setText("Complete");
+            statusText.setTextColor(Color.GREEN);
+        } else {
+            statusText.setText("Incomplete");
+            statusText.setTextColor(Color.RED);
+        }
+    }
+
+    private boolean areAllDocsFieldsFilled() {
+        for (String docField : docsFieldsList) {
+            if (!filledDocs.containsKey(docField) || filledDocs.get(docField).isEmpty()) {
+                return false;
+            }
+        }
+        return true;
     }
 
     private void fetchServiceData() {
