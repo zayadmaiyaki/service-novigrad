@@ -1,5 +1,6 @@
 package com.example.servicenovigrad;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -25,6 +26,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class MainPageClient extends AppCompatActivity {
@@ -36,7 +38,7 @@ public class MainPageClient extends AppCompatActivity {
     private ArrayAdapter<String> adapter;
     private ArrayList<String> ongoingRequests;
     private double averageRating1;
-
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

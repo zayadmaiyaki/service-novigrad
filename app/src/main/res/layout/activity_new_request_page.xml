@@ -50,20 +50,22 @@
         app:layout_constraintTop_toBottomOf="@+id/location_input" />
 
     <!-- Button for 'Apply filter' -->
+
+    <!-- Button for 'Search by branch working times' -->
     <Button
         android:id="@+id/button_filter"
         android:layout_width="0dp"
         android:layout_height="59dp"
-        android:layout_marginTop="16dp"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:backgroundTint="@color/grey"
         android:text="Apply filter"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/offered_services" />
 
-    <!-- Button for 'Search by branch working times' -->
     <Button
         android:id="@+id/button_working_times"
         android:layout_width="0dp"
@@ -78,20 +80,24 @@
         app:layout_constraintTop_toBottomOf="@+id/button_filter" />
 
     <!-- ListView for Displaying Branches -->
+
+    <!-- Message for No Results -->
+
     <ListView
         android:id="@+id/branches_list_view"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="16dp"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button_working_times"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintVertical_bias="1.0" />
 
-    <!-- Message for No Results -->
     <TextView
         android:id="@+id/text_no_results"
         android:layout_width="wrap_content"
