@@ -46,7 +46,7 @@ Voici les identifiants d'un de nos comptes employé pour vous connecter au besoi
 -Username : employee
 -Password : employee123
 
-## Livrable 2
+## Livrable 4
 
 ### Fonctionnalités
 Les fonctionnalités implémentées dans le livrable 4 sont les suivantes:
