@@ -46,6 +46,14 @@ Voici les identifiants d'un de nos comptes employé pour vous connecter au besoi
 -Username : employee
 -Password : employee123
 
+## Livrable 2
+
+### Fonctionnalités
+Les fonctionnalités implémentées dans le livrable 4 sont les suivantes:
+
+-La recherche d'une succursale de Service Novigrad par adresse, heures de travail et type de services fournis par le client.
+-L'affiche des succursales disponible en fonction de la recherche de l'utilisateur
+-La soumission d'une demande par un utilisateur
 
 
 
