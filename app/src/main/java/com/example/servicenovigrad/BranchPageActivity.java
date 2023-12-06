@@ -43,6 +43,9 @@ public class BranchPageActivity extends AppCompatActivity {
         branchAddressTextView = findViewById(R.id.branchAddressText);
         Button selectedServices = findViewById(R.id.buttonOfferedServices);
 
+        // Add these lines to initialize the buttonServicesRequests
+        Button buttonServicesRequests = findViewById(R.id.buttonServicesRequests);
+
         branchId = getIntent().getStringExtra("BRANCH_ID");
 
         setupDayButtons();
@@ -56,7 +59,18 @@ public class BranchPageActivity extends AppCompatActivity {
                 DatabaseReference branchesRef = database.getReference("branches");
                 Intent intent = new Intent(BranchPageActivity.this, OfferedServicesActivity.class);
                 intent.putExtra("BRANCH_ID", branchId);
-                intent.putExtra("BRANCH_NAME",branchNameTextView.getText().toString().trim());
+                intent.putExtra("BRANCH_NAME", branchNameTextView.getText().toString().trim());
+                startActivity(intent);
+            }
+        });
+
+        // Set the onClick listener for buttonServicesRequests
+        buttonServicesRequests.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Handle button click and redirect to activity_requests_page.xml
+                Intent intent = new Intent(BranchPageActivity.this, RequestsPageActivity.class);
+                intent.putExtra("BRANCH_ID", branchId);
                 startActivity(intent);
             }
         });
@@ -69,6 +83,7 @@ public class BranchPageActivity extends AppCompatActivity {
 
         loadBranchDetails();
     }
+
 
     private void setupDayButtons() {
         int[] dayButtonIds = {

@@ -21,12 +21,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.076" />
+        app:layout_constraintVertical_bias="0.039" />
 
     <ListView
-        android:layout_width="352dp"
-        android:layout_height="518dp"
-        android:layout_marginTop="32dp"
+        android:id="@+id/requestsListView"
+        android:layout_width="354dp"
+        android:layout_height="603dp"
+        android:layout_marginTop="4dp"
         app:layout_constraintEnd_toEndOf="@+id/textRequestsPage"
         app:layout_constraintHorizontal_bias="0.505"
         app:layout_constraintStart_toStartOf="@+id/textRequestsPage"
