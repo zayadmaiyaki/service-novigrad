@@ -207,6 +207,7 @@ public class RequestForServiceActivity extends AppCompatActivity {
                             requestsRef.child(requestId).child("form").setValue(filledForm);
                             requestsRef.child(requestId).child("username").setValue(username);
                             requestsRef.child(requestId).child("requestId").setValue(requestId);
+                            requestsRef.child(requestId).child("status").setValue("In progress");
                             requestsRef.child(requestId).child("branch").setValue(getIntent().getStringExtra("BRANCH_ID"));
                             requestsRef.child(requestId).child("docs").setValue(filledDocs)
                                     .addOnSuccessListener(new OnSuccessListener<Void>() {

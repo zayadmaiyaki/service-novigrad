@@ -13,6 +13,7 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -102,27 +103,44 @@ public class MainPageClient extends AppCompatActivity {
 
 
     // Show Dialog
-    private void showLongClickDialog(String selectedItem) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Request Status")
-                .setMessage("Status of request '" + selectedItem + "': In Progress")
-                .setPositiveButton("Go to Request", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        // Create an intent for NewRequestPageActivity
-                        Intent intent = new Intent(MainPageClient.this, DisplayRequest.class);
-                        // Put the selectedItem as an extra in the intent
-                        intent.putExtra("REQUEST_ID", selectedItem);
-                        intent.putExtra("BRANCH_ID",getIntent().getStringExtra("BRANCH_ID"));
-                        startActivity(intent);
-                        dialog.dismiss(); // Close the dialog
-                    }
-                })
-                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        dialog.dismiss(); // Close the dialog
-                    }
-                });
-        builder.create().show();
+    private void showLongClickDialog(final String selectedItem) {
+        DatabaseReference statusRef = FirebaseDatabase.getInstance().getReference("requests").child(selectedItem).child("status");
+
+        // Retrieve the status from Firebase
+        statusRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String status = dataSnapshot.getValue(String.class);
+                String statusMessage = "Status of request '" + selectedItem + "': " + status;
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(MainPageClient.this);
+                builder.setTitle("Request Status")
+                        .setMessage(statusMessage)
+                        .setPositiveButton("Go to Request", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                // Create an intent for NewRequestPageActivity
+                                Intent intent = new Intent(MainPageClient.this, DisplayRequest.class);
+                                // Put the selectedItem as an extra in the intent
+                                intent.putExtra("REQUEST_ID", selectedItem);
+                                intent.putExtra("BRANCH_ID", getIntent().getStringExtra("BRANCH_ID"));
+                                startActivity(intent);
+                                dialog.dismiss(); // Close the dialog
+                            }
+                        })
+                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.dismiss(); // Close the dialog
+                            }
+                        });
+                builder.create().show();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // Handle error
+                Toast.makeText(MainPageClient.this, "Failed to retrieve request status.", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
