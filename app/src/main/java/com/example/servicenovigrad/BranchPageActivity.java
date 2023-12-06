@@ -3,15 +3,10 @@ package com.example.servicenovigrad;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.InputType;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 
 
 import androidx.annotation.NonNull;
@@ -69,7 +64,7 @@ public class BranchPageActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // Handle button click and redirect to activity_requests_page.xml
-                Intent intent = new Intent(BranchPageActivity.this, RequestsPageActivity.class);
+                Intent intent = new Intent(BranchPageActivity.this, EmployeeRequestsPageActivity.class);
                 intent.putExtra("BRANCH_ID", branchId);
                 startActivity(intent);
             }

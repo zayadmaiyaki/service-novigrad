@@ -13,7 +13,10 @@
         android:theme="@style/Theme.ServiceNovigrad"
         tools:targetApi="34">
         <activity
-            android:name=".RequestsPageActivity"
+            android:name=".DisplayRequest"
+            android:exported="false" />
+        <activity
+            android:name=".EmployeeRequestsPageActivity"
             android:exported="false" />
         <activity
             android:name=".OfferedServicesForRequestActivity"
