@@ -43,8 +43,8 @@ Les fonctionnalités implémentées dans le livrable 3 sont les suivantes:
 - L'association des des services creer par l'administrateur au profil de la succursale
 
 Voici les identifiants d'un de nos comptes employé pour vous connecter au besoin :
--Username : employee
--Password : employee123
+- Username : employee
+- Password : employee123
 
 ## Livrable 4
 
@@ -58,8 +58,8 @@ Les fonctionnalités implémentées dans le livrable 4 sont les suivantes:
 - l'affichage des notes des differentes succursales.
 
 Voici les identifiants d'un de nos comptes client pour vous connecter au besoin :
--Username : Penda
--Password : penda02
+- Username : Penda
+- Password : penda02
 
 
 
