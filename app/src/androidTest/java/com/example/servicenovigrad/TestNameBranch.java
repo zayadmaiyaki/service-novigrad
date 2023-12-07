@@ -1,5 +1,7 @@
 package com.example.servicenovigrad;
 
+// Cette classe test la validité des noms de branches
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 

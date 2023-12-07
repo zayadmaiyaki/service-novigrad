@@ -1,5 +1,7 @@
 package com.example.servicenovigrad;
 
+// Cette classe test le nom de Service à rentrer
+
 import androidx.test.core.app.ActivityScenario;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import android.widget.EditText;

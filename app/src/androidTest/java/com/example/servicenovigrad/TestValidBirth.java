@@ -1,5 +1,7 @@
 package com.example.servicenovigrad;
 
+// Ce test sert à vérifier la validité de la date de naissance à rentrer
+
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 

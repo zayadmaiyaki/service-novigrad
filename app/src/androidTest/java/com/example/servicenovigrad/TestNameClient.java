@@ -1,5 +1,7 @@
 package com.example.servicenovigrad;
 
+// Cette classe test la validité
+
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
 

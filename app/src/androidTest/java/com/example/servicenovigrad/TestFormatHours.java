@@ -1,5 +1,7 @@
 package com.example.servicenovigrad;
 
+// Cette classe test le format à rentrer dans la section Heure d'ouverture
+
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import org.junit.Test;

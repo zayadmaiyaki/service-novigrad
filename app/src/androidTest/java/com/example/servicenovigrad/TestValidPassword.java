@@ -1,5 +1,7 @@
 package com.example.servicenovigrad;
 
+// Ce test sert à vérifier la validité du mot de passe à rentrer
+
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
 

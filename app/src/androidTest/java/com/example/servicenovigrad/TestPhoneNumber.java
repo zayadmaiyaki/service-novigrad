@@ -1,12 +1,12 @@
 package com.example.servicenovigrad;
+
+// cette classe test le format du numero de telephone à rentrer
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
-
 import android.widget.EditText;
-
 import androidx.test.core.app.ActivityScenario;
-
 import org.junit.Before;
 import org.junit.Test;
 
