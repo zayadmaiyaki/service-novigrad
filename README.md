@@ -61,6 +61,8 @@ Voici les identifiants d'un de nos comptes client pour vous connecter au besoin 
 - Username : Penda
 - Password : penda02
 
+  Pour les diagrammes UML 3 et 4 veillez svp les télécharger et les Zoomer pour identifier les differentes classes
+
 
 
 
